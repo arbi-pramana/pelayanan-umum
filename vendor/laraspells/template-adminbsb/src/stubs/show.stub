@@ -1,0 +1,21 @@
+@extends('{? view_namespace ?}layout.master')
+
+@section('content')
+<div class="block-header">
+    <h2>{? page_title ?}</h2>
+</div>
+@include('{? view_namespace ?}partials.alert-messages')
+<div class="card card-grid">
+	<div class="header">
+		<a href="{{ route('{? route_list ?}') }}" class="btn btn-default">Back to list</a>
+		<a href="{{ route('{? route_edit ?}', [${? varname ?}['{? primary_key ?}']]) }}" class="btn btn-primary">Edit</a>
+	</div>
+	<div class="body">
+		<div class="table-responsive">
+			<table class="table table-detail table-hover">
+				{? fields ?}
+			</table>
+		</div>
+	</div>
+</div>
+@stop

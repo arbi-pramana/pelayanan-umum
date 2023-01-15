@@ -1,0 +1,17 @@
+{
+    "name": "laraspells/template-adminbsb",
+    "description": "LaraSpells template Admin BSB",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Muhammad Syifa",
+            "email": "emsifa@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LaraSpells\\Template\\AdminBsb\\": "src"
+        }
+    },
+    "require": {}
+}

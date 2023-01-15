@@ -1,0 +1,19 @@
+@extends('{? view_namespace ?}layout.master')
+
+@section('content')
+@include('{? view_namespace ?}partials.alert-messages')
+<div class="page-heading">
+	<h2 class="page-title">{? page_title ?}</h2>
+</div>
+<div class="page-content">
+  <form {? form.attributes ?}>
+    {? form.fields ?}
+  
+    <div class='form-group'>
+      {!! csrf_field() !!}
+      <a class='btn btn-default' href="{{ route('{? route_list ?}') }}">Cancel</a>
+      <button class='btn btn-success'>Create</button>
+    </div>
+  </form>
+</div>
+@stop

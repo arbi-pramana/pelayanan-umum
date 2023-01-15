@@ -1,0 +1,43 @@
+@extends('{? view_namespace ?}layout.master')
+
+@section('content')
+<div class="block-header">
+    <h2>{? page_title ?}</h2>
+</div>
+@include('{? view_namespace ?}partials.alert-messages')
+<div class="card card-grid">
+	<div class="header">
+		<div class="row">
+			<div class="col-md-9 no-margin">
+				<a class="btn btn-success" href="{{ route('{? route_create ?}') }}">Create</a>
+			</div>
+			<div class="col-md-3 no-margin">
+				<form method="GET">
+					<div class="form-group" style="margin:0px">
+						<div class="input-group" style="margin:0px">
+							<div class="form-line">
+								<input name="keyword" class="form-control" placeholder="Search something ..." value="{{ request('keyword') }}"/>
+							</div>
+							<div class="input-group-btn">
+								<button class="btn btn-info">Search</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="body">
+		@if($pagination->items())
+		<div class="table-responsive">
+		  {? table.html ?}
+		</div>
+		{? table.pagination ?}
+		@else
+		<div class="well well-sm">
+			{? table.label ?} empty
+		</div>
+		@endif
+	</div>
+</div>
+@stop

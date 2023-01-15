@@ -1,0 +1,24 @@
+{
+    "name": "laraspells/asset-collector",
+    "description": "Blade directives to prevent multiple asset (css/js) code insertions.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Muhammad Syifa",
+            "email": "emsifa@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LaraSpells\\AssetCollector\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaraSpells\\AssetCollector\\ServiceProvider"
+            ]
+        }
+    }
+}

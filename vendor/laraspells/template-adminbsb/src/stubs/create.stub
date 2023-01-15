@@ -1,0 +1,19 @@
+@extends('{? view_namespace ?}layout.master')
+
+@section('content')
+@include('{? view_namespace ?}partials.alert-messages')
+<div class="block-header">
+    <h2>{? page_title ?}</h2>
+</div>
+<div class="card">
+	<div class="body">
+		<form {? form.attributes ?}>
+		  	{? form.fields ?}
+		  
+		    {!! csrf_field() !!}
+		    <a class='btn btn-lg btn-default m-t-15 waves-effect' href="{{ route('{? route_list ?}') }}">Cancel</a>
+		    <button class='btn btn-lg btn-success m-t-15 waves-effect'>Create</button>
+		</form>
+	</div>
+</div>
+@stop

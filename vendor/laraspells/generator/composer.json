@@ -1,0 +1,31 @@
+{
+    "name": "laraspells/generator",
+    "description": "Laravel Crud Generator",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Muhammad Syifa",
+            "email": "emsifa@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LaraSpells\\Generator\\": "src"
+        }
+    },
+    "require": {
+        "symfony/yaml": "3.*"
+    },
+    "require-dev": {
+        "illuminate/support": "5.4",
+        "phpunit/phpunit": "^5.7"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaraSpells\\Generator\\ServiceProvider"
+            ]
+        }
+    }
+}

@@ -1,0 +1,39 @@
+.navbar {
+	margin: 0px;
+}
+
+.alert-message {
+	margin-top: 15px;
+}
+
+.alert-message + .page-heading {
+	margin-top: -15px;
+}
+
+.page-heading {
+	width: 100%;
+	float: left;
+	padding: 15px 0px;
+	margin-bottom: 15px;
+}
+
+.page-heading .page-title {
+	width: auto;
+	float: left;
+	margin: 0px;
+}
+
+.pagination {
+	margin: 0px;
+}
+
+.page-content {
+	width: 100%;
+	padding: 15px;
+	background: white;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	box-sizing: border-box;
+	float: left;
+	margin-bottom: 15px;
+}

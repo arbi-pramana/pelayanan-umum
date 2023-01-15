@@ -1,0 +1,26 @@
+<?php
+
+return [
+
+    'default_form' => 'admin-bsb',
+
+    'forms' => [
+        'admin-bsb' => [
+            'form' => '{? view_namespace ?}partials.form',
+            'inputs' => [
+                'text'  => '{? view_namespace ?}partials.fields.text',
+                'date' => '{? view_namespace ?}partials.fields.date',
+                'textarea' => '{? view_namespace ?}partials.fields.textarea',
+                'file' => '{? view_namespace ?}partials.fields.file',
+                'image' => '{? view_namespace ?}partials.fields.image',
+                'number' => '{? view_namespace ?}partials.fields.number',
+                'email' => '{? view_namespace ?}partials.fields.email',
+                'radio' => '{? view_namespace ?}partials.fields.radio',
+                'checkbox' => '{? view_namespace ?}partials.fields.checkbox',
+                'select' => '{? view_namespace ?}partials.fields.select',
+                'select-multiple' => '{? view_namespace ?}partials.fields.select-multiple',
+            ]
+        ]
+    ]
+
+];
