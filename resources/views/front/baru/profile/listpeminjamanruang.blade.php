@@ -61,12 +61,12 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                             Permohonan Kendaraan
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{route('list-surat-perintah-jalan')}}">
                             <i class="fa fa-map-marker"></i>
                             Surat Perintah Jalan
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </aside>
         </div>
