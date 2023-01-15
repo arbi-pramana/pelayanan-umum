@@ -35,7 +35,7 @@
 		      <tr>
 		        <th width="20" class="text-center column-number">No</th>
 		        <th class='column-nama'>Nama</th>
-		        <th class='column-nid'>NID</th>
+		        <th class='column-nid'>Nomor Induk</th>
 		        <th class='column-password'>Password</th>
 {{-- 		        <th class='column-id_atasan'>ID Atasan</th>
 		        <th class='column-id_supervisor'>ID Supervisor</th>
@@ -55,7 +55,7 @@
 		      <tr>
 		        <td class="text-center column-number">{{ $pagination->firstItem() + $i }}</td>
 		        <td class='column-nama'>{{ $karyawan->nama }}</td>
-		        <td class='column-nid'>{{ $karyawan->nid }}</td>
+		        <td class='column-nid'>{{ $karyawan->no_induk }}</td>
 		        <td class='column-password'>{{ $karyawan->password }}</td>
 		        {{-- <td class='column-id_atasan'>{{ $karyawan->id_atasan }}</td>
 		        <td class='column-id_supervisor'>{{ $karyawan->id_supervisor }}</td>

@@ -44,13 +44,18 @@ class FrontController extends Controller
     {
         $PemesananRuangan = [] ;
         $ruangs = Ruang::where('kapasitas','>=',$req->jumlah_peserta)->get();
+                
         foreach($ruangs as $ruang){
             $pemesanan_ruangan = $this->pemesananRuangan
-                ->where('id_ruang',$ruang->id)
-                ->where('tanggal',$req->tanggal)
-                ->where('status_pj','!=','Rejected')
-                ->where('waktu_awal','>=',strtotime($req->waktu_awal))
-                ->where('waktu_awal','<=',strtotime($req->waktu_akhir))
+                ->where(function($q) use ($req,$ruang){
+                    $q->whereBetween('waktu_awal',[strtotime($req->waktu_awal),strtotime($req->waktu_akhir)]);
+                    // $q->whereBetween('waktu_akhir',[strtotime($req->waktu_awal),strtotime($req->waktu_akhir)]);
+                    $q->whereBetween('tanggal',[$req->tanggal,$req->tanggal_selesai]);
+                    // $q->whereBetween('tanggal_selesai',[$req->tanggal,$req->tanggal_selesai]);
+                    $q->where('status_pj','!=','Rejected');
+                    $q->where("id_ruang",$ruang->id);
+                    return $q;
+                })
                 ->first();
             if(!empty($pemesanan_ruangan)){
                 $ruangNotReady[] = $pemesanan_ruangan->id_ruang;
@@ -64,6 +69,7 @@ class FrontController extends Controller
         
         $data['pemesanan_ruangan'] = $PemesananRuangan;
         $data['date'] = $req->tanggal;
+        $data['tanggal_selesai'] = $req->tanggal_selesai;
         $data['waktu_awal'] = $req->waktu_awal;
         $data['waktu_akhir'] = $req->waktu_akhir;
         $data['jumlah_peserta'] = $req->jumlah_peserta;
@@ -83,6 +89,11 @@ class FrontController extends Controller
     {
         $data['pemohon'] = $this->guard()->user();
         return view('front.baru.ruangan.form_cari', $data);
+    }
+    public function layoutDesign(Request $req)
+    {
+        $data['pemohon'] = $this->guard()->user();
+        return view('front.baru.layout', $data);
     }
 
     public function pageSPjalan(Request $req)
@@ -292,6 +303,7 @@ class FrontController extends Controller
                     "permohonan_konsumsi.id",
                     "permohonan_konsumsi.no_permohonan_konsumsi",
                     "permohonan_konsumsi.tanggal",
+                    "permohonan_konsumsi.tanggal_selesai",
                     "permohonan_konsumsi.jam",
                     // "sumber_dana.nama_sumber_dana",
                     "permohonan_konsumsi.kegiatan",
@@ -596,11 +608,14 @@ class FrontController extends Controller
 
     public function deletelistKonsumsi(Request $request, $id)
     {
-        $pemesananRuangan = $this->findOrFail($id);
+        $permohonanKonsumsi = $this->findOrFail($id);
 
         // Delete data
         $deleted = $permohonanKonsumsi->delete();
         if (!$deleted) {
+
+            $notification = Notification::where('permohonan_konsumsi_id',$id)->first()->delete();
+
             $message = 'Something went wrong when delete Permohonan Konsumsi';
             return back()->with('danger', $message);
         }
@@ -658,6 +673,8 @@ class FrontController extends Controller
         // Delete data
         $deleted = $pemesananRuangan->delete();
         if (!$deleted) {
+
+            $notification = Notification::where('pemesanan_ruangan_id',$id)->first()->delete();
             $message = 'Something went wrong when delete Pemesanan Ruangan';
             return back()->with('danger', $message);
         }
@@ -729,6 +746,9 @@ class FrontController extends Controller
         // Delete data
         $deleted = $permohonankendaraan->delete();
         if (!$deleted) {
+
+            $notification = Notification::where('permohonan_pemakaian_kendaraan_id',$id)->first()->delete();
+
             $message = 'Something went wrong when delete Permohonan Kendaraan';
             return back()->with('danger', $message);
         }

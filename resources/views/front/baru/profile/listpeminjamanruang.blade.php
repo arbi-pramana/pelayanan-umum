@@ -78,6 +78,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <th>No</th>
                         <th>Kode</th>
                         <th>Tanggal</th>
+                        <th>Tanggal Selesai</th>
                         <th>Acara</th>
                         <th>Nama Pemesan</th>
                         <th>Mulai</th>
@@ -105,6 +106,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <td>{{ $pagination->firstItem() + $i }}</td>
                         <td>{{ $pemesananRuangan->no_pemesanan_ruangan }}</td>
                         <td>{{ $pemesananRuangan->tanggal }}</td>
+                        <td>{{ $pemesananRuangan->tanggal_selesai }}</td>
                         <td>{{ $pemesananRuangan->nama_acara }}</td>
                         <td>{{ $pemesananRuangan->nama_pemesan }}</td>
                         <td>{{ date("H:i",$pemesananRuangan->waktu_awal)}}</td>

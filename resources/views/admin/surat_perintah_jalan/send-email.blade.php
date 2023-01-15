@@ -37,6 +37,10 @@
             <td>{{$surat['tanggal_kembali']}}</td>
         </tr>
         <tr>
+            <th>Jam Kembali </th>
+            <td>{{$surat['jam_kembali']}}</td>
+        </tr>
+        <tr>
             <th>Mobil </th>
             <td>{{$surat['nama_kendaraan']}} - {{$surat['no_pol']}} </td>
         </tr>
@@ -49,18 +53,13 @@
             <td>Rp . {{number_format($surat['biaya_toll'])}}</td>
         </tr>
         <tr>
-            <th>Total Biaya </th>
+            <th>Total Biaya Ke 1 </th>
             <td>Rp . {{number_format($surat['total_biaya'])}}</td>
         </tr>
-        @php
-           $map = explode(",",$surat['latlng']);
-           $link = 'https://maps.google.com/?q='.$map[0].','.$map[1];
-        @endphp
         <tr>
-            <th>Lokasi </th>
-            <td><a href="{{$link}}">Click</a></td>
+            <th>Total Biaya Ke 2</th>
+            <td>Rp . {{number_format($surat['total_biaya_2'])}}</td>
         </tr>
-
     </table>
 </body>
 </html>

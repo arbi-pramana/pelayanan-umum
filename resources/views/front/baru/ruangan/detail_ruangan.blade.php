@@ -32,17 +32,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label>Tanggal Pemesanan</label>
                         <input class="form-control" name="tanggal" type="date" value="{{$_GET['tanggal']}}" readonly
                             required />
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
+                        <label>Tanggal_selesai</label>
+                        <input class="form-control" name="tanggal_selesai" type="date" value="{{$_GET['tanggal_selesai']}}" readonly
+                            required />
+                    </div>
+                    <div class="form-group col-md-3">
                         <label>Waktu Awal</label>
                         <input class="form-control" name="waktu_awal" type="time" value="{{Request::get('waktu_awal')}}"
                             readonly required />
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label>Waktu Akhir</label>
                         <input class="form-control" name="waktu_akhir" type="time" value="{{Request::get('waktu_akhir')}}"
                             readonly required />
@@ -56,12 +61,12 @@
                     <div class="form-group col-md-3">
                         <label>Design Ruangan</label>
                         <select class="form-control" name="design_ruangan" required>
-                            <option>U-Shape</option>
-                            <option>Classroom</option>
-                            <option>Classroom Tanpa Meja</option>
-                            <option>Lesehan</option>
-                            <option>U-Shape + Classroom</option>
-                            <option>U-Shape Tanpa Meja</option>
+                            @php
+                                $layout = App\Models\LayoutRuang::get();
+                            @endphp
+                            @foreach ($layout as $item)
+                            <option>{{$item->nama_layout_ruang}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group col-md-3">

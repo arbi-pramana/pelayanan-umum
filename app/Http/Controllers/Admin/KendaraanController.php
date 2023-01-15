@@ -219,6 +219,23 @@ class KendaraanController extends Controller
                     "max:120"
                 ]
             ],
+            'status_kendaraan' => [
+                'input' => "select",
+                'label' => "Status",
+                'options' => [
+                    [
+                        'label' => 'Ready',
+                        'value' => 'Ready'
+                    ],
+                    [
+                        'label' => 'Not Ready',
+                        'value' => 'Not Ready'
+                    ]
+                ],
+                'rules' => [
+                    "required"
+                ]
+            ]
         ])->withViewData([
             // phpcs:ignore
             'before_button_save' => '<a class="btn btn-default" href="'.route('admin::kendaraan.page-list').'"><i class="fa fa-chevron-left"></i> Cancel</a>&nbsp;',

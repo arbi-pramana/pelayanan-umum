@@ -17,15 +17,26 @@
                                     <h2>Cek Ketersediaan Ruangan</h2>
                                     <form action="{{url('fetchruangan')}}" method="GET">
                                         <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group form-group-lg form-group-icon-left">
-                                                    <i class="fa fa-calendar input-icon input-icon-highlight"></i>
-                                                    <label>Tanggal Pemesanan</label>
-                                                    <input class="form-control" type="date" name="tanggal" required
-                                                        autocomplete="off" />
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-lg form-group-icon-left">
+                                                        <i class="fa fa-calendar input-icon input-icon-highlight"></i>
+                                                        <label>Tanggal Pemesanan</label>
+                                                        <input class="form-control" type="date" name="tanggal" required
+                                                            autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-lg form-group-icon-left">
+                                                        <i class="fa fa-calendar input-icon input-icon-highlight"></i>
+                                                        <label>Tanggal Selesai</label>
+                                                        <input class="form-control" type="date" name="tanggal_selesai" required
+                                                            autocomplete="off" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                           <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="form-group form-group-lg form-group-icon-left">
                                                     <i class="fa fa-clock input-icon input-icon-highlight"></i>
                                                     <label>Waktu Mulai</label>
@@ -33,7 +44,7 @@
                                                         autocomplete="off" />
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
                                                 <div class="form-group form-group-lg form-group-icon-left">
                                                     <i class="fa fa-clock input-icon input-icon-highlight"></i>
                                                     <label>Waktu Selesai</label>
@@ -41,7 +52,9 @@
                                                         autocomplete="off" />
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 <div class="form-group form-group-lg form-group-icon-left">
                                                     <i class="fa fa-users input-icon input-icon-highlight"></i>
                                                     <label>Jumlah Peserta</label>
@@ -49,6 +62,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                         <button class="btn btn-primary btn-lg" type="submit">
                                             Cari Ruangan
                                         </button>

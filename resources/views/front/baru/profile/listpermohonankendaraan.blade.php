@@ -103,6 +103,9 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <th class="column-jam-kembali">
                             Jam Kembali
                         </th>
+                        <th class="column-nama-driver">
+                            Nama Driver
+                        </th>
                         <th class="column-status_pj">
                             Status Permohon
                         </th>
@@ -147,6 +150,9 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         </td>
                         <td class="column-jam_kembali">
                             {{ $permohonanPemakaianKendaraan->jam_kembali }}
+                        </td>
+                        <td class="column-nama-driver">
+                            {{ $permohonanPemakaianKendaraan->spj->driver->nama_driver ?? '-' }}
                         </td>
                         <td class="column-status_pj">
                             {{ $permohonanPemakaianKendaraan->status_pj }}

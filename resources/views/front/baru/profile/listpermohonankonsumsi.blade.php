@@ -78,6 +78,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <th>No</th>
                         <th>No. Permohonan Konsumsi</th>
                         <th>Tanggal</th>
+                        <th>Tanggal Selesai</th>
                         <th>Jumlah</th>
                         <th>Sumber Dana</th>
                         <th>Nama Kegiatan</th>
@@ -108,6 +109,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <td>{{ $permohonanKonsumsi->nomor['no_pemesanan_ruangan'] }}</td>
                         @endif
                         <td>{{ $permohonanKonsumsi->tanggal }}</td>
+                        <td>{{ $permohonanKonsumsi->tanggal_selesai }}</td>
                         <td>{{ $permohonanKonsumsi->jumlah }}</td>
                         <td>{{ $permohonanKonsumsi->sumber_dana }}</td>
                         <td>{{ $permohonanKonsumsi->kegiatan }}</td>

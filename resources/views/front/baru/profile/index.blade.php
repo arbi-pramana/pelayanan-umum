@@ -49,12 +49,12 @@
                             Permohonan Kendaraan
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{route('list-surat-perintah-jalan')}}">
                             <i class="fa fa-map-marker"></i>
                             Surat Perintah Jalan
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </aside>
         </div>
@@ -79,7 +79,7 @@
                 <li>
                     <i class="fa fa-map-marker user-profile-statictics-icon"></i>
                     <h5>{{$permohonanPemakaianKendaraan}}</h5>
-                    <p>Permohonan<br>Surat Jalan</p>
+                    <p>Permohonan<br>Kendaraan</p>
                 </li>
                 <!-- <li>
                     <i class="fa fa-minus-square user-profile-statictics-icon"></i>

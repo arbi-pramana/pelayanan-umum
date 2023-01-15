@@ -21,10 +21,10 @@ class FormRuangController extends Controller
         $image_name = $file->getClientOriginalName();
         $file->move(public_path('pemesanan_ruangan/attachment/'),$image_name);
      
-
         $pemesananRuangan = new PemesananRuangan;
         $pemesananRuangan->no_pemesanan_ruangan = $req->get('no_pemesanan_ruangan');
         $pemesananRuangan->tanggal = $req->get('tanggal');
+        $pemesananRuangan->tanggal_selesai = $req->get('tanggal_selesai');
         $pemesananRuangan->pemohon = $req->get('pemohon');
         $pemesananRuangan->pemohon_id = $req->get('pemohon_id');
         $pemesananRuangan->nama_acara =$req->get('nama_acara');

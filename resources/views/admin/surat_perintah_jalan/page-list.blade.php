@@ -46,8 +46,11 @@
 		        <th class='column-jam_berangkat'>Jam Berangkat</th>
 		        <th class='column-jam_kembali'>Jam Kembali</th>
 		        <th class='column-pengisian_bbm'>Estimasi Pengisian Bbm</th>
+		        <th class='column-pengisian_bbm'>Estimasi Bbm Ke 1</th>
+		        <th class='column-pengisian_bbm'>Estimasi Bbm Ke 2</th>
 		        <th class='column-pengisian_bbm'>Biaya Tol</th>
-		        <th class='column-pengisian_bbm'>Estimasi Total Biaya Perjalanan</th>
+		        <th class='column-pengisian_bbm'>Estimasi Total Biaya Ke 1 Perjalanan</th>
+		        <th class='column-pengisian_bbm'>Estimasi Total Biaya Ke 2 Perjalanan</th>
 		        <th class='column-pengisian_bbm'>Status Perjalanan</th>
 		        {{-- <th class='column-penanggung_jawab'>Penanggung Jawab</th>
 		        <th>Status PJ</th>
@@ -80,8 +83,16 @@
 		        <td class='column-jam_berangkat'>{{ $suratPerintahJalan->jam_berangkat }}</td>
 		        <td class='column-jam_kembali'>{{ $suratPerintahJalan->jam_kembali }}</td>
 		        <td class='column-pengisian_bbm'>{{ $suratPerintahJalan->pengisian_bbm }} L </td>
-		        <td class='column-pengisian_bbm'>Rp . {{ number_format($suratPerintahJalan->biaya_toll) }}  </td>
-		        <td class='column-pengisian_bbm'>Rp . {{ number_format($suratPerintahJalan->total_biaya) }}  </td>
+		        <td class='column-pengisian_bbm'>Rp . {{ number_format($suratPerintahJalan->total_biaya - $suratPerintahJalan->biaya_toll) }} 	Pertalite / Dexlite  </td>
+		        <td class='column-pengisian_bbm'>Rp . {{ number_format($suratPerintahJalan->total_biaya_2 - $suratPerintahJalan->biaya_toll) }} Pertamax / Dex  </td>
+		        <td class='column-pengisian_bbm'>Rp . {{ number_format($suratPerintahJalan->biaya_toll) }}  
+				
+				</td>
+		        <td class='column-pengisian_bbm'>Rp . {{ number_format($suratPerintahJalan->total_biaya) }} 
+					Pertalite / Dexlite
+				 </td>
+		        <td class='column-pengisian_bbm'>Rp . {{ number_format($suratPerintahJalan->total_biaya_2) }} 
+				Pertamax / Dex </td>
 				<td class='column-jam_kembali'>{{ $suratPerintahJalan->status_perjalanan }}</td>
 		        {{-- @php
 		        $pj = App\Models\Karyawan::where('id',$suratPerintahJalan->penanggung_jawab)->first();

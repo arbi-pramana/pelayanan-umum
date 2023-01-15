@@ -59,6 +59,7 @@ class PermohonanKonsumsiController extends Controller
             "permohonan_konsumsi.id",
             "permohonan_konsumsi.no_permohonan_konsumsi",
             "permohonan_konsumsi.tanggal",
+            "permohonan_konsumsi.tanggal_selesai",
             "permohonan_konsumsi.jam",
             // "sumber_dana.nama_sumber_dana",
             "permohonan_konsumsi.kegiatan",

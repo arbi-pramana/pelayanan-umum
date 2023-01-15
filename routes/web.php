@@ -8,6 +8,7 @@ Route::middleware("front.auth")->namespace('Front')->prefix('profile')->name('pr
 
 Route::middleware("front.auth")->namespace('Front')->group(function() {
     Route::get('/', 'FrontController@pageDashboard');
+    Route::get('/layout', 'FrontController@layoutDesign')->name('layoutdesign');
  
     //Pemesanan Ruangan
 
@@ -300,4 +301,5 @@ Route::name('admin::setting.')->prefix('admin/setting')->middleware('auth')->nam
 Route::get('api/permohonankonsumsi', 'Admin\PermohonanKonsumsiController@getJson');
 Route::get('api/biayapermeter', 'Admin\SuratPerintahJalanController@getBiayaPerMeter');
 Route::get('api/getdetailkendaraan/{id}', 'Admin\SuratPerintahJalanController@kendaraanDetail');
+Route::get('api/getdatapermohonan/{id}', 'Admin\SuratPerintahJalanController@getDataPermohonan');
 Route::get('api/permohonankendaraan', 'Admin\SuratPerintahJalanController@getPermohonanKendaraan');
