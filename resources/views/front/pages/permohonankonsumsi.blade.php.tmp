@@ -1,0 +1,110 @@
+@extends('front.layout.master')
+
+@section('content')	
+
+<div class="container">
+
+  <div class="container-contact100">
+		<div class="wrap-contact100">
+			<form action="{{ route('permohonankonsumsi.submit') }}" method="POST" class ="contact100-form validate-form">
+				{!! csrf_field() !!}
+				<span class="contact100-form-title">
+					Form Permohonan Konsumsi
+				</span>	
+
+				<div class="wrap-input100 validate-input bg1" data-validate="Nomor Permohonan Konsumsi">
+					<span class="label-input100">Nomor Permohonan Konsumsi *</span>
+					<input class="input100" type="text" name="no_permohonan_konsumsi" placeholder="Masukkan Nomor Permohonan Konsumsi">
+				</div>
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Tanggal">
+					<span class="label-input100">Tanggal *</span>
+					<input class="input100" type="date" name="tanggal" placeholder="Masukkan Tanggal">
+				</div>
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Jam">
+					<span class="label-input100">Jam</span>
+					<input class="input100" type="time" name="jam" placeholder="Masukkan Jam">
+				</div>
+
+				<div class="wrap-input100 input100-select bg1">
+					<span class="label-input100">Sumber Dana *</span>
+					<div>
+						<select class="js-select2" name="sumber_dana">
+							@foreach($array_sumber_dana as $dana)
+							  <option value={{ $dana["id"] }}>{{ $dana["nama_sumber_dana"] }}</option>
+							@endforeach
+						</select>
+						<div class="dropDownSelect2"></div>
+					</div>
+				</div>
+
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Kegiatan">
+					<span class="label-input100">Kegiatan *</span>
+					<input class="input100" type="text" name="kegiatan" placeholder="Masukkan Kegiatan ">
+				</div>
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Jenis Konsumsi">
+					  <label for="sel1">Jenis Konsumsi</label>
+					  <select class="form-control" id="sel1" name="jenis_konsumsi">
+					    <option value="Snack">Snack</option>
+					    <option value="Makan Siang">Makan Siang</option>
+					  </select>
+				</div>
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Jumlah">
+					<span class="label-input100">Jumlah *</span>
+					<input class="input100" type="number" name="jumlah" placeholder="Masukkan Jumlah ">
+				</div>
+
+				<div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Pemohon *</span>
+					<input class="input100" type="text" name="pemohon" value="{{ $pemohon["nama"] }}" readonly>
+				</div>
+
+				<div class="wrap-input100 input100-select rs1-wrap-input100" >
+					<span class="label-input100">Supervisor *</span>
+					<div>
+						<select class="js-select2" name="supervisor">
+							<option>Please chooses</option>
+							@foreach($array_supervisor as $supervisor)
+							  <option value={{ $supervisor["id"] }}>{{ $supervisor["nama"] }}</option>
+							@endforeach
+						</select>
+						<div class="dropDownSelect2"></div>
+					</div>
+				</div>
+
+				<div class="wrap-input100 input100-select rs1-wrap-input100" >
+					<span class="label-input100">Manajer *</span>
+					<div>
+						<select class="js-select2" name="manajer">
+							<option>Please chooses</option>
+							@foreach($array_manajer as $manajer)
+							  <option value={{ $manajer["id"] }}>{{ $manajer["nama"] }}</option>
+							@endforeach
+						</select>
+						<div class="dropDownSelect2"></div>
+					</div>
+				</div>
+
+				<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "Masukkan Keterangan">
+					<span class="label-input100">Keterangan</span>
+					<textarea class="input100" name="keterangan" placeholder="Keterangan Disini..."></textarea>
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						<span>
+							Submit
+							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</div><!-- /.container -->
+@stop

@@ -1,0 +1,75 @@
+@extends('front.layout.master')
+
+@section('content')	
+
+<div class="container">
+
+  <div class="container-contact100">
+		<div class="wrap-contact100">
+			<form action="{{ route('permohonanatk.submit') }}" method="POST" class ="contact100-form validate-form">
+				{!! csrf_field() !!}
+				<span class="contact100-form-title">
+					Form Permohonan ATK
+				</span>	
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Jumlah">
+					<span class="label-input100">Jumlah *</span>
+					<input class="input100" type="number" name="jumlah" placeholder="Masukkan Jumlah">
+				</div>
+	
+				<div class="wrap-input100 input100-select rs1-wrap-input100" >
+					<span class="label-input100">Nama Barang *</span>
+					<div>
+						<select class="js-select2" name="nama_barang">
+							<option>Please chooses</option>
+							@foreach($array_barang as $barang)
+							  <option value={{ $barang["id"] }}>{{ $barang["nama_barang"] }}</option>
+							@endforeach
+						</select>
+						<div class="dropDownSelect2"></div>
+					</div>
+				</div> 
+
+
+				<div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Pemohon *</span>
+					<input class="input100" type="text" name="pemohon" value="{{ $pemohon["nama"] }}" readonly>
+				</div>
+
+				<div class="wrap-input100 validate-input bg1" data-validate="Bagian">
+					<span class="label-input100">Bagian *</span>
+					<input class="input100" type="text" name="bagian" placeholder="Masukkan Bagian">
+				</div>
+
+				<div class="wrap-input100 input100-select rs1-wrap-input100" >
+					<span class="label-input100">Penanggung Jawab *</span>
+					<div>
+						<select class="js-select2" name="penanggung_jawab">
+							<option>Please chooses</option>
+							@foreach($array_pj_atk as $manajer)
+							  <option value={{ $manajer["id"] }}>{{ $manajer["nama"] }}</option>
+							@endforeach
+						</select>
+						<div class="dropDownSelect2"></div>
+					</div>
+				</div>
+
+				<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "Masukkan Keterangan">
+					<span class="label-input100">Keterangan</span>
+					<textarea class="input100" name="keterangan" placeholder="Keterangan Disini..."></textarea>
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						<span>
+							Submit
+							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</div><!-- /.container -->
+@stop

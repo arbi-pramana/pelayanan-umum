@@ -1,0 +1,25 @@
+LEGEND:
+    [v] = Completed
+    [n] = Partial Completed
+    [x] = Task
+
+[x] 1. fetchruangan - Ruang Rapat 01 not available
+[v] 2. listsuratperintahjalan - Nama PJ dan PJ Pool belum muncul
+[v] 3. List SPJ belum ada
+[v] 4. Child Ruangan belum tersimpan (recommended implode)
+[x] 5. pemesananruangan - Attachment tidak tersimpan/terpanggil
+[x] 6. Attachment engga bisa diakses
+
+
+
+
+
+NEW TASK 17-03-2019
+
+1. Form Konsumsi Belum Masuk
+2. Form Permohonan ATK
+3. Form Peminjaman Kendaraan
+4. Form Surat Perintah Jalan (Mas Sifa)
+5. Role Approval Balik Lagi Ke (Supervisor, Manajer dan Orang Umum)
+6. Untuk Semua List Pemesanan harus ada di user (Cek Contoh di user-profile-booking-history.html)
+7. Halaman User belom dimasukin
