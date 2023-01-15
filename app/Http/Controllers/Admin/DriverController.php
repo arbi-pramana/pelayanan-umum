@@ -202,133 +202,23 @@ class DriverController extends Controller
                     "max:120"
                 ]
             ],
-            // 'jabatan' => [
-            //     'input' => "text",
-            //     'label' => "Jabatan",
-            //     'maxlength' => "120",
-            //     'rules' => [
-            //         "required",
-            //         "max:120"
-            //     ]
-            // ],
-            // 'bidang' => [
-            //     'input' => "text",
-            //     'label' => "Bidang",
-            //     'maxlength' => "120",
-            //     'rules' => [
-            //         "required",
-            //         "max:120"
-            //     ]
-            // ],
-            // 'sub_bidang' => [
-            //     'input' => "text",
-            //     'label' => "Sub Bidang",
-            //     'maxlength' => "120",
-            //     'rules' => [
-            //         "required",
-            //         "max:120"
-            //     ]
-            // ],
-            // 'grade' => [
-            //     'input' => "text",
-            //     'label' => "Grade",
-            //     'maxlength' => "120",
-            //     'rules' => [
-            //         "required",
-            //         "max:120"
-            //     ]
-            // ],
-            // 'jenis_kelamin' => [
-            //     'input' => "select",
-            //     'label' => "Jenis Kelamin",
-            //     'options' => [
-            //         [
-            //             'label' => 'Laki-Laki',
-            //             'value' => 'L'
-            //         ],
-            //         [
-            //             'label' => 'Perempuan',
-            //             'value' => 'P'
-            //         ]
-            //     ],
-            //     'rules' => [
-            //         "required"
-            //     ]
-            // ],
-            // 'pendidikan' => [
-            //     'input' => "text",
-            //     'label' => "Pendidikan",
-            //     'maxlength' => "120",
-            //     'rules' => [
-            //         "required",
-            //         "max:120"
-            //     ]
-            // ],
-            // 'universitas' => [
-            //     'input' => "text",
-            //     'label' => "Universitas",
-            //     'maxlength' => "120",
-            //     'rules' => [
-            //         "required",
-            //         "max:120"
-            //     ]
-            // ],
-            // 'password' => [
-            //     'input' => "text",
-            //     'label' => "Password",
-            //     'maxlength' => "60",
-            //     'rules' => [
-            //         "required",
-            //         "max:60"
-            //     ]
-            // ],
-            // 'id_atasan' => [
-            //     'input' => "select",
-            //     'label' => "Atasan",
-            //     'options' => $this->getAtasanOptions(),
-            //     'rules' => [
-            //     ]
-            // ],
-            // 'id_supervisor' => [
-            //     'input' => "select",
-            //     'label' => "Supervisor",
-            //     'options' => $this->getSupervisorOptions(),
-            //     'rules' => [
-            //     ]
-            // ],
-            // 'id_manajer' => [
-            //     'input' => "select",
-            //     'label' => "Manajer",
-            //     'options' => $this->getManajerOptions(),
-            //     'rules' => [
-            //     ]
-            // ],
-            // 'role' => [
-            //     'input' => "select",
-            //     'label' => "Role",
-            //     'options' => [
-            //         // [
-            //         //     'label' => 'Supervisor',
-            //         //     'value' => 'Supervisor'
-            //         // ],
-            //         // [
-            //         //     'label' => 'Manajer',
-            //         //     'value' => 'Manajer'
-            //         // ],
-            //         // [
-            //         //     'label' => 'Administrator',
-            //         //     'value' => 'Administrator'
-            //         // ],
-            //         [
-            //             'label' => 'Karyawan',
-            //             'value' => 'Karyawan'
-            //         ]
-            // //     ],
-            //     'rules' => [
-            //         "required",
-            //         "max:120"
-            //     ]
-            // ]
+            'status_driver' => [
+                'input' => "select",
+                'label' => "Status",
+                'options' => [
+                    [
+                        'label' => 'Ready',
+                        'value' => 'Ready'
+                    ],
+                    [
+                        'label' => 'Not Ready',
+                        'value' => 'Not Ready'
+                    ]
+                ],
+                'rules' => [
+                    "required"
+                ]
+            ]
         ])->withViewData([
             // phpcs:ignore
             'before_button_save' => '<a class="btn btn-default" href="'.route('admin::driver.page-list').'"><i class="fa fa-chevron-left"></i> Cancel</a>&nbsp;',

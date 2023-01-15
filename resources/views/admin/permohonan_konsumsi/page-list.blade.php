@@ -36,6 +36,7 @@
 		        <th width="20" class="text-center column-number">No</th>
 		        <th class='column-no_permohonan_konsumsi'>No Permohonan Konsumsi</th>
 		        <th class='column-tanggal'>Tanggal</th>
+		        <th class='column-tanggal'>Tanggal Selesai</th>
 		        <th class='column-jam'>Jumlah</th>
 		        <th class='column-sumber_dana'>Sumber Dana</th>
 		        <th class='column-kegiatan'>Kegiatan</th>
@@ -77,6 +78,7 @@
 		        	<td class='column-no_permohonan_konsumsi'>{{ $permohonanKonsumsi->nomor['no_pemesanan_ruangan'] }}</td>
 				@endif
 		        <td class='column-tanggal'>{{ $permohonanKonsumsi->tanggal }}</td>
+		        <td class='column-tanggal'>{{ $permohonanKonsumsi->tanggal_selesai }}</td>
 		        <td class='column-jam'>{{ $permohonanKonsumsi->jumlah }}</td>
 		        <td class='column-sumber_dana'>{{ $permohonanKonsumsi->sumber_dana }}</td>
 		        <td class='column-kegiatan'>{{ $permohonanKonsumsi->kegiatan }}</td>
@@ -93,7 +95,7 @@
 		        <td width="200" class="text-center column-action">
 				{{-- @if (now() <= $permohonanKonsumsi->tanggal) --}}
 					@if (Auth::user()->role == 'adminruang')
-						@if($permohonanKonsumsi->status_pj != 'Approved')
+						@if($permohonanKonsumsi->status_pj == 'Pending')
 							<a class="btn btn-sm btn-delete btn-success" href="{{ route('admin::permohonan-konsumsi.approve', [$permohonanKonsumsi->getKey()]) }}">Approve</a>
 							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-konsumsi.reject', [$permohonanKonsumsi->getKey()]) }}">Reject</a>
 						@endif 
@@ -101,10 +103,15 @@
 							<a class="btn btn-sm btn-delete btn-warning" href="{{ route('admin::permohonan-konsumsi.terlaksana', [$permohonanKonsumsi->getKey()]) }}">Selesai</a>
 						@endif 
 					@else
-						@if($permohonanKonsumsi->status_pj != 'Approved')
+						@if($permohonanKonsumsi->status_pj == 'Pending')
 							<a class="btn btn-sm btn-delete btn-success" href="{{ route('admin::permohonan-konsumsi.approve', [$permohonanKonsumsi->getKey()]) }}">Approve</a>
 							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-konsumsi.reject', [$permohonanKonsumsi->getKey()]) }}">Reject</a>
 						@endif 
+						@if($permohonanKonsumsi->status_pj == 'Rejected')
+						<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::permohonan-konsumsi.form-edit', [$permohonanKonsumsi->getKey()]) }}">Edit</a>
+							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-konsumsi.delete', [$permohonanKonsumsi->getKey()]) }}">Delete</a>
+						@endif 
+
 						@if($permohonanKonsumsi->status_pelaksana != 'Terlaksana' && $permohonanKonsumsi->status_pj == 'Approved' )
 							<a class="btn btn-sm btn-delete btn-warning" href="{{ route('admin::permohonan-konsumsi.terlaksana', [$permohonanKonsumsi->getKey()]) }}">Selesai</a>
 							<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::permohonan-konsumsi.form-edit', [$permohonanKonsumsi->getKey()]) }}">Edit</a>

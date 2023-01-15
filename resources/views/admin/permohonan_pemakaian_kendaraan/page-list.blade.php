@@ -86,6 +86,10 @@
 								<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::permohonan-pemakaian-kendaraan.form-edit', [$permohonanPemakaianKendaraan->getKey()]) }}">Edit</a>
 								<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-pemakaian-kendaraan.delete', [$permohonanPemakaianKendaraan->getKey()]) }}">Delete</a>
 							@endif
+							@if($permohonanPemakaianKendaraan->status_pj == 'Approved' || $permohonanPemakaianKendaraan->status_pj == 'Rejected')
+								<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::permohonan-pemakaian-kendaraan.form-edit', [$permohonanPemakaianKendaraan->getKey()]) }}">Edit</a>
+								<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-pemakaian-kendaraan.delete', [$permohonanPemakaianKendaraan->getKey()]) }}">Delete</a>
+							@endif
 						@endif
 					{{-- @endif --}}
 		        </td>

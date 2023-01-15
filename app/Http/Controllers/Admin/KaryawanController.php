@@ -235,24 +235,24 @@ class KaryawanController extends Controller
             //         "max:120"
             //     ]
             // ],
-            // 'no_induk' => [
-            //     'input' => "text",
-            //     'label' => "No. Induk",
-            //     'maxlength' => "120",
-            //     'rules' => [
-            //         "required",
-            //         "max:120"
-            //     ]
-            // ],
-            'nid' => [
+            'no_induk' => [
                 'input' => "text",
-                'label' => "NID",
+                'label' => "No. Induk",
                 'maxlength' => "120",
                 'rules' => [
                     "required",
                     "max:120"
                 ]
             ],
+            // 'nid' => [
+            //     'input' => "text",
+            //     'label' => "NID",
+            //     'maxlength' => "120",
+            //     'rules' => [
+            //         "required",
+            //         "max:120"
+            //     ]
+            // ],
             // 'jabatan' => [
             //     'input' => "text",
             //     'label' => "Jabatan",

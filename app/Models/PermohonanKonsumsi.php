@@ -31,6 +31,7 @@ class PermohonanKonsumsi extends Model
         "no_permohonan_konsumsi",
         "pemohon_id",
         "tanggal",
+        "tanggal_selesai",
         "jam",
         "sumber_dana",
         "kegiatan",

@@ -25,15 +25,14 @@
     <div class="global-wrap">
         <header id="main-header">
             <div class="header-top">
-                <div class="container">
+                <div class="container p-1">
                     <div class="row">
                         <div class="col-md-3">
-                            <a class="logo" href="index.html">
-                                <img src="{{asset('vendor/home')}}/images/pjb.png" alt="Image Alternative text" title="Aplikasi PJB"
-                                    style="width:30%;" />
-                            </a>
+                                <a class="logo" href="index.html">
+                                    <img src="{{asset('logo/new-logo.png')}}" alt="" height="35" width="35" style="margin-right: auto; margin-left:auto;">
+                                </a>
                         </div>
-                        <div class="col-md-offset-5 col-md-4">
+                        <div class="col-md-9">
                             <div class="top-user-area clearfix">
                                 <ul class="top-user-area-list list list-horizontal list-border">
                                     <li class="top-user-area-avatar">
@@ -60,6 +59,7 @@
                     <li><a href="{{route('permohonankonsumsi')}}">Permohonan Konsumsi</a></li>
                     {{-- <li><a href="{{route('permohonanatk')}}">Permohonan ATK</a></li> --}}
                     <li><a href="{{route('permohonankendaraan')}}">Peminjaman Kendaraan</a></li>
+                    <li><a href="{{route('layoutdesign')}}">Layout Design & Ruangan</a></li>
                 </ul>
             </div>
         </header>
@@ -70,7 +70,7 @@
             <div class="container">
                 <div class="row row-wrap">
                     <div class="center">
-                        <p class="text-center">{{date('Y')}} - Aplikasi Pelayanan Umum PT. PJB. By Ditamadigital</p>
+                        <p class="text-center">{{date('Y')}} - Aplikasi Pelayanan Umum  PT PLN Nusantara Power Unit Pembangkitan Muara Karang By Ditamadigital</p>
                     </div>
                 </div>
             </div>

@@ -36,6 +36,7 @@
 		        <th width="20" class="text-center column-number">No</th>
 		        <th class='column-no_pemesanan_ruangan'>No Pemesanan Ruangan</th>
 		        <th class='column-tanggal'>Tanggal</th>
+		        <th class='column-tanggal'>Tanggal Selesai</th>
 		        <th class='column-nama_acara'>Nama Acara</th>
 		        <th class='column-pemohon'>Nama Pemohon</th>
 		        <th class='column-waktu'>Waktu Awal</th>
@@ -69,6 +70,7 @@
 		        <td class="text-center column-number">{{ $pagination->firstItem() + $i }}</td>
 		        <td class='column-no_pemesanan_ruangan'>{{ $pemesananRuangan->no_pemesanan_ruangan }}</td>
 		        <td class='column-tanggal'>{{ $pemesananRuangan->tanggal }}</td>
+		        <td class='column-tanggal'>{{ $pemesananRuangan->tanggal_selesai }}</td>
 		        <td class='column-nama_acara'>{{ $pemesananRuangan->nama_acara }}</td>
 		        <td class='column-pemohon'>{{ $pemesananRuangan->pemohon }}</td>
 		        <td class='column-waktu_awal'>{{ date('H:i',$pemesananRuangan->waktu_awal) }}</td>
@@ -85,14 +87,18 @@
 		        <td width="200" class="text-center column-action">
 					{{-- @if (now() <= $pemesananRuangan->tanggal) --}}
 						@if (Auth::user()->role == 'adminruang')
-							@if($pemesananRuangan->status_pj != 'Approved')
+							@if($pemesananRuangan->status_pj == 'Pending')
 							<a class="btn btn-sm btn-delete btn-success" href="{{ route('admin::pemesanan-ruangan.approve', [$pemesananRuangan->getKey()]) }}">Approve</a>
 							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::pemesanan-ruangan.reject', [$pemesananRuangan->getKey()]) }}">Reject</a>
 							@endif
 						@else
-							@if($pemesananRuangan->status_pj != 'Approved')
+							@if($pemesananRuangan->status_pj == 'Pending')
 							<a class="btn btn-sm btn-delete btn-success" href="{{ route('admin::pemesanan-ruangan.approve', [$pemesananRuangan->getKey()]) }}">Approve</a>
 							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::pemesanan-ruangan.reject', [$pemesananRuangan->getKey()]) }}">Reject</a>
+							<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::pemesanan-ruangan.form-edit', [$pemesananRuangan->getKey()]) }}">Edit</a>
+							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::pemesanan-ruangan.delete', [$pemesananRuangan->getKey()]) }}">Delete</a>
+							@endif
+							@if($pemesananRuangan->status_pj == 'Approved' || $pemesananRuangan->status_pj == 'Rejected')
 							<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::pemesanan-ruangan.form-edit', [$pemesananRuangan->getKey()]) }}">Edit</a>
 							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::pemesanan-ruangan.delete', [$pemesananRuangan->getKey()]) }}">Delete</a>
 							@endif

@@ -16,12 +16,17 @@
                         <input class="form-control" type="text" placeholder="Tanggal Acara" required
                              value="{{$info->no_pemesanan_ruangan}}" readonly/>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <label>Tanggal <span style="color:red;">*</span> </label>
                         <input class="form-control" name="tanggal" type="date" placeholder="Tanggal Acara" required
                              value="{{$info->tanggal}}" />
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
+                        <label>Tanggal Selesai <span style="color:red;">*</span> </label>
+                        <input class="form-control" name="tanggal_selesai" type="date" placeholder="Tanggal Acara" required
+                             value="{{$info->tanggal_selesai}}" />
+                    </div>
+                    <div class="form-group col-md-2">
                         <label>Jumlah Konsumsi <span style="color:red;">*</span></label>
                         <input class="form-control" name="jumlah" placeholder="Jumlah" type="number"
                             required  />
@@ -103,12 +108,17 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <label>Tanggal <span style="color:red;">*</span></label>
                         <input class="form-control" name="tanggal" type="date" placeholder="Tanggal Acara" required
                              />
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
+                        <label>Tanggal Selesai<span style="color:red;">*</span></label>
+                        <input class="form-control" name="tanggal_selesai" type="date" placeholder="Tanggal Selesai" required
+                             />
+                    </div>
+                    <div class="form-group col-md-2">
                         <label>Jumlah Konsumsi <span style="color:red;">*</span></label>
                         <input class="form-control" name="jumlah" placeholder="Jumlah" type="number"
                             required  />
@@ -179,6 +189,7 @@
                 console.log(result);
                 $("[name='kegiatan']").val(result.nama_acara);
                 $("[name='tanggal']").val(result.tanggal);
+                $("[name='tanggal_selesai']").val(result.tanggal_selesai);
                 $("[name='jam']").val(result.waktu_awal);
                 $("[name='jumlah_peserta']").val(result.jumlah_peserta);
                 $("[name='ruang']").val(result.nama_ruang);

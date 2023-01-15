@@ -57,6 +57,7 @@ class PemesananRuanganController extends Controller
             "id",
             "no_pemesanan_ruangan",
             "tanggal",
+            "tanggal_selesai",
             "nama_acara",
             "pemohon",
             "waktu_awal",

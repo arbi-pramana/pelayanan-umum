@@ -58,4 +58,9 @@ class PermohonanPemakaianKendaraan extends Model
     protected $dates = [
         "deleted_at"
     ];
+    public function spj(){
+
+        return $this->hasOne('App\Models\SuratPerintahJalan', 'id_permohonan_pemakaian_kendaraan','id');
+
+    }
 }

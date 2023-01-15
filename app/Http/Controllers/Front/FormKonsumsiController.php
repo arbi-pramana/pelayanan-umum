@@ -18,6 +18,7 @@ class FormKonsumsiController extends Controller
         $permohonanKonsumsi = new PermohonanKonsumsi;
         $permohonanKonsumsi->no_permohonan_konsumsi = str_replace("PR", "PK", $req->get('no_permohonan_konsumsi'));
         $permohonanKonsumsi->tanggal = $req->get('tanggal');
+        $permohonanKonsumsi->tanggal_selesai = $req->get('tanggal_selesai');
         $permohonanKonsumsi->jumlah =$req->get('jumlah');
         $permohonanKonsumsi->sumber_dana =$req->get('sumber_dana');
         $permohonanKonsumsi->kegiatan =$req->get('kegiatan');

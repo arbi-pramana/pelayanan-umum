@@ -67,7 +67,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-2">
-                            <div id="colorlib-logo"><img src="{{ asset('vendor/home/images/pjb.png') }}" height="150px"></div>
+                            <div id="colorlib-logo"><img src="{{ asset('vendor/home/images/new-logo.png') }}" height="150px"></div>
                         </div>
                         <div class="col-xs-10 text-right menu-1">
                             <ul>
@@ -442,7 +442,7 @@
                         Copyright &copy;
                         <script>
                             document.write(new Date().getFullYear());
-                        </script> PT PJB by <a href="https://ditamadigital.co.id" target="_blank">Ditamadigital</a></span>
+                        </script> PT PLN Nusantara Power Unit Pembangkitan Muara Karang by <a href="https://ditamadigital.co.id" target="_blank">Ditamadigital</a></span>
                     </p>
                 </div>
             </div>

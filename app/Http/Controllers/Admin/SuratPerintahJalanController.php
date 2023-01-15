@@ -68,6 +68,7 @@ class SuratPerintahJalanController extends Controller
         $limit = (int) $request->get('limit') ?: 10;
         $keyword = $request->get('keyword');
 
+      
         $query = $this->suratPerintahJalan->query();
             // "permohonan_pemakaian_kendaraan.pemohon",
             // "permohonan_pemakaian_kendaraan.tujuan",
@@ -199,6 +200,7 @@ class SuratPerintahJalanController extends Controller
             $spj->jam_kembali = $request->jam_kembali;
             $spj->pengisian_bbm = $request->pengisian_bbm;
             $spj->total_biaya = $request->total_biaya;
+            $spj->total_biaya_2 = $request->total_biaya_2;
             $spj->save();
             
             $driver = Driver::where('id',$request->driver_id)->first();
@@ -228,7 +230,7 @@ class SuratPerintahJalanController extends Controller
     public function formEdit(Request $request, $id)
     {
         $suratPerintahJalan = $this->findOrFail($id);
-
+        
         $data['title'] = 'Form Edit Surat Perintah Jalan';
         // phpcs:ignore
         $data['form'] = $this->form($suratPerintahJalan)->withAction(route('admin::surat-perintah-jalan.post-edit', [$id]));
@@ -449,9 +451,22 @@ class SuratPerintahJalanController extends Controller
             'total_hide' => [
                 'input' => "hidden"
             ],
+            'total_hide_2' => [
+                'input' => "hidden"
+            ],
             'total_biaya' => [
                 'input' => "number",
-                'label' => "Total Biaya",
+                'label' => "Total Biaya Ke 1",
+                'maxlength' => "255",
+                'readonly' => true,
+                'rules' => [
+                    "required",
+                    "max:255"
+                ]
+            ],
+            'total_biaya_2' => [
+                'input' => "number",
+                'label' => "Total Biaya Ke 2",
                 'maxlength' => "255",
                 'readonly' => true,
                 'rules' => [
@@ -557,32 +572,62 @@ class SuratPerintahJalanController extends Controller
             // phpcs:ignore
             ->select(['id as value', \DB::raw('concat(pemohon," - ",penanggung_jawab, " - ", tujuan, " (", tanggal_berangkat, ")") as label')])
             ->orderBy('id', 'desc')
+            ->whereDoesntHave('spj')
             ->get()
             ->toArray();
     }
     protected function getdriver()
     {
-        return Driver::query()
+        $segments = request()->segments();
+        if($segments[2] == 'edit'){
+            return Driver::query()
+            // phpcs:ignore
+            ->select(['id as value', \DB::raw('concat(nama_driver," - ", email ) as label')])
+            ->orderBy('id', 'desc')
+            ->get()
+            ->toArray();
+        }else{
+            return Driver::query()
             // phpcs:ignore
             ->select(['id as value', \DB::raw('concat(nama_driver," - ", email ) as label')])
             ->where('status_driver','Ready')
             ->orderBy('id', 'desc')
             ->get()
             ->toArray();
+        }
+       
     }
     protected function getKendaraan()
     {
-        return Kendaraan::query()
+        $segments = request()->segments();
+        if($segments[2] == 'edit'){
+            return Kendaraan::query()
+            // phpcs:ignore
+            ->select(['id as value', \DB::raw('concat(nama_kendaraan, " - ", tipe_bbm," - ", no_pol) as label')])
+            ->orderBy('id', 'desc')
+            ->get()
+            ->toArray();
+        }else{
+            return Kendaraan::query()
             // phpcs:ignore
             ->select(['id as value', \DB::raw('concat(nama_kendaraan, " - ", tipe_bbm," - ", no_pol) as label')])
             ->where('status_kendaraan','Ready')
             ->orderBy('id', 'desc')
             ->get()
             ->toArray();
+        }
+        
     }
 
     public function kendaraanDetail($id){
 
         return Kendaraan::where('id',$id)->first();
+    }
+
+    public function getDataPermohonan($id){
+
+        $permohonan = PermohonanPemakaianKendaraan::where('id',$id)->first();
+
+        return $permohonan;
     }
 }
