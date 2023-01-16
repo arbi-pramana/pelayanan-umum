@@ -37,9 +37,7 @@ class FormRuangController extends Controller
         $pemesananRuangan->keterangan =$req->get('keterangan');
         $pemesananRuangan->design_ruangan =$req->get('design_ruangan');
         $pemesananRuangan->status_pj = 'Pending';
-        $pemesananRuangan->supervisor = $pemohon->id_supervisor;
         $pemesananRuangan->status_supervisor = 'Pending';
-        $pemesananRuangan->manajer = $pemohon->id_manajer;
         $pemesananRuangan->status_manajer = 'Pending';
         if (!empty($req->get('subruang'))) {
             $pemesananRuangan->child_ruang = implode(";", $req->get('subruang'));

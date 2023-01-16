@@ -27,9 +27,7 @@ class FormKonsumsiController extends Controller
         $permohonanKonsumsi->pemohon =$req->get('pemohon');
         $permohonanKonsumsi->pemohon_id =$req->get('pemohon_id');
         $permohonanKonsumsi->status_pj ='Pending';
-        $permohonanKonsumsi->supervisor = $pemohon->id_supervisor;
         $permohonanKonsumsi->status_supervisor = 'Pending';
-        $permohonanKonsumsi->manajer = $pemohon->id_manajer;
         $permohonanKonsumsi->status_manajer = 'Pending';
         $permohonanKonsumsi->keterangan =$req->get('keterangan');
         $permohonanKonsumsi->save();
