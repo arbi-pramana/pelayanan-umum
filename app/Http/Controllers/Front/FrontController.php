@@ -221,7 +221,7 @@ class FrontController extends Controller
         //     ->orWhere('pemesanan_ruangan.pemohon', $pemohon->nama);
         // } else {
             $query = $this->pemesananRuangan->query();
-            $query->where('pemohon', '=', $pemohon->nama)
+            $query->where('pemohon_id', '=', $pemohon->id)
             ->get();
         // }
 
@@ -322,7 +322,7 @@ class FrontController extends Controller
                     // "pemesanan_ruangan.no_pemesanan_ruangan"
             ])
             // ->join('pemesanan_ruangan', 'permohonan_konsumsi.no_permohonan_konsumsi', '=', 'pemesanan_ruangan.id')
-            ->where('permohonan_konsumsi.pemohon', '=', $pemohon->nama);
+            ->where('permohonan_konsumsi.pemohon_id', '=', $pemohon->id);
         // }
 
         if ($keyword) {
