@@ -16,17 +16,17 @@ class ProfileController extends Controller
     {
         $id_karyawan = auth()->guard('front')->id();
         $data['user'] = Karyawan::where('id', auth()->guard('front')->id())->first();
-        $pemesananRuangan = PemesananRuangan::where('pemohon', $data['user']->nama)
+        $pemesananRuangan = PemesananRuangan::where('pemohon_id', $data['user']->id)
         ->orWhere('supervisor',$id_karyawan)
         ->orWhere('manajer',$id_karyawan)
         ->count();
 
-        $data['permohonanKonsumsi'] = PermohonanKonsumsi::where('pemohon', $data['user']->nama)
+        $data['permohonanKonsumsi'] = PermohonanKonsumsi::where('pemohon_id', $data['user']->id)
         ->orWhere('supervisor',$id_karyawan)
         ->orWhere('manajer',$id_karyawan)
         ->count();
         $data['permohonanAtk'] = PermohonanAtk::where('pemohon', $data['user']->nama)->count();
-        $data['permohonanPemakaianKendaraan'] = PermohonanPemakaianKendaraan::where('pemohon', $data['user']->nama)
+        $data['permohonanPemakaianKendaraan'] = PermohonanPemakaianKendaraan::where('pemohon_id', $data['user']->id)
         ->orWhere('penanggung_jawab',$id_karyawan)
         ->count();
         
