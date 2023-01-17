@@ -73,7 +73,11 @@
 		        <td class='column-status_manajer'>{{ $pemesananRuangan->status_manajer }}</td> --}}
 		        <td class='column-status_penanggung_jawab'>{{ $pemesananRuangan->status_pj }}</td>
 		        <td class='column-file_attachment'>
-		          <a target="_blank" href="{{asset('pemesanan_ruangan/attachment/'.$pemesananRuangan->attachment) }}" download>click</a>
+					@if ($pemesananRuangan->attachment == null)
+						<span> - </span>
+					@else
+						<a target="_blank" href="{{asset('pemesanan_ruangan/attachment/'.$pemesananRuangan->attachment) }}" download>click</a>
+					@endif
 		        </td>
 		        <td class='column-keterangan'>{{ $pemesananRuangan->keterangan }}</td>
 		        <td width="200" class="text-center column-action">

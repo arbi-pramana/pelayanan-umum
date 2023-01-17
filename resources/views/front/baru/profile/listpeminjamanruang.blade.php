@@ -110,9 +110,13 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <td>{{ $pemesananRuangan->status_manajer }}</td> --}}
                         <td>{{ $pemesananRuangan->status_pj }}</td>
                         <td>
-                            <a href="{{asset('pemesanan_ruangan/attachment/'.$pemesananRuangan->attachment) }}" download>
-                                Click
-                            </a>
+                            @if ($pemesananRuangan->attachment == null)
+                                <span> - </span>
+                            @else
+                                <a href="{{asset('pemesanan_ruangan/attachment/'.$pemesananRuangan->attachment) }}" download>
+                                    Click
+                                </a>
+                            @endif
                         </td>
                         <td>{{ $pemesananRuangan->keterangan }}</td>
                         <td class="row" width="300">

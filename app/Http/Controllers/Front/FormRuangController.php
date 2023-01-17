@@ -17,10 +17,15 @@ class FormRuangController extends Controller
     {
         $pemohon = Karyawan::where('nama', $req->get('pemohon'))->first();
 
-        $file= $req->file('attachment');
-        $image_name = $file->getClientOriginalName();
-        $file->move(public_path('pemesanan_ruangan/attachment/'),$image_name);
-     
+        if($req->hasFile('attachment')){
+            $file= $req->file('attachment');
+            $image_name = $file->getClientOriginalName();
+            $file->move(public_path('pemesanan_ruangan/attachment/'),$image_name);
+         
+        }else{
+            $image_name = null;
+        }
+        
         $pemesananRuangan = new PemesananRuangan;
         $pemesananRuangan->no_pemesanan_ruangan = $req->get('no_pemesanan_ruangan');
         $pemesananRuangan->tanggal = $req->get('tanggal');

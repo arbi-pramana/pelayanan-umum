@@ -88,6 +88,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <th>Status Manajer</th> --}}
                         <th>Status Permohonan</th>
                         <th>Keterangan</th>
+                        <th>Attachment</th>
                         {{-- <th>Status</th> --}}
                         <th>Action</th>
                     </tr>
@@ -110,6 +111,9 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <td>{{ $permohonanKonsumsi->jumlah_peserta }}</td>
                         <td>{{ $permohonanKonsumsi->status_pj }}</td>
                         <td>{{ $permohonanKonsumsi->keterangan }}</td>
+                        <td>
+                            <a href="{{asset('pemesanan_ruangan/attachment/'.$permohonanKonsumsi->attachment) }}" download> Click</a>
+                        </td>
                         {{-- <td>{{ $permohonanKonsumsi->status_approval }}</td> --}}
                         <td>
                             @if($permohonanKonsumsi->manajer == $user->id)
