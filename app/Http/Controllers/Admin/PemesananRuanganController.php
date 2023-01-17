@@ -62,6 +62,7 @@ class PemesananRuanganController extends Controller
             "waktu_akhir",
             "jumlah_peserta",
             "id_ruang",
+            "design_ruangan",
             "attachment",
             "keterangan",
             "status_supervisor",
