@@ -69,11 +69,11 @@ return [
                 // 'route' => "admin::child-ruang.page-list",
                 // 'icon' => "meeting_room"
                 // ],
-                [
-                'label' => "Sumber Dana",
-                'route' => "admin::sumber-dana.page-list",
-                'icon' => "attach_money"
-                ],
+                // [
+                // 'label' => "Sumber Dana",
+                // 'route' => "admin::sumber-dana.page-list",
+                // 'icon' => "attach_money"
+                // ],
                 // [
                 // // 'label' => "Anggaran Sumber Dana",
                 // // 'route' => "admin::anggaran-sumber-dana.page-list",

@@ -177,76 +177,12 @@ class FrontController extends Controller
 
         $user = $this->guard()->user();
         $pemohon = $this->guard()->user();
-        $limit = (int) $request->get('limit') ?: 10;
-        $keyword = $request->get('keyword');
-
-        // if ($role=="Manajer") {
-        //     $query = $this->pemesananRuangan->query();
-        //     $query->select([
-        //         "pemesanan_ruangan.id",
-        //         "pemesanan_ruangan.no_pemesanan_ruangan",
-        //         "pemesanan_ruangan.tanggal",
-        //         "pemesanan_ruangan.nama_acara",
-        //         "pemesanan_ruangan.waktu_awal",
-        //         "pemesanan_ruangan.waktu_akhir",
-        //         "pemesanan_ruangan.jumlah_peserta",
-        //         "ruang.nama_ruang",
-        //         "pemesanan_ruangan.attachment",
-        //         "pemesanan_ruangan.keterangan",
-        //         "pemesanan_ruangan.status_supervisor",
-        //         "pemesanan_ruangan.status_manajer",
-        //         "pemesanan_ruangan.status_pj",
-        //         "pemesanan_ruangan.manajer"
-        //     ])
-        //     ->join('ruang', 'pemesanan_ruangan.id_ruang', '=', 'ruang.id')
-        //     ->where('pemesanan_ruangan.status_supervisor', 'Approved')
-        //     ->where('pemesanan_ruangan.manajer', $user->id)
-        //     ->orWhere('pemesanan_ruangan.pemohon', $pemohon->nama);
-        // } else if ($role=="Supervisor") {
-        //     $query = $this->pemesananRuangan->query();
-        //     $query->select([
-        //         "pemesanan_ruangan.id",
-        //         "pemesanan_ruangan.no_pemesanan_ruangan",
-        //         "pemesanan_ruangan.tanggal",
-        //         "pemesanan_ruangan.nama_acara",
-        //         "pemesanan_ruangan.waktu_awal",
-        //         "pemesanan_ruangan.waktu_akhir",
-        //         "pemesanan_ruangan.jumlah_peserta",
-        //         "ruang.nama_ruang",
-        //         "pemesanan_ruangan.attachment",
-        //         "pemesanan_ruangan.keterangan",
-        //         "pemesanan_ruangan.status_supervisor",
-        //         "pemesanan_ruangan.status_manajer",
-        //         "pemesanan_ruangan.status_pj",
-        //         "pemesanan_ruangan.supervisor"
-        //     ])
-        //     ->join('ruang', 'pemesanan_ruangan.id_ruang', '=', 'ruang.id')
-        //     ->where('pemesanan_ruangan.supervisor', $user->id)
-        //     ->orWhere('pemesanan_ruangan.pemohon', $pemohon->nama);
-        // } else {
-            $query = $this->pemesananRuangan->query();
-            $query->where('pemohon_id', '=', $pemohon->id)
-            ->get();
-        // }
-
-        if ($keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('no_pemesanan_ruangan', 'like', "%{$keyword}%");
-                $query->orWhere('pemohon', 'like', "%{$keyword}%");
-                $query->orWhere('tanggal', 'like', "%{$keyword}%");
-                $query->orWhere('nama_acara', 'like', "%{$keyword}%");
-                $query->orWhere('jam_awal', 'like', "%{$keyword}%");
-                $query->orWhere('jam_akhir', 'like', "%{$keyword}%");
-                $query->orWhere('jumlah_peserta', 'like', "%{$keyword}%");
-                $query->orWhere('id_ruang', 'like', "%{$keyword}%");
-                $query->orWhere('attachment', 'like', "%{$keyword}%");
-                $query->orWhere('keterangan', 'like', "%{$keyword}%");
-                $query->orWhere('status_pj', 'like', "%{$keyword}%");
-            });
-        }
+        $query = $this->pemesananRuangan->query();
+        $query->where('pemohon_id', '=', $pemohon->id)
+        ->get();
 
         $data['title'] = 'List Pemesanan Ruangan';
-        $data['pagination'] = $query->latest()->paginate(5);
+        $data['pagination'] = $query->latest()->get();
         return view('front.baru.profile.listpeminjamanruang', $data);
     }
 
@@ -255,55 +191,9 @@ class FrontController extends Controller
         $user = $this->guard()->user();
         $role = $this->guard()->user()->role;
         $pemohon = $this->guard()->user();
-        $limit = (int) $request->get('limit') ?: 10;
-        $keyword = $request->get('keyword');
 
-        // if ($role == 'Manajer') {
-        //     $query = $this->permohonanKonsumsi->query();
-        //     $query->select([
-        //             "permohonan_konsumsi.id",
-        //             "permohonan_konsumsi.no_permohonan_konsumsi",
-        //             "permohonan_konsumsi.tanggal",
-        //             "permohonan_konsumsi.jam",
-        //             "sumber_dana.nama_sumber_dana",
-        //             "permohonan_konsumsi.kegiatan",
-        //             "permohonan_konsumsi.jenis_konsumsi",
-        //             "permohonan_konsumsi.jumlah_peserta",
-        //             "permohonan_konsumsi.pemohon",
-        //             "permohonan_konsumsi.status_supervisor",
-        //             "permohonan_konsumsi.status_manajer",
-        //             "permohonan_konsumsi.status_pj",
-        //             "permohonan_konsumsi.keterangan",
-        //             "permohonan_konsumsi.manajer"
-        //     ])
-        //     ->join('sumber_dana', 'permohonan_konsumsi.sumber_dana', '=', 'sumber_dana.id')
-        //     ->where('permohonan_konsumsi.status_supervisor', 'Approved')
-        //     ->where('permohonan_konsumsi.manajer', $user->id)
-        //     ->orWhere('permohonan_konsumsi.pemohon', '=', $pemohon->nama);
-        // } else if($role == "Supervisor") {
-        //     $query = $this->permohonanKonsumsi->query();
-        //     $query->select([
-        //             "permohonan_konsumsi.id",
-        //             "permohonan_konsumsi.no_permohonan_konsumsi",
-        //             "permohonan_konsumsi.tanggal",
-        //             "permohonan_konsumsi.jam",
-        //             "sumber_dana.nama_sumber_dana",
-        //             "permohonan_konsumsi.kegiatan",
-        //             "permohonan_konsumsi.jenis_konsumsi",
-        //             "permohonan_konsumsi.jumlah_peserta",
-        //             "permohonan_konsumsi.pemohon",
-        //             "permohonan_konsumsi.status_supervisor",
-        //             "permohonan_konsumsi.status_manajer",
-        //             "permohonan_konsumsi.status_pj",
-        //             "permohonan_konsumsi.supervisor",
-        //             "permohonan_konsumsi.keterangan"
-        //     ])
-        //     ->join('sumber_dana', 'permohonan_konsumsi.sumber_dana', '=', 'sumber_dana.id')
-        //     ->where('permohonan_konsumsi.supervisor', $user->id)
-        //     ->orWhere('permohonan_konsumsi.pemohon', '=', $pemohon->nama);
-        // } else {
-            $query = $this->permohonanKonsumsi->query();
-            $query->select([
+        $query = $this->permohonanKonsumsi->query();
+        $query->select([
                     "permohonan_konsumsi.id",
                     "permohonan_konsumsi.no_permohonan_konsumsi",
                     "permohonan_konsumsi.tanggal",
@@ -322,29 +212,11 @@ class FrontController extends Controller
                     "permohonan_konsumsi.keterangan",
                     "permohonan_konsumsi.created_at",
                     "permohonan_konsumsi.updated_at"
-
-                    // "pemesanan_ruangan.no_pemesanan_ruangan"
             ])
-            // ->join('pemesanan_ruangan', 'permohonan_konsumsi.no_permohonan_konsumsi', '=', 'pemesanan_ruangan.id')
             ->where('permohonan_konsumsi.pemohon_id', '=', $pemohon->id);
-        // }
-
-        if ($keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('no_permohonan_konsumsi', 'like', "%{$keyword}%");
-                $query->orWhere('tanggal', 'like', "%{$keyword}%");
-                $query->orWhere('jam', 'like', "%{$keyword}%");
-                $query->orWhere('sumber_dana', 'like', "%{$keyword}%");
-                $query->orWhere('kegiatan', 'like', "%{$keyword}%");
-                $query->orWhere('jenis_konsumsi', 'like', "%{$keyword}%");
-                $query->orWhere('pemohon', 'like', "%{$keyword}%");
-                $query->orWhere('status_pj', 'like', "%{$keyword}%");
-                $query->orWhere('keterangan', 'like', "%{$keyword}%");
-            });
-        }
 
         $data['title'] = 'List Permohonan Konsumsi';
-        $data['pagination'] = $query->latest()->paginate($limit);
+        $data['pagination'] = $query->latest()->get();
         return view('front.baru.profile.listpermohonankonsumsi', $data);
     }
 
@@ -423,73 +295,11 @@ class FrontController extends Controller
 
         $user = $this->guard()->user();
         $pemohon = $this->guard()->user();
-        $limit = (int) $request->get('limit') ?: 10;
-        $keyword = $request->get('keyword');
-
-        // if ($role=='Manajer') {
-        //     $query = $this->permohonanPemakaianKendaraan->query();
-        //     $query->select([
-        //         "permohonan_pemakaian_kendaraan.id",
-        //         "permohonan_pemakaian_kendaraan.pemohon",
-        //         "permohonan_pemakaian_kendaraan.tujuan",
-        //         "permohonan_pemakaian_kendaraan.keperluan",
-        //         "permohonan_pemakaian_kendaraan.hari",
-        //         "permohonan_pemakaian_kendaraan.tanggal_berangkat",
-        //         "permohonan_pemakaian_kendaraan.tanggal_kembali",
-        //         "permohonan_pemakaian_kendaraan.jam_berangkat",
-        //         "permohonan_pemakaian_kendaraan.jam_kembali",
-        //         "penanggung_jawab.nama as nama_penanggung_jawab",
-        //         "permohonan_pemakaian_kendaraan.penanggung_jawab",
-        //         "permohonan_pemakaian_kendaraan.status_pj"
-        //     ])
-        //     ->join('karyawan', 'permohonan_pemakaian_kendaraan.penanggung_jawab', '=', 'karyawan.id')
-        //     // phpcs:ignore
-        //     ->join('karyawan as penanggung_jawab', 'permohonan_pemakaian_kendaraan.penanggung_jawab', '=', 'penanggung_jawab.id');
-        //     // ->where('permohonan_pemakaian_kendaraan.penanggung_jawab', '=', $user->id);
-            
-        // } elseif ($role=='Supervisor') {
-        //     $query = $this->permohonanPemakaianKendaraan->query();
-        //     $query->select([
-        //         "permohonan_pemakaian_kendaraan.id",
-        //         "permohonan_pemakaian_kendaraan.pemohon",
-        //         "permohonan_pemakaian_kendaraan.tujuan",
-        //         "permohonan_pemakaian_kendaraan.keperluan",
-        //         "permohonan_pemakaian_kendaraan.hari",
-        //         "permohonan_pemakaian_kendaraan.tanggal_berangkat",
-        //         "permohonan_pemakaian_kendaraan.tanggal_kembali",
-        //         "permohonan_pemakaian_kendaraan.jam_berangkat",
-        //         "permohonan_pemakaian_kendaraan.jam_kembali",
-        //         "penanggung_jawab.nama as nama_penanggung_jawab",
-        //         "permohonan_pemakaian_kendaraan.penanggung_jawab",
-        //         "permohonan_pemakaian_kendaraan.status_pj"
-        //     ])
-        //     ->join('karyawan', 'permohonan_pemakaian_kendaraan.penanggung_jawab', '=', 'karyawan.id')
-        //     // phpcs:ignore
-        //     ->join('karyawan as penanggung_jawab', 'permohonan_pemakaian_kendaraan.penanggung_jawab', '=', 'penanggung_jawab.id')
-        //     ->where('permohonan_pemakaian_kendaraan.penanggung_jawab', '=', $user->id);
-        // } else {
-            $query = $this->permohonanPemakaianKendaraan->query()
-       
-            ->where('pemohon_id', $pemohon->id);
-            // dd($query);
-        // }
-
-        if ($keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('pemohon', 'like', "%{$keyword}%");
-                $query->orWhere('tujuan', 'like', "%{$keyword}%");
-                $query->orWhere('keperluan', 'like', "%{$keyword}%");
-                $query->orWhere('hari', 'like', "%{$keyword}%");
-                $query->orWhere('tanggal_berangkat', 'like', "%{$keyword}%");
-                $query->orWhere('tanggal_kembali', 'like', "%{$keyword}%");
-                $query->orWhere('jam_berangkat', 'like', "%{$keyword}%");
-                $query->orWhere('jam_kembali', 'like', "%{$keyword}%");
-                $query->orWhere('penanggung_jawab', 'like', "%{$keyword}%");
-            });
-        }
+        $query = $this->permohonanPemakaianKendaraan->query()
+                ->where('pemohon_id', $pemohon->id);
 
         $data['title'] = 'List Permohonan Pemakaian Kendaraan';
-        $data['pagination'] = $query->latest()->paginate($limit);
+        $data['pagination'] = $query->latest()->get();
         return view('front.baru.profile.listpermohonankendaraan', $data);
     }
 

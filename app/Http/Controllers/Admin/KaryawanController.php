@@ -42,8 +42,6 @@ class KaryawanController extends Controller
      */
     public function pageList(Request $request)
     {
-        $limit = (int) $request->get('limit') ?: 10;
-        $keyword = $request->get('keyword');
 
         $query = $this->karyawan->query();
         $query->select([
@@ -66,28 +64,8 @@ class KaryawanController extends Controller
             "role"
         ]);
 
-        if ($keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('nama', 'like', "%{$keyword}%");
-                $query->orWhere('nama_tanpa_gelar', 'like', "%{$keyword}%");
-                $query->orWhere('no_induk', 'like', "%{$keyword}%");
-                $query->orWhere('nid', 'like', "%{$keyword}%");
-                $query->orWhere('jabatan', 'like', "%{$keyword}%");
-                $query->orWhere('bidang', 'like', "%{$keyword}%");
-                $query->orWhere('sub_bidang', 'like', "%{$keyword}%");
-                $query->orWhere('grade', 'like', "%{$keyword}%");
-                $query->orWhere('jenis_kelamin', 'like', "%{$keyword}%");
-                $query->orWhere('pendidikan', 'like', "%{$keyword}%");
-                $query->orWhere('universitas', 'like', "%{$keyword}%");
-                $query->orWhere('id_atasan', 'like', "%{$keyword}%");
-                $query->orWhere('id_supervisor', 'like', "%{$keyword}%");
-                $query->orWhere('id_manajer', 'like', "%{$keyword}%");
-                $query->orWhere('role', 'like', "%{$keyword}%");
-            });
-        }
-
         $data['title'] = 'List Karyawan';
-        $data['pagination'] = $query->paginate($limit);
+        $data['pagination'] = $query->get();
 
         return view('admin::karyawan.page-list', $data);
     }

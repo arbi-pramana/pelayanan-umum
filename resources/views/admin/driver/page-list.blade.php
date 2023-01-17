@@ -12,7 +12,7 @@
 				<a class="btn btn-success" href="{{ route('admin::driver.form-create') }}">Create</a>
 			</div>
 			<div class="col-md-3 no-margin">
-				<form method="GET">
+				{{-- <form method="GET">
 					<div class="form-group" style="margin:0px">
 						<div class="input-group" style="margin:0px">
 							<div class="form-line">
@@ -23,14 +23,13 @@
 							</div>
 						</div>
 					</div>
-				</form>
+				</form> --}}
 			</div>
 		</div>
 	</div>
 	<div class="body">
-		@if($pagination->items())
 		<div class="table-responsive">
-		  <table id="table-karyawan" class="table table-bordered table-striped table-hover">
+		  <table id="my-table" class="table table-bordered table-striped table-hover">
 		    <thead>
 		      <tr>
 		        <th width="20" class="text-center column-number">No</th>
@@ -41,16 +40,9 @@
 		      </tr>
 		    </thead>
 		    <tbody>
-		      @if(!$pagination->count())
+		      @foreach($pagination as $i => $driver)
 		      <tr>
-		        <td colspan="17" class="text-center">
-		          Records empty.
-		        </td>
-		      </tr>
-		      @endif
-		      @foreach($pagination->items() as $i => $driver)
-		      <tr>
-		        <td class="text-center column-number">{{ $pagination->firstItem() + $i }}</td>
+		        <td class="text-center column-number">{{ $loop->iteration }}</td>
 		        <td class='column-nama'>{{ $driver->nama_driver }}</td>
 		        <td class='column-no_induk'>{{ $driver->email }}</td>
 		        <td class='column-no_induk'>{{ $driver->status_driver }}</td>
@@ -63,12 +55,6 @@
 		    </tbody>
 		  </table>
 		</div>
-		{!! $pagination->links() !!}
-		@else
-		<div class="well well-sm">
-			driver empty
-		</div>
-		@endif
 	</div>
 </div>
 @stop

@@ -45,8 +45,6 @@ class PermohonanPemakaianKendaraanController extends Controller
      */
     public function pageList(Request $request)
     {
-        $limit = (int) $request->get('limit') ?: 10;
-        $keyword = $request->get('keyword');
 
         $query = $this->permohonanPemakaianKendaraan->query();
         $query->select([
@@ -63,22 +61,8 @@ class PermohonanPemakaianKendaraanController extends Controller
             "status_pj",
         ]);
 
-        if ($keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('pemohon', 'like', "%{$keyword}%");
-                $query->orWhere('tujuan', 'like', "%{$keyword}%");
-                $query->orWhere('keperluan', 'like', "%{$keyword}%");
-                $query->orWhere('hari', 'like', "%{$keyword}%");
-                $query->orWhere('tanggal_berangkat', 'like', "%{$keyword}%");
-                $query->orWhere('tanggal_kembali', 'like', "%{$keyword}%");
-                $query->orWhere('jam_berangkat', 'like', "%{$keyword}%");
-                $query->orWhere('jam_kembali', 'like', "%{$keyword}%");
-                $query->orWhere('penanggung_jawab', 'like', "%{$keyword}%");
-            });
-        }
-
         $data['title'] = 'List Permohonan Pemakaian Kendaraan';
-        $data['pagination'] = $query->paginate($limit);
+        $data['pagination'] = $query->latest()->get();
 
         return view('admin::permohonan_pemakaian_kendaraan.page-list', $data);
     }
