@@ -87,11 +87,11 @@
         <div class="header-pdf">
             <div class="logo-header">
                 <div class="image-logo">
-                    <img src="{{asset('logo/pjb.png')}}" alt="" height="50" width="100">
+                    <img src="{{asset('logo/new-logo.png')}}"  alt=""  width="150">
                 </div>
                 <div class="text-logo">
-                    <h5><b>PT PEMBANGKITAN JAWA BALI<b></h5>
-                    <h5 style="margin-top: -5px;"><b>UNIT PEMBANGKITAN MUARA KARANG<b></h5>
+                    <h5><b> PT PLN Nusantara Power<b></h5>
+                    <h5 style="margin-top: -5px;"><b>Unit Pembangkitan Muara Karang<b></h5>
                 </div>
             </div>
             <div class="nopol-header">

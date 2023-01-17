@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{asset('vendor/frontend')}}/css/switcher.css" />
     @styles()
 
-    <link rel="icon" href="{{asset('vendor/home')}}/images/pjb.png">
+    <link rel="icon" href="{{asset('vendor/home')}}/images/new-logo.ico">
 
     <script src="{{asset('vendor/frontend')}}/js/modernizr.js"></script>
 </head>
