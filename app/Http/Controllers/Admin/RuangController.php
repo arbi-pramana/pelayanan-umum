@@ -45,8 +45,6 @@ class RuangController extends Controller
      */
     public function pageList(Request $request)
     {
-        $limit = (int) $request->get('limit') ?: 10;
-        $keyword = $request->get('keyword');
 
         $query = $this->ruang->query();
         $query->select([
@@ -58,15 +56,8 @@ class RuangController extends Controller
             "foto_ruang"
         ]);
 
-        if ($keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('id_ruang', 'like', "%{$keyword}%");
-                $query->orWhere('nama_ruang', 'like', "%{$keyword}%");
-            });
-        }
-
         $data['title'] = 'List Ruang';
-        $data['pagination'] = $query->paginate($limit);
+        $data['pagination'] = $query->get();
 
         return view('admin::ruang.page-list', $data);
     }

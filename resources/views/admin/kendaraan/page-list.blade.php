@@ -12,7 +12,7 @@
 				<a class="btn btn-success" href="{{ route('admin::kendaraan.form-create') }}">Create</a>
 			</div>
 			<div class="col-md-3 no-margin">
-				<form method="GET">
+				{{-- <form method="GET">
 					<div class="form-group" style="margin:0px">
 						<div class="input-group" style="margin:0px">
 							<div class="form-line">
@@ -23,14 +23,13 @@
 							</div>
 						</div>
 					</div>
-				</form>
+				</form> --}}
 			</div>
 		</div>
 	</div>
 	<div class="body">
-		@if($pagination->items())
 		<div class="table-responsive">
-		  <table id="table-karyawan" class="table table-bordered table-striped table-hover">
+		  <table id="my-table" class="table table-bordered table-striped table-hover">
 		    <thead>
 		      <tr>
 		        <th width="20" class="text-center column-number">No</th>
@@ -42,16 +41,9 @@
 		      </tr>
 		    </thead>
 		    <tbody>
-		      @if(!$pagination->count())
+		      @foreach($pagination as $i => $kendaraan)
 		      <tr>
-		        <td colspan="17" class="text-center">
-		          Records empty.
-		        </td>
-		      </tr>
-		      @endif
-		      @foreach($pagination->items() as $i => $kendaraan)
-		      <tr>
-		        <td class="text-center column-number">{{ $pagination->firstItem() + $i }}</td>
+		        <td class="text-center column-number">{{ $loop->iteration }}</td>
 		        <td class='column-nama'>{{ $kendaraan->nama_kendaraan }}</td>
 		        <td class='column-no_induk'>{{ $kendaraan->tipe_bbm }}</td>
 		        <td class='column-nid'>{{ $kendaraan->no_pol }}</td>
@@ -65,12 +57,6 @@
 		    </tbody>
 		  </table>
 		</div>
-		{!! $pagination->links() !!}
-		@else
-		<div class="well well-sm">
-			Kendaraan empty
-		</div>
-		@endif
 	</div>
 </div>
 @stop

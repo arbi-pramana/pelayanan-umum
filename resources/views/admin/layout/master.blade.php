@@ -15,6 +15,8 @@
 
   <!-- Font awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+  
 
   <!-- Bootstrap Core Css -->
   <link href="{{ asset('vendor/admin-bsb/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
@@ -108,7 +110,13 @@
   <!-- Jquery Core Js -->
   @section('scripts')
   <script src="{{ asset('vendor/admin-bsb/plugins/jquery/jquery.min.js') }}"></script>
+  <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready( function () {
+    $('#my-table').DataTable();
+} );
 
+</script>
   <!-- Bootstrap Core Js -->
   <script src="{{ asset('vendor/admin-bsb/plugins/bootstrap/js/bootstrap.js') }}"></script>
 

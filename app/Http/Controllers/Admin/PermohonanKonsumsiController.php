@@ -50,9 +50,6 @@ class PermohonanKonsumsiController extends Controller
      */
     public function pageList(Request $request)
     {
-        $limit = (int) $request->get('limit') ?: 10;
-        $keyword = $request->get('keyword');
-
         $query = $this->permohonanKonsumsi->query();
         
         $query->select([
@@ -82,25 +79,8 @@ class PermohonanKonsumsiController extends Controller
         // ->join('karyawan', 'permohonan_konsumsi.supervisor', '=', 'karyawan.id')
         // ->join('karyawan as manager', 'permohonan_konsumsi.manajer', '=', 'manager.id');
 
-        if ($keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('permohonan_konsumsi.no_permohonan_konsumsi', 'like', "%{$keyword}%");
-                $query->orWhere('permohonan_konsumsi.tanggal', 'like', "%{$keyword}%");
-                $query->orWhere('permohonan_konsumsi.jumlah', 'like', "%{$keyword}%");
-                $query->orWhere('permohonan_konsumsi.sumber_dana', 'like', "%{$keyword}%");
-                $query->orWhere('permohonan_konsumsi.kegiatan', 'like', "%{$keyword}%");
-                $query->orWhere('permohonan_konsumsi.jenis_konsumsi', 'like', "%{$keyword}%");
-                $query->orWhere('permohonan_konsumsi.pemohon', 'like', "%{$keyword}%");
-                $query->orWhere('nama_supervisor', 'like', "%{$keyword}%");
-                $query->orWhere('permohonan_konsumsi.status_supervisor', 'like', "%{$keyword}%");
-                $query->orWhere('nama_manajer', 'like', "%{$keyword}%");
-                $query->orWhere('permohonan_konsumsi.status_manajer', 'like', "%{$keyword}%");
-                $query->orWhere('permohonan_konsumsi.keterangan', 'like', "%{$keyword}%");
-            });
-        }
-
         $data['title'] = 'List Permohonan Konsumsi';
-        $data['pagination'] = $query->latest()->paginate($limit);
+        $data['pagination'] = $query->latest()->get();
 
         return view('admin::permohonan_konsumsi.page-list', $data);
     }

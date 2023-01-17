@@ -73,7 +73,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
         </div>
 
         <div class="col-md-9" style="overflow-x: scroll;">
-            <table class="table table-bordered table-striped table-booking-history">
+            <table id="my-table" class="table table-bordered table-striped table-booking-history">
                 <thead>
                     <tr align="center">
                         <th class="text-center column-number" width="20">
@@ -115,17 +115,10 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                     </tr>
                 </thead>
                 <tbody>
-                    @if(!$pagination->count())
-                    <tr>
-                        <td colspan="11" class="text-center">
-                            Records empty.
-                        </td>
-                    </tr>
-                    @endif
-                    @foreach($pagination->items() as $i => $permohonanPemakaianKendaraan)
+                    @foreach($pagination as $i => $permohonanPemakaianKendaraan)
                     <tr align="center">
                         <td class="text-center column-number">
-                            {{ $pagination->firstItem() + $i }}
+                            {{ $loop->iteration }}
                         </td>
                         <td class="column-pemohon">
                             {{ $permohonanPemakaianKendaraan->pemohon }}
@@ -186,7 +179,6 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                     @endforeach
                 </tbody>
             </table>
-            {{ $pagination->links() }}
         </div>
     </div>
 </div>

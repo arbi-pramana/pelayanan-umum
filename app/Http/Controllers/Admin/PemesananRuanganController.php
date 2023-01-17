@@ -49,8 +49,6 @@ class PemesananRuanganController extends Controller
      */
     public function pageList(Request $request)
     {
-        $limit = (int) $request->get('limit') ?: 10;
-        $keyword = $request->get('keyword');
 
         $query = $this->pemesananRuangan->query();
         $query->select([
@@ -71,27 +69,8 @@ class PemesananRuanganController extends Controller
             "status_pj"
         ]);
 
-        if ($keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('no_pemesanan_ruangan', 'like', "%{$keyword}%");
-                $query->orWhere('tanggal', 'like', "%{$keyword}%");
-                $query->orWhere('nama_acara', 'like', "%{$keyword}%");
-                $query->orWhere('pemohon', 'like', "%{$keyword}%");
-                $query->orWhere('jam_awal', 'like', "%{$keyword}%");
-                $query->orWhere('jam_akhir', 'like', "%{$keyword}%");
-                $query->orWhere('jumlah_peserta', 'like', "%{$keyword}%");
-                $query->orWhere('id_ruang', 'like', "%{$keyword}%");
-                $query->orWhere('penanggung_jawab', 'like', "%{$keyword}%");
-                $query->orWhere('file_layout', 'like', "%{$keyword}%");
-                $query->orWhere('keterangan', 'like', "%{$keyword}%");
-                $query->orWhere('status_pj', 'like', "%{$keyword}%");
-                $query->orWhere('status_manajer', 'like', "%{$keyword}%");
-                $query->orWhere('status_supervisor', 'like', "%{$keyword}%");
-            });
-        }
-
         $data['title'] = 'List Pemesanan Ruangan';
-        $data['pagination'] = $query->latest()->paginate($limit);
+        $data['pagination'] = $query->latest()->get();
 
         return view('admin::pemesanan_ruangan.page-list', $data);
     }

@@ -42,19 +42,11 @@ class DriverController extends Controller
      */
     public function pageList(Request $request)
     {
-        $limit = (int) $request->get('limit') ?: 10;
-        $keyword = $request->get('keyword');
 
         $query = $this->driver->query();
 
-        if ($keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('nama_driver', 'like', "%{$keyword}%");
-                $query->orWhere('email', 'like', "%{$keyword}%");
-            });
-        }
         $data['title'] = 'List driver';
-        $data['pagination'] = $query->paginate($limit);
+        $data['pagination'] = $query->get();
 
         return view('admin::driver.page-list', $data);
     }

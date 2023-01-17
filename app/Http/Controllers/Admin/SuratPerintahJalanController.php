@@ -65,10 +65,7 @@ class SuratPerintahJalanController extends Controller
 
     public function pageList(Request $request)
     {
-        $limit = (int) $request->get('limit') ?: 10;
-        $keyword = $request->get('keyword');
 
-      
         $query = $this->suratPerintahJalan->query();
             // "permohonan_pemakaian_kendaraan.pemohon",
             // "permohonan_pemakaian_kendaraan.tujuan",
@@ -82,25 +79,9 @@ class SuratPerintahJalanController extends Controller
         // $query->join('driver','surat_perintah_jalan.driver_id','=','driver.id')->get();
         // dd($query);
 
-        if ($keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('nama_pengemudi', 'like', "%{$keyword}%");
-                $query->orWhere('tujuan', 'like', "%{$keyword}%");
-                // $query->orWhere('lama_perjalanan', 'like', "%{$keyword}%");
-                $query->orWhere('tanggal_berangkat', 'like', "%{$keyword}%");
-                $query->orWhere('tanggal_kembali', 'like', "%{$keyword}%");
-                $query->orWhere('jam_berangkat', 'like', "%{$keyword}%");
-                $query->orWhere('jam_kembali', 'like', "%{$keyword}%");
-                $query->orWhere('penanggung_jawab', 'like', "%{$keyword}%");
-                $query->orWhere('penanggung_jawab_pool', 'like', "%{$keyword}%");
-                $query->orWhere('status_pj', 'like', "%{$keyword}%");
-                $query->orWhere('status_pj_pool', 'like', "%{$keyword}%");
-            });
-        }
-
         // dd($query->paginate($limit));
         $data['title'] = 'List Surat Perintah Jalan';
-        $data['pagination'] = $query->latest()->paginate($limit);
+        $data['pagination'] = $query->latest()->get();
 
         return view('admin::surat_perintah_jalan.page-list', $data);
     }
