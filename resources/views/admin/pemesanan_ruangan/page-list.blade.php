@@ -41,7 +41,8 @@
 		        <th class='column-waktu'>Waktu Awal</th>
 		        <th class='column-waktu'>Waktu Akhir</th>
 		        <th class='column-jumlah_peserta'>Jumlah Peserta</th>
-		        <th class='column-id_ruang'>Ruang</th>
+		        <th class='column-id_ruang'>Ruangan</th>
+		        <th class='column-id_ruang'>Design Ruangan</th>
 		        {{-- <th class='column-status-supervisor'>Status Spv</th>
 		        <th class='column-status-manajer'>Status Manajer</th> --}}
 		        <th class='column-status-penanggung_jawab'>Status Penanggung Jawab</th>
@@ -69,6 +70,7 @@
 		        <td class='column-waktu_akhir'>{{ date('H:i',$pemesananRuangan->waktu_akhir) }}</td>
 		        <td class='column-jumlah_peserta'>{{ $pemesananRuangan->jumlah_peserta }}</td>
 		        <td class='column-id_ruang'>{{ $pemesananRuangan->ruang['nama_ruang'] }}</td>
+		        <td class='column-id_ruang'>{{ $pemesananRuangan->design_ruangan }}</td>
 		        {{-- <td class='column-status_supervisor'>{{ $pemesananRuangan->status_supervisor }}</td>
 		        <td class='column-status_manajer'>{{ $pemesananRuangan->status_manajer }}</td> --}}
 		        <td class='column-status_penanggung_jawab'>{{ $pemesananRuangan->status_pj }}</td>

@@ -85,6 +85,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <th>Selesai</th>
                         <th>Peserta</th>
                         <th>Ruangan</th>
+                        <th>Design Ruangan</th>
                         {{-- <td>Status Spv</td>
                         <td>Status Manajer</td> --}}
                         <td>Status Permohonan</td>
@@ -106,6 +107,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <td>{{ date("H:i",$pemesananRuangan->waktu_akhir)}}</td>
                         <td>{{ $pemesananRuangan->jumlah_peserta }}</td>
                         <td>{{ $pemesananRuangan->ruang['nama_ruang'] }}</td>
+                        <td>{{ $pemesananRuangan->design_ruangan }}</td>
                         {{-- <td>{{ $pemesananRuangan->status_supervisor }}</td>
                         <td>{{ $pemesananRuangan->status_manajer }}</td> --}}
                         <td>{{ $pemesananRuangan->status_pj }}</td>
