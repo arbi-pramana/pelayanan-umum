@@ -56,7 +56,7 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label>Attachment</label>
-                        <input class="form-control" name="attachment" type="file" required />
+                        <input class="form-control" name="attachment" type="file"/>
                     </div>
                     <div class="form-group col-md-3">
                         <label>Design Ruangan</label>

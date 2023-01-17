@@ -6,7 +6,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <title>{{ $title or 'Aplikasi Pemesanan Ruang dan Konsumsi' }}</title>
   <!-- Favicon-->
-  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="{{asset('vendor/home')}}/images/new-logo.ico">
 
   @section('styles')
   <!-- Google Fonts -->

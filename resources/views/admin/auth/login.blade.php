@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>{{ $title or 'Your Application Name' }}</title>
     <!-- Favicon-->
-    <link rel="icon" href="{{ asset('vendor/admin-bsb/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{asset('vendor/home')}}/images/new-logo.ico">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">

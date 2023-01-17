@@ -210,6 +210,7 @@ class FrontController extends Controller
                     "permohonan_konsumsi.status_manajer",
                     "permohonan_konsumsi.status_pj",
                     "permohonan_konsumsi.keterangan",
+                    "permohonan_konsumsi.attachment",
                     "permohonan_konsumsi.created_at",
                     "permohonan_konsumsi.updated_at"
             ])

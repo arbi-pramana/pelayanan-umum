@@ -62,6 +62,10 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3">
+                        <label>Attachment <span style="color:red;">*</span></label>
+                        <input class="form-control" name="attachment" type="file" required/>
+                    </div>
+                    <div class="form-group col-md-3">
                         <label>Jenis Konsumsi <span style="color:red;">*</span></label>
                             <select name="jenis_konsumsi" class="form-control" required>
                                 <option>Snack Pagi + Makan Siang + Snack Sore + Makan Malam</option>
@@ -73,7 +77,7 @@
                                 <option>Makan Malam</option>
                             </select>
                     </div>
-                    <div class="form-group col-md-9">
+                    <div class="form-group col-md-6">
                         <label>Keterangan</label>
                         <input type="text" name="keterangan" class="form-control" placeholder="Masukkan Keterangan">
                     </div>
@@ -153,6 +157,10 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3">
+                        <label>Attachment <span style="color:red;">*</span></label>
+                        <input class="form-control" accept=".xls,.xlsx,.pdf" name="attachment" type="file" required/>
+                    </div>
+                    <div class="form-group col-md-3">
                         <label>Jenis Konsumsi <span style="color:red;">*</span></label>
                         <select name="jenis_konsumsi" class="form-control" required>
                             <option>Snack Pagi + Makan Siang + Snack Sore + Makan Malam</option>
@@ -164,7 +172,7 @@
                             <option>Makan Malam</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-9">
+                    <div class="form-group col-md-6">
                         <label>Keterangan</label>
                         <input type="text" name="keterangan" class="form-control" placeholder="Masukkan Keterangan">
                     </div>

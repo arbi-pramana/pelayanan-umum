@@ -13,6 +13,10 @@ class FormKonsumsiController extends Controller
     
     public function submit(Request $req)
     {
+        $file= $req->file('attachment');
+        $image_name = $file->getClientOriginalName();
+        $file->move(public_path('pemesanan_ruangan/attachment/'),$image_name);
+
         $pemohon = Karyawan::where('nama', $req->get('pemohon'))->first();
         // dd($pemohon);
         $permohonanKonsumsi = new PermohonanKonsumsi;
@@ -30,6 +34,7 @@ class FormKonsumsiController extends Controller
         $permohonanKonsumsi->status_supervisor = 'Pending';
         $permohonanKonsumsi->status_manajer = 'Pending';
         $permohonanKonsumsi->keterangan =$req->get('keterangan');
+        $permohonanKonsumsi->attachment = $image_name;
         $permohonanKonsumsi->save();
 
         $notifications = new Notification;

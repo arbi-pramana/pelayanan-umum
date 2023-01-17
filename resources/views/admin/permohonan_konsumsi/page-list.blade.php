@@ -49,6 +49,7 @@
 		        <th class='column-status_pj'>Status</th>
 		        <th class='column-status_pj'>Status Pelaksana</th>
 		        <th class='column-keterangan'>Keterangan</th>
+		        <th class='column-keterangan'>Attachment</th>
 		        <th class="text-center column-action">Action</th>
 		      </tr>
 		    </thead>
@@ -84,6 +85,9 @@
 		        <td class='column-status_pj'>{{ $permohonanKonsumsi->status_pj }}</td>
 		        <td class='column-status_pj'>{{ $permohonanKonsumsi->status_pelaksana }}</td>
 		        <td class='column-keterangan'>{{ $permohonanKonsumsi->keterangan }}</td>
+				<td>
+					<a href="{{asset('pemesanan_ruangan/attachment/'.$permohonanKonsumsi->attachment) }}" download> Click</a>
+				</td>
 		        <td width="200" class="text-center column-action">
 				{{-- @if (now() <= $permohonanKonsumsi->tanggal) --}}
 					@if (Auth::user()->role == 'adminruang')

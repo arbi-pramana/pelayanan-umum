@@ -40,6 +40,7 @@ class PermohonanKonsumsi extends Model
         "pemohon",
         "status_pj",
         "keterangan",
+        "attachment",
         "jumlah",
         "status_pelaksana"
     ];
