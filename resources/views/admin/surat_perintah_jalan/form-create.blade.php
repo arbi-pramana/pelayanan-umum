@@ -109,12 +109,18 @@
             if (res.tipe_bbm == 'bensin')
             {
               var harga = 10000;
-              var harga2 = 14500;
+              var harga2 = 12800;
             }
-            else{
-              var harga = 17800;
-              var harga2 = 18100;
+            if (res.tipe_bbm == null){
+              var harga = 0;
+              var harga2 = 0;
+
             }
+            if (res.tipe_bbm == 'diesel'){
+              var harga = 16150;
+              var harga2 = 16750;
+            }
+
             $("#input-total_hide").val(
              Math.floor($("#input-pengisian_bbm").val() * parseInt(harga))
               );

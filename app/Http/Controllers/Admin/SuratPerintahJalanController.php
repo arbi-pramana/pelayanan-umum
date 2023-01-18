@@ -109,19 +109,9 @@ class SuratPerintahJalanController extends Controller
             // "permohonan_pemakaian_kendaraan.pemohon",
             // "permohonan_pemakaian_kendaraan.tujuan",
             // "permohonan_pemakaian_kendaraan.keperluan");
-        $query->join('permohonan_pemakaian_kendaraan','surat_perintah_jalan.id_permohonan_pemakaian_kendaraan','=','permohonan_pemakaian_kendaraan.id')
-        ->join('driver','surat_perintah_jalan.driver_id','=','driver.id')
-        ->join('kendaraan','surat_perintah_jalan.kendaraan_id','=','kendaraan.id');
-        $query->select(
-            'surat_perintah_jalan.*',
-            'driver.nama_driver',
-            'kendaraan.nama_kendaraan',
-            'kendaraan.tipe_bbm',
-            'kendaraan.no_pol',
-            'permohonan_pemakaian_kendaraan.pemohon',
-            'permohonan_pemakaian_kendaraan.keperluan'
-        );
         $data['surat']= $query->first();
+        // dd($data);
+
         // dd($data);
         return view('admin::surat_perintah_jalan.page-export',$data);
     }
@@ -185,11 +175,16 @@ class SuratPerintahJalanController extends Controller
             $spj->save();
             
             $driver = Driver::where('id',$request->driver_id)->first();
-            $driver->status_driver = 'Not Ready';
-            $driver->save();
+            if($driver->email != null){
+
+                $driver->status_driver = 'Not Ready';
+                $driver->save();
+            }
             
             $kendaraan = Kendaraan::where('id',$request->kendaraan_id)->first();
-            $kendaraan->status_kendaraan = 'Not Ready';
+            if($kendaraan->tipe_bbm != null){
+                $kendaraan->status_kendaraan = 'Not Ready';
+            }
             $kendaraan->save();
             
             $message = 'Surat Perintah Jalan has been created!';
@@ -289,11 +284,15 @@ class SuratPerintahJalanController extends Controller
         $suratPerintahJalan->save();
 
         $driver = Driver::where('id',$suratPerintahJalan->driver_id)->first();
-        $driver->status_driver = 'Ready';
-        $driver->save();
+        if($driver->email != null){
+            $driver->status_driver = 'Ready';
+            $driver->save();
+        }
 
         $kendaraan = Kendaraan::where('id',$suratPerintahJalan->kendaraan_id)->first();
-        $kendaraan->status_kendaraan = 'Ready';
+        if($kendaraan->tipe_bbm != null){
+            $kendaraan->status_kendaraan = 'Ready';
+        }
         $kendaraan->save();
 
         $message = 'Surat Perintah Jalan Done!';
@@ -564,7 +563,6 @@ class SuratPerintahJalanController extends Controller
             return Driver::query()
             // phpcs:ignore
             ->select(['id as value', \DB::raw('concat(nama_driver," - ", email ) as label')])
-            ->orderBy('id', 'desc')
             ->get()
             ->toArray();
         }else{
@@ -572,7 +570,6 @@ class SuratPerintahJalanController extends Controller
             // phpcs:ignore
             ->select(['id as value', \DB::raw('concat(nama_driver," - ", email ) as label')])
             ->where('status_driver','Ready')
-            ->orderBy('id', 'desc')
             ->get()
             ->toArray();
         }
@@ -585,7 +582,7 @@ class SuratPerintahJalanController extends Controller
             return Kendaraan::query()
             // phpcs:ignore
             ->select(['id as value', \DB::raw('concat(nama_kendaraan, " - ", tipe_bbm," - ", no_pol) as label')])
-            ->orderBy('id', 'desc')
+            ->orderBy('id', 'asc')
             ->get()
             ->toArray();
         }else{
@@ -593,7 +590,7 @@ class SuratPerintahJalanController extends Controller
             // phpcs:ignore
             ->select(['id as value', \DB::raw('concat(nama_kendaraan, " - ", tipe_bbm," - ", no_pol) as label')])
             ->where('status_kendaraan','Ready')
-            ->orderBy('id', 'desc')
+            ->orderBy('id', 'asc')
             ->get()
             ->toArray();
         }
