@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>PT. PJB</title>
+    <title>PT PLN Nusantara Power Unit Pembangkitan Muara Karang</title>
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600' rel='stylesheet' type='text/css'>

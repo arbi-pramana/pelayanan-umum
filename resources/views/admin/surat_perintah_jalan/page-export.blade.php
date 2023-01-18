@@ -98,11 +98,11 @@
                 <table border="1">
                     <tr>
                         <th >No Pol</th>
-                        <td style="padding-right: 90px;">{{$surat->no_pol}}</td>
+                        <td style="padding-right: 90px;">{{$surat->kendaraan->no_pol ?? 'Tanpa Kendaraan'}}</td>
                     </tr>
                     <tr>
                         <th>Jenis</th>
-                        <td style="padding-right: 90px;">{{$surat->nama_kendaraan}}</td>
+                        <td style="padding-right: 90px;">{{$surat->kendaraan->nama_kendaraan ?? 'Tanpa Kendaraan'}}</td>
                     </tr>
                 
                 </table>
@@ -118,7 +118,7 @@
         <div class="desc-body">
             <div class="nama_pengemudi">
                 <label for="">Nama Pengemudi &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; : </label>
-                <span>{{$surat->nama_driver}}</span>
+                <span>{{$surat->driver->nama_driver}}</span>
             </div>
             <div class="tujuan-body">
                 <div class="tujuan">

@@ -67,8 +67,8 @@
 			  @endif
 		        <td class="text-center column-number">{{ $loop->iteration }}</td>
 		        <td class='column-nama_pengemudi'>{{ $suratPerintahJalan->nama_driver }}</td>
-		        <td class='column-nama_pengemudi'>{{ $suratPerintahJalan->kendaraan->nama_kendaraan }}</td>
-		        <td class='column-nama_pengemudi'>{{ $suratPerintahJalan->kendaraan->no_pol }}</td>
+		        <td class='column-nama_pengemudi'>{{ $suratPerintahJalan->kendaraan->nama_kendaraan ?? 'Tanpa Kendaraan' }}</td>
+		        <td class='column-nama_pengemudi'>{{ $suratPerintahJalan->kendaraan->no_pol ?? 'Tanpa Kendaraan' }}</td>
 		        <td class='column-tujuan'>{{ $suratPerintahJalan->tujuan }}</td>
 		        <td class='column-tanggal_berangkat'>{{ $suratPerintahJalan->tanggal_berangkat }}</td>
 		        <td class='column-tanggal_kembali'>{{ $suratPerintahJalan->tanggal_kembali }}</td>
