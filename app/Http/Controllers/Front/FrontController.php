@@ -78,6 +78,7 @@ class FrontController extends Controller
         return view('front.baru.ruangan.daftar_ruangan', $data);
     }
 
+
     public function pageDashboard(Request $req)
     {
         $data['pemohon'] = $this->guard()->user();
