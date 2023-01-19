@@ -29,7 +29,7 @@
                 <div class="container p-1">
                     <div class="row">
                         <div class="col-md-3">
-                                <a class="logo" href="index.html">
+                                <a class="logo" href="{{url('')}}">
                                     <img src="{{asset('logo/new-logo.png')}}" alt="" height="35" width="35" style="margin-right: auto; margin-left:auto;">
                                 </a>
                         </div>
