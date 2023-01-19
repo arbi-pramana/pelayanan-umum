@@ -40,7 +40,7 @@ class FrontController extends Controller
         $this->suratPerintahJalan = $suratPerintahJalan;
     }
 
-     public function submitRuangan(Request $req)
+    public function submitRuangan(Request $req)
     {
         $PemesananRuangan = [] ;
         $ruangs = Ruang::where('kapasitas','>=',$req->jumlah_peserta)->get();
