@@ -125,10 +125,12 @@ class SuratPerintahJalanController extends Controller
         ->join('driver','surat_perintah_jalan.driver_id','=','driver.id')
         ->join('kendaraan','surat_perintah_jalan.kendaraan_id','=','kendaraan.id');
         $surat= $query->first();
-        
-        Mail::to($surat->email)->send(new DriverEmail($surat));
-
-        return redirect()->back()->with('info', 'Email Terkirim');
+        if($surat->email != null){
+            Mail::to($surat->email)->send(new DriverEmail($surat));
+            return redirect()->back()->with('info', 'Email Terkirim');
+        }else{
+            return redirect()->back()->with('danger', 'Tidak Bisa Mengirim Email');
+        }
     }
 
     /**
