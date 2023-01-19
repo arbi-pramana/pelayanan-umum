@@ -1,4 +1,5 @@
 <?php
+Route::get('/dashboard/ruangan', 'Front\DashboardController@dashboard')->name('dashboard');
 Route::middleware("front.auth")->namespace('Front')->prefix('profile')->name('profile.')->group(function() {
     Route::get('/', 'ProfileController@index')->name('index');
     Route::get('/setting', 'ProfileController@setting')->name('setting');
