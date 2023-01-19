@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #C0F5FF;
+}
+
+.header-body h3 {
+    font-weight: 600 !important;
+    color: #035B71;
+    font-size: 1.8em;
+}
+
+.date {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.footer {
+    background-color: yellow;
+    margin-top: 80px;
+    padding-top: 15px;
+    padding-bottom: 3px;
+}
+
+.item-room {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.room-image {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.room-box {
+    background-color: #00AFF0;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.image-room {
+    border: 5px solid white;
+}
+
+.room-desc {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.room-desc-header {
+    background-color: #00AFF0;
+    padding: 25px;
+    padding-left: 50px;
+    border-radius: 10px;
+    color: white;
+}
+
+.room-desc-info {
+    background-color: #00AFF0;
+    padding: 30px;
+    padding-left: 50px;
+    border-radius: 10px;
+    font-size: 1em;
+    color: white;
+    font-weight: 600;
+}
