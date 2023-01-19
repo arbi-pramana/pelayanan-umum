@@ -552,6 +552,7 @@ class SuratPerintahJalanController extends Controller
             // phpcs:ignore
             ->select(['id as value', \DB::raw('concat(pemohon," - ",penanggung_jawab, " - ", tujuan, " (", tanggal_berangkat, ")") as label')])
             ->orderBy('id', 'desc')
+            ->where('status_pj','Approved')
             ->whereDoesntHave('spj')
             ->get()
             ->toArray();

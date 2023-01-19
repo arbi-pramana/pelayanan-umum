@@ -168,8 +168,8 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                                 class="btn btn-danger btn-sm">Delete</a>
                             @endif
                             @else
-                            <a href="{{ route('permohonankendaraan.edit', $permohonanPemakaianKendaraan->id) }}"
-                                class="btn btn-info btn-sm">Edit</a>
+                            {{-- <a href="{{ route('permohonankendaraan.edit', $permohonanPemakaianKendaraan->id) }}"
+                                class="btn btn-info btn-sm">Edit</a> --}}
                             <a onclick="return confirm('Apa anda yakin ingin menghapus permohonan ini?')"
                                 href="{{ route('permohonankendaraan.destroy', $permohonanPemakaianKendaraan->id) }}"
                                 class="btn btn-danger btn-sm">Delete</a>

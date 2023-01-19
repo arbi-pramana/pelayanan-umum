@@ -41,24 +41,24 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                             Permohonan Konsumsi
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{route('list-permohonan-atk')}}">
                             <i class="fa fa-pencil"></i>
                             Permohonan ATK
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="{{route('list-permohonan-kendaraan')}}">
                             <i class="fa fa-map-marker"></i>
                             Permohonan Kendaraan
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{route('list-surat-perintah-jalan')}}">
                             <i class="fa fa-map-marker"></i>
                             Surat Perintah Jalan
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </aside>
         </div>
