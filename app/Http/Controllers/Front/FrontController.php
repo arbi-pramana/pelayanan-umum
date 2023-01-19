@@ -48,13 +48,9 @@ class FrontController extends Controller
         foreach($ruangs as $ruang){
             $pemesanan_ruangan = $this->pemesananRuangan
                 ->where(function($q) use ($req,$ruang){
-                    $q->where('tanggal','>=',$req->tanggal);
-                    $q->where('tanggal','<=',$req->tanggal_selesai);
-                    $q->where('waktu_awal','>=',strtotime($req->waktu_awal));
-                    $q->where('waktu_awal','<=',strtotime($req->waktu_akhir));
-                    // $q->whereBetween('waktu_awal',[strtotime($req->waktu_awal),strtotime($req->waktu_akhir)]);
+                    $q->whereBetween('waktu_awal',[strtotime($req->waktu_awal),strtotime($req->waktu_akhir)]);
                     // $q->whereBetween('waktu_akhir',[strtotime($req->waktu_awal),strtotime($req->waktu_akhir)]);
-                    // $q->whereBetween('tanggal',[$req->tanggal,$req->tanggal_selesai]);
+                    $q->whereBetween('tanggal',[$req->tanggal,$req->tanggal_selesai]);
                     // $q->whereBetween('tanggal_selesai',[$req->tanggal,$req->tanggal_selesai]);
                     $q->where('status_pj','!=','Rejected');
                     $q->where("id_ruang",$ruang->id);
