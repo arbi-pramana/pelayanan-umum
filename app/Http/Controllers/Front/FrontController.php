@@ -426,8 +426,10 @@ class FrontController extends Controller
         $deleted = $permohonanKonsumsi->delete();
         if (!$deleted) {
 
-            $notification = Notification::where('permohonan_konsumsi_id',$id)->first()->delete();
-
+            $notification = Notification::where('permohonan_konsumsi_id',$id)->first();
+            if($notification){
+                $notification->delete();
+            }
             $message = 'Something went wrong when delete Permohonan Konsumsi';
             return back()->with('danger', $message);
         }
@@ -486,7 +488,10 @@ class FrontController extends Controller
         $deleted = $pemesananRuangan->delete();
         if (!$deleted) {
 
-            $notification = Notification::where('pemesanan_ruangan_id',$id)->first()->delete();
+            $notification = Notification::where('pemesanan_ruangan_id',$id)->first();
+            if($notification){
+                $notification->delete();
+            }
             $message = 'Something went wrong when delete Pemesanan Ruangan';
             return back()->with('danger', $message);
         }
@@ -559,7 +564,10 @@ class FrontController extends Controller
         $deleted = $permohonankendaraan->delete();
         if (!$deleted) {
 
-            $notification = Notification::where('permohonan_pemakaian_kendaraan_id',$id)->first()->delete();
+            $notification = Notification::where('permohonan_pemakaian_kendaraan_id',$id)->first();
+            if($notification){
+                $notification->delete();
+            }
 
             $message = 'Something went wrong when delete Permohonan Kendaraan';
             return back()->with('danger', $message);
