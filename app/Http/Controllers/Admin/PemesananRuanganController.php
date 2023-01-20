@@ -184,7 +184,9 @@ class PemesananRuanganController extends Controller
         }
 
         $notif = Notification::where('pemesanan_ruangan_id',$id)->first();
-        $notif->delete();
+        if($notif){
+            $notif->delete();
+        }
 
         $message = 'Pemesanan Ruangan has been deleted!';
         return redirect()->route('admin::pemesanan-ruangan.page-list')->with('info', $message);
@@ -212,8 +214,10 @@ class PemesananRuanganController extends Controller
             ->update(['status_pj' => 'Approved']);
 
         $notif = Notification::where('pemesanan_ruangan_id',$id)->first();
-        $notif->status = true;
-        $notif->save();
+        if($notif){
+            $notif->status = true;
+            $notif->save();
+        }
         
         return redirect('admin/pemesanan-ruangan')->with('info','Berhasil Merubah Status');
     }
@@ -238,6 +242,10 @@ class PemesananRuanganController extends Controller
             return back()->with('danger', $message);
         }
 
+        $notif = Notification::where('pemesanan_ruangan_id',$id)->first();
+        if($notif){
+            $notif->delete();
+        }
         $message = 'Pemesanan Ruangan has been deleted!';
         return redirect('/listpeminjamanruang')->with('info', $message);
     }

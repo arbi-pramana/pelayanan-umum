@@ -180,7 +180,9 @@ class PermohonanPemakaianKendaraanController extends Controller
             return back()->with('danger', $message);
         }
         $notif = Notification::where('permohonan_pemakaian_kendaraan_id',$id)->first();
-        $notif->delete();
+        if($notif){
+            $notif->delete();
+        }
 
         $message = 'Permohonan Pemakaian Kendaraan has been deleted!';
         return redirect()->route('admin::permohonan-pemakaian-kendaraan.page-list')->with('info', $message);
@@ -207,8 +209,10 @@ class PermohonanPemakaianKendaraanController extends Controller
             ->update(['status_pj' => 'Approved']);
 
         $notif = Notification::where('permohonan_pemakaian_kendaraan_id',$id)->first();
-        $notif->status = true;
-        $notif->save();
+        if($notif){
+            $notif->status = true;
+            $notif->save();
+        }
     
         return redirect('admin/permohonan-pemakaian-kendaraan')->with('info','Berhasil Merubah Status');
     }

@@ -161,8 +161,10 @@ class PermohonanKonsumsiController extends Controller
             ->update(['status_pj' => 'Approved']);
 
         $notif = Notification::where('permohonan_konsumsi_id',$id)->first();
-        $notif->status = true;
-        $notif->save();
+        if($notif){
+            $notif->status = true;
+            $notif->save();
+        }
 
         return redirect('admin/permohonan-konsumsi');
     }
@@ -256,7 +258,9 @@ class PermohonanKonsumsiController extends Controller
             return back()->with('danger', $message);
         }
         $notif = Notification::where('permohonan_konsumsi_id',$id)->first();
-        $notif->delete();
+        if($notif){
+            $notif->delete();
+        }
 
         $message = 'Permohonan Konsumsi has been deleted!';
         return redirect()->route('admin::permohonan-konsumsi.page-list')->with('info', $message);
@@ -271,6 +275,11 @@ class PermohonanKonsumsiController extends Controller
         if (!$deleted) {
             $message = 'Something went wrong when delete Permohonan Konsumsi';
             return back()->with('danger', $message);
+        }
+        
+        $notif = Notification::where('permohonan_konsumsi_id',$id)->first();
+        if($notif){
+            $notif->delete();
         }
 
         $message = 'Permohonan Konsumsi has been deleted!';
