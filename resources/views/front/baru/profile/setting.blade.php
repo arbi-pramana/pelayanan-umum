@@ -135,7 +135,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
             <form method="POST" action="{{route('profile.updatePass')}}">
                 {{ csrf_field() }}
                 <input class="form-control" value="{{$user->no_induk}}" name="no_induk" type="hidden" readonly />
-                <div class="row">
+                <div class="row d-flex justify-content-end">
                     <div class="col-md-6">
                         <div class="form-group form-group-icon-left"><i class="fa fa-key input-icon"></i>
                             <label>Password Baru</label>

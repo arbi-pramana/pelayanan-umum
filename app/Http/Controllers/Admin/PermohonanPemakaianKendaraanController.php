@@ -210,7 +210,7 @@ class PermohonanPemakaianKendaraanController extends Controller
         $notif->status = true;
         $notif->save();
     
-        return redirect('admin/permohonan-pemakaian-kendaraan');
+        return redirect('admin/permohonan-pemakaian-kendaraan')->with('info','Berhasil Merubah Status');
     }
 
     public function reject($id)
@@ -219,7 +219,7 @@ class PermohonanPemakaianKendaraanController extends Controller
             ->where('id', '=', $id)
             ->update(['status_pj' => 'Rejected']);
 
-        return redirect('admin/permohonan-pemakaian-kendaraan');
+        return redirect('admin/permohonan-pemakaian-kendaraan')->with('info','Berhasil Merubah Status');
     }
 
     /**
