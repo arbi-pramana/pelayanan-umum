@@ -180,9 +180,7 @@ class PermohonanPemakaianKendaraanController extends Controller
             return back()->with('danger', $message);
         }
         $notif = Notification::where('permohonan_pemakaian_kendaraan_id',$id)->first();
-        if(!empty($notif)){
-            $notif->delete();
-        }
+        $notif->delete();
 
         $message = 'Permohonan Pemakaian Kendaraan has been deleted!';
         return redirect()->route('admin::permohonan-pemakaian-kendaraan.page-list')->with('info', $message);
