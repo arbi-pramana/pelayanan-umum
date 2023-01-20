@@ -173,7 +173,7 @@ class PermohonanKonsumsiController extends Controller
             ->where('id', '=', $id)
             ->update(['status_pelaksana' => 'Terlaksana']);
 
-        return redirect('admin/permohonan-konsumsi');
+        return redirect('admin/permohonan-konsumsi')->with('info','Berhasil Merubah Status');
     }
 
     public function reject($id)
@@ -182,7 +182,7 @@ class PermohonanKonsumsiController extends Controller
             ->where('id', '=', $id)
             ->update(['status_pj' => 'Rejected']);
 
-        return redirect('admin/permohonan-konsumsi');
+        return redirect('admin/permohonan-konsumsi'->with('info','Berhasil Merubah Status'));
     }
 
     public function approveSupervisor($id)

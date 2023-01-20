@@ -215,7 +215,7 @@ class PemesananRuanganController extends Controller
         $notif->status = true;
         $notif->save();
         
-        return redirect('admin/pemesanan-ruangan');
+        return redirect('admin/pemesanan-ruangan')->with('info','Berhasil Merubah Status');
     }
 
     public function reject($id)
@@ -224,7 +224,7 @@ class PemesananRuanganController extends Controller
             ->where('id', '=', $id)
             ->update(['status_pj' => 'Rejected']);
 
-        return redirect('admin/pemesanan-ruangan');
+        return redirect('admin/pemesanan-ruangan')->with('info','Berhasil Merubah Status');
     }
 
     public function deletelist(Request $request, $id)
