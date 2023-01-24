@@ -68,7 +68,7 @@
 				@if ($permohonanKonsumsi->no_permohonan_konsumsi == '0')
 					<td class='column-no_permohonan_konsumsi'>Tanpa Ruangan</td>
 				@else
-		        	<td class='column-no_permohonan_konsumsi'>{{ $permohonanKonsumsi->nomor['no_pemesanan_ruangan'] }}</td>
+		        	<td class='column-no_permohonan_konsumsi'>{{ $permohonanKonsumsi->nomor['no_pemesanan_ruangan'] ?? '' }}</td>
 				@endif
 		        <td class='column-tanggal'>{{ $permohonanKonsumsi->tanggal }}</td>
 		        <td class='column-tanggal'>{{ $permohonanKonsumsi->tanggal_selesai }}</td>
