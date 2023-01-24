@@ -34,7 +34,9 @@
 		      <tr>
 		        <th width="20" class="text-center column-number">No</th>
 		        <th class='column-no_pemesanan_ruangan'>No Pemesanan Ruangan</th>
-		        <th class='column-tanggal'>Tanggal</th>
+		        <th class='column-tanggal'>Tanggal Pemesanan </th>
+		        <th class='column-tanggal'>Jam Pemesanan </th>
+		        <th class='column-tanggal'>Tanggal Mulai </th>
 		        <th class='column-tanggal'>Tanggal Selesai</th>
 		        <th class='column-nama_acara'>Nama Acara</th>
 		        <th class='column-pemohon'>Nama Pemohon</th>
@@ -62,6 +64,8 @@
 				@endif
 		        <td class="text-center column-number">{{ $loop->iteration }}</td>
 		        <td class='column-no_pemesanan_ruangan'>{{ $pemesananRuangan->no_pemesanan_ruangan }}</td>
+		        <td class='column-tanggal'>{{ $pemesananRuangan->created_at->format("Y-m-d") }}</td>
+		        <td class='column-tanggal'>{{ $pemesananRuangan->created_at->format("H:i:s")}}</td>
 		        <td class='column-tanggal'>{{ $pemesananRuangan->tanggal }}</td>
 		        <td class='column-tanggal'>{{ $pemesananRuangan->tanggal_selesai }}</td>
 		        <td class='column-nama_acara'>{{ $pemesananRuangan->nama_acara }}</td>
