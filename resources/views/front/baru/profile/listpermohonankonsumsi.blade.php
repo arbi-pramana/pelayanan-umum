@@ -100,7 +100,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         @if ($permohonanKonsumsi->no_permohonan_konsumsi == 0)
                         <td>Tanpa Ruangan</td>
                         @else
-                        <td>{{ $permohonanKonsumsi->nomor['no_pemesanan_ruangan'] }}</td>
+                        <td>{{ $permohonanKonsumsi->nomor['no_pemesanan_ruangan'] ?? '' }}</td>
                         @endif
                         <td>{{ $permohonanKonsumsi->tanggal }}</td>
                         <td>{{ $permohonanKonsumsi->tanggal_selesai }}</td>

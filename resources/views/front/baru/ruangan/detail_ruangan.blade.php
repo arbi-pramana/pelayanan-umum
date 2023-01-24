@@ -57,6 +57,11 @@
                     <div class="form-group col-md-3">
                         <label>Attachment</label>
                         <input class="form-control" name="attachment" type="file"/>
+                        @if($errors->has('attachment'))
+                        <div class="error text-danger">{{ $errors->first('attachment') }}</div>
+                        @else
+                        <small id="" class="form-text text-danger">File attachment maksimal sebesar 2MB</small>
+                        @endif
                     </div>
                     <div class="form-group col-md-3">
                         <label>Design Ruangan</label>

@@ -63,7 +63,12 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label>Attachment <span style="color:red;">*</span></label>
-                        <input class="form-control" name="attachment" type="file" required/>
+                        <input class="form-control" accept=".xls,.xlsx,.pdf" name="attachment" type="file" required/>
+                        {{-- @if($errors->has('attachment'))
+                        <div class="error text-danger">{{ $errors->first('attachment') }}</div>
+                        @else --}}
+                        <small id="" class="form-text text-danger">File attachment maksimal sebesar 2MB</small>
+                        {{-- @endif --}}
                     </div>
                     <div class="form-group col-md-3">
                         <label>Jenis Konsumsi <span style="color:red;">*</span></label>
@@ -75,6 +80,7 @@
                                 <option>Snack Sore</option>
                                 <option>Makan Siang</option>
                                 <option>Makan Malam</option>
+                                <option>Kupon</option>
                             </select>
                     </div>
                     <div class="form-group col-md-6">
@@ -108,40 +114,44 @@
                             <option value="" disabled selected>pilih satu</option>
                             <option value="0">Tanpa Ruangan</option>
                             @foreach($prs as $pr)
+                            @if(old('no_permohonan_konsumsi') == $pr->id )
+                            <option selected value="{{$pr->id}}">{{$pr->no_pemesanan_ruangan}}</option>
+                            @else
                             <option value="{{$pr->id}}">{{$pr->no_pemesanan_ruangan}}</option>
+                            @endif
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group col-md-2">
                         <label>Tanggal <span style="color:red;">*</span></label>
-                        <input class="form-control" name="tanggal" type="date" placeholder="Tanggal Acara" required
+                        <input class="form-control" name="tanggal" type="date" placeholder="Tanggal Acara" required value="{{old('tanggal')}}"
                              />
                     </div>
                     <div class="form-group col-md-2">
                         <label>Tanggal Selesai<span style="color:red;">*</span></label>
-                        <input class="form-control" name="tanggal_selesai" type="date" placeholder="Tanggal Selesai" required
+                        <input class="form-control" name="tanggal_selesai" type="date" placeholder="Tanggal Selesai" required value="{{old('tanggal_selesai')}}"
                              />
                     </div>
                     <div class="form-group col-md-2">
                         <label>Jumlah Konsumsi <span style="color:red;">*</span></label>
                         <input class="form-control" name="jumlah" placeholder="Jumlah" type="number"
-                            required  />
+                            required value="{{old('jumlah')}}"  />
                     </div>
                     <div class="form-group col-md-3">
                         <label>Sumber Dana <span style="color:red;">*</span></label>
                         <input class="form-control" name="sumber_dana"  placeholder="Sumber Dana"
-                        required  />
+                        required value="{{old('sumber_dana')}}"  />
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label>Nama Acara <span style="color:red;">*</span></label>
-                        <input type="text" name="kegiatan" class="form-control" placeholder="Masukkan Nama Acara" required
+                        <input type="text" name="kegiatan" class="form-control" placeholder="Masukkan Nama Acara" required value="{{old('kegiatan')}}"
                             >
                     </div>
                     <div class="form-group col-md-3">
                         <label>Jumlah Peserta <span style="color:red;">*</span></label>
-                        <input type="text" name="jumlah_peserta" class="form-control" placeholder="Masukkan Jumlah Peserta" required
+                        <input type="text" name="jumlah_peserta" class="form-control" placeholder="Masukkan Jumlah Peserta" required value="{{old('jumlah_peserta')}}"
                             >
                     </div>
                     <div class="form-group col-md-3">
@@ -159,10 +169,16 @@
                     <div class="form-group col-md-3">
                         <label>Attachment <span style="color:red;">*</span></label>
                         <input class="form-control" accept=".xls,.xlsx,.pdf" name="attachment" type="file" required/>
+                        @if($errors->has('attachment'))
+                        <div class="error text-danger" >{{ $errors->first('attachment') }}</div>
+                        @else
+                        <small id="" class="form-text text-danger">File attachment maksimal sebesar 2MB</small>
+                        @endif
                     </div>
                     <div class="form-group col-md-3">
                         <label>Jenis Konsumsi <span style="color:red;">*</span></label>
                         <select name="jenis_konsumsi" class="form-control" required>
+                            <option selected disabled>Pilih Jenis Konsumsi</option>
                             <option>Snack Pagi + Makan Siang + Snack Sore + Makan Malam</option>
                             <option>Snack Pagi + Makan Siang</option>
                             <option>Snack Sore + Makan Malam</option>
@@ -170,11 +186,12 @@
                             <option>Snack Sore</option>
                             <option>Makan Siang</option>
                             <option>Makan Malam</option>
+                            <option>Kupon</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label>Keterangan</label>
-                        <input type="text" name="keterangan" class="form-control" placeholder="Masukkan Keterangan">
+                        <input type="text" name="keterangan" class="form-control" placeholder="Masukkan Keterangan" value="{{old('keterangan')}}">
                     </div>
                 </div>
                 <div class="text-right">

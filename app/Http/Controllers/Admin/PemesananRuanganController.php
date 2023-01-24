@@ -67,7 +67,8 @@ class PemesananRuanganController extends Controller
             "keterangan",
             "status_supervisor",
             "status_manajer",
-            "status_pj"
+            "status_pj",
+            "created_at"
         ]);
 
         $data['title'] = 'List Pemesanan Ruangan';
