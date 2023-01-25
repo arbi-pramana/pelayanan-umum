@@ -254,12 +254,17 @@ class SuratPerintahJalanController extends Controller
         $suratPerintahJalan = $this->findOrFail($id);
 
         // Delete data
+    
         $deleted = $suratPerintahJalan->delete();
+
         if (!$deleted) {
             $message = 'Something went wrong when delete Surat Perintah Jalan';
             return back()->with('danger', $message);
         }
-
+        $driver = Driver::where('id',$suratPerintahJalan->driver_id)->first();
+        $driver->status_driver = 'Ready';
+        $driver->save();
+        
         $message = 'Surat Perintah Jalan has been deleted!';
         return redirect()->route('admin::surat-perintah-jalan.page-list')->with('info', $message);
     }
@@ -341,7 +346,7 @@ class SuratPerintahJalanController extends Controller
                 'input' => "number",
                 'label' => "Biaya Toll",
                 'maxlength' => "255",
-                'readonly' => true,
+                'readonly' => false,
                 'rules' => [
                     "required",
                     "max:255"
@@ -377,7 +382,7 @@ class SuratPerintahJalanController extends Controller
                 'input' => "text",
                 'label' => "Jarak ( Pulang Pergi )",
                 'maxlength' => "255",
-                'readonly' => true,
+                'readonly' => "true",
                 'rules' => [
                     "required",
                     "max:255"
@@ -423,8 +428,9 @@ class SuratPerintahJalanController extends Controller
                 ]
             ],
             'pengisian_bbm' => [
-                'input' => "number",
-                'label' => "Pengisian Bbm",
+                'input' => "text",
+                'label' => "Pengisian BBM",
+                'readonly' => "true",
                 'rules' => [
                     "required",
                     "max:10"
@@ -440,7 +446,6 @@ class SuratPerintahJalanController extends Controller
                 'input' => "number",
                 'label' => "Total Biaya Ke 1",
                 'maxlength' => "255",
-                'readonly' => true,
                 'rules' => [
                     "required",
                     "max:255"
@@ -450,7 +455,6 @@ class SuratPerintahJalanController extends Controller
                 'input' => "number",
                 'label' => "Total Biaya Ke 2",
                 'maxlength' => "255",
-                'readonly' => true,
                 'rules' => [
                     "required",
                     "max:255"
