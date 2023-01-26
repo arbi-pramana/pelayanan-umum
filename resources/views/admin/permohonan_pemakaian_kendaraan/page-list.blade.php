@@ -34,6 +34,8 @@
 		    <thead>
 		      <tr>
 		        <th width="20" class="text-center column-number">No</th>
+				<th class='column-tanggal'>Tanggal Pemesanan </th>
+		        <th class='column-tanggal'>Jam Pemesanan </th>
 		        <th class='column-pemohon'>Pemohon</th>
 		        <th class='column-tujuan'>Tujuan</th>
 		        <th class='column-keperluan'>Keperluan</th>
@@ -55,6 +57,8 @@
 			  <tr>
 			  @endif
 		        <td class="text-center column-number">{{ $loop->iteration }}</td>
+		        <td class='column-pemohon'>{{ $permohonanPemakaianKendaraan->created_at->format("Y-m-d") }}</td>
+		        <td class='column-pemohon'>{{ $permohonanPemakaianKendaraan->created_at->format("H:i:s") }}</td>
 		        <td class='column-pemohon'>{{ $permohonanPemakaianKendaraan->pemohon }}</td>
 		        <td class='column-tujuan'>{{ $permohonanPemakaianKendaraan->tujuan }}</td>
 		        <td class='column-keperluan'>{{ $permohonanPemakaianKendaraan->keperluan }}</td>

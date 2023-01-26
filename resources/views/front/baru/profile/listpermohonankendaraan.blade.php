@@ -151,29 +151,13 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                             {{ $permohonanPemakaianKendaraan->status_pj }}
                         </td>
                         <td class="text-center column-action" width="200">
-                            @if($permohonanPemakaianKendaraan->penanggung_jawab == $user->id)
-                            @if($permohonanPemakaianKendaraan->status_pj == 'Pending')
-                            <a href="{{ route('approve-manager-kendaraan', [$permohonanPemakaianKendaraan->getKey()]) }}"
-                                class="btn btn-success btn-sm">Approve</a>
-                            <a href="{{ route('permohonankendaraan.edit', $permohonanPemakaianKendaraan->id) }}"
-                                class="btn btn-info btn-sm">Edit</a>
-                            <a onclick="return confirm('Apa anda yakin ingin menghapus permohonan ini?')"
-                                href="{{ route('permohonankendaraan.destroy', $permohonanPemakaianKendaraan->id) }}"
-                                class="btn btn-danger btn-sm">Delete</a>
-                            @elseif($permohonanPemakaianKendaraan->status_pj == 'Approved')
-                            <a href="{{ route('permohonankendaraan.edit', $permohonanPemakaianKendaraan->id) }}"
-                                class="btn btn-info btn-sm">Edit</a>
-                            <a onclick="return confirm('Apa anda yakin ingin menghapus permohonan ini?')"
-                                href="{{ route('permohonankendaraan.destroy', $permohonanPemakaianKendaraan->id) }}"
-                                class="btn btn-danger btn-sm">Delete</a>
-                            @endif
-                            @else
-                            {{-- <a href="{{ route('permohonankendaraan.edit', $permohonanPemakaianKendaraan->id) }}"
-                                class="btn btn-info btn-sm">Edit</a> --}}
-                            <a onclick="return confirm('Apa anda yakin ingin menghapus permohonan ini?')"
-                                href="{{ route('permohonankendaraan.destroy', $permohonanPemakaianKendaraan->id) }}"
-                                class="btn btn-danger btn-sm">Delete</a>
-                            @endif
+                                @if($permohonanPemakaianKendaraan->status_pj == 'Pending')
+                                <a href="{{ route('permohonankendaraan.edit', $permohonanPemakaianKendaraan->id) }}"
+                                    class="btn btn-info btn-sm">Edit</a>
+                                <a onclick="return confirm('Apa anda yakin ingin menghapus permohonan ini?')"
+                                    href="{{ route('permohonankendaraan.destroy', $permohonanPemakaianKendaraan->id) }}"
+                                    class="btn btn-danger btn-sm">Delete</a>
+                                @endif
                         </td>
                     </tr>
                     @endforeach

@@ -18,22 +18,22 @@
                                     <form action="{{url('fetchruangan')}}" method="GET">
                                         <div class="row">
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group form-group-lg form-group-icon-left">
                                                         <i class="fa fa-calendar input-icon input-icon-highlight"></i>
                                                         <label>Tanggal Pemesanan</label>
-                                                        <input class="form-control" type="date" name="tanggal" required
+                                                        <input class="form-control" name="range_date" required id="reportrange"
                                                             autocomplete="off" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                {{-- <div class="col-md-6">
                                                     <div class="form-group form-group-lg form-group-icon-left">
                                                         <i class="fa fa-calendar input-icon input-icon-highlight"></i>
                                                         <label>Tanggal Selesai</label>
                                                         <input class="form-control" type="date" name="tanggal_selesai" required
                                                             autocomplete="off" />
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                            <div class="row">
                                             <div class="col-md-6">

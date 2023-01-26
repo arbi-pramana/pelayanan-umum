@@ -116,22 +116,11 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         </td>
                         {{-- <td>{{ $permohonanKonsumsi->status_approval }}</td> --}}
                         <td>
-                            @if($permohonanKonsumsi->manajer == $user->id)
-                                @if($permohonanKonsumsi->status_manajer == 'Pending')
-                                    <a class="btn btn-sm btn-success" href="{{ route('approve-manager-konsumsi', [$permohonanKonsumsi->getKey()]) }}">Approve</a>
-                                    <a class="btn btn-sm btn-warning" href="{{ route('reject-manager-konsumsi', [$permohonanKonsumsi->getKey()]) }}">Reject</a>
-                                @elseif($permohonanKonsumsi->status_manajer == 'Approved')
-                                    <a class="btn btn-sm btn-warning" href="{{ route('reject-manager-konsumsi', [$permohonanKonsumsi->getKey()]) }}">Reject</a>
+                                @if($permohonanKonsumsi->status_pj == 'Pending')
+                                <a class="btn btn-sm btn-delete btn-danger" href="{{ route('delete-list-konsumsi', [$permohonanKonsumsi->getKey()]) }}">Delete</a>
                                 @endif
-                            @elseif($permohonanKonsumsi->supervisor == $user->id)
-                                @if($permohonanKonsumsi->status_supervisor == 'Pending')
-                                    <a class="btn btn-sm btn-success" href="{{ route('approve-supervisor-konsumsi', [$permohonanKonsumsi->getKey()]) }}">Approve</a>
-                                    <a class="btn btn-sm btn-warning" href="{{ route('reject-supervisor-konsumsi', [$permohonanKonsumsi->getKey()]) }}">Reject</a>
-                                @elseif($permohonanKonsumsi->status_supervisor == 'Approved')
-                                    <a class="btn btn-sm btn-warning" href="{{ route('reject-supervisor-konsumsi', [$permohonanKonsumsi->getKey()]) }}">Reject</a>
-                                @endif
-                            @endif
-                            <a class="btn btn-sm btn-delete btn-danger" href="{{ route('delete-list-konsumsi', [$permohonanKonsumsi->getKey()]) }}">Delete</a>
+                           
+              
                         </td>
                     </tr>
                     @endforeach

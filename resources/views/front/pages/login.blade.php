@@ -44,7 +44,13 @@
 						Username
 					</span>
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-						<input class="input100" type="text" name="no_induk" >
+						<select name="no_induk" id="" class="input100">
+							<option selected disabled>Pilih Username</option>
+							@foreach ($users as $user)
+							<option value="{{$user->no_induk}}">{{$user->nama}}</option>
+							@endforeach
+						</select>
+						{{-- <input class="input100" type="text" name="no_induk" > --}}
 						<span class="focus-input100"></span>
 					</div>
 					

@@ -59,6 +59,7 @@ class PermohonanPemakaianKendaraanController extends Controller
             "jam_kembali",
             "penanggung_jawab",
             "status_pj",
+            "created_at",
         ]);
 
         $data['title'] = 'List Permohonan Pemakaian Kendaraan';

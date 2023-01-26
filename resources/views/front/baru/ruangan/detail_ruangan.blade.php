@@ -32,16 +32,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-6">
                         <label>Tanggal Pemesanan</label>
-                        <input class="form-control" name="tanggal" type="date" value="{{$_GET['tanggal']}}" readonly
+                        <input class="form-control" name="range_date" value="{{$_GET['tanggal']}}" readonly
                             required />
                     </div>
-                    <div class="form-group col-md-3">
+                    {{-- <div class="form-group col-md-3">
                         <label>Tanggal_selesai</label>
                         <input class="form-control" name="tanggal_selesai" type="date" value="{{$_GET['tanggal_selesai']}}" readonly
                             required />
-                    </div>
+                    </div> --}}
                     <div class="form-group col-md-3">
                         <label>Waktu Awal</label>
                         <input class="form-control" name="waktu_awal" type="time" value="{{Request::get('waktu_awal')}}"
