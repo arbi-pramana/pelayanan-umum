@@ -7,6 +7,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600' rel='stylesheet' type='text/css'>
     <link href='//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <link rel="stylesheet" href="{{asset('vendor/frontend')}}/css/bootstrap.css">
     <link rel="stylesheet" href="{{asset('vendor/frontend')}}/css/font-awesome.css">
@@ -98,10 +99,20 @@
         <script src="{{asset('vendor/frontend')}}/js/custom.js"></script>
         <script src="{{asset('vendor/frontend')}}/js/switcher.js"></script>
         <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+        {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> --}}
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
         <script>
             $(document).ready( function () {
                 $('#my-table').DataTable();
             } );
+        </script>
+        <script>
+            $('input[name="range_date"]').daterangepicker({
+                locale: {
+                            format: 'YYYY-MM-DD',
+                            }
+            });
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSrThpCRzBbdGhfA27I6T4H-JkzEl4zk0&libraries=places"></script>
         @yield('script')

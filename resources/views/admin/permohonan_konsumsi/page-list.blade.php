@@ -34,6 +34,8 @@
 		      <tr>
 		        <th width="20" class="text-center column-number">No</th>
 		        <th class='column-no_permohonan_konsumsi'>No Permohonan Konsumsi</th>
+				<th class='column-tanggal'>Tanggal Pemesanan </th>
+		        <th class='column-tanggal'>Jam Pemesanan </th>
 		        <th class='column-tanggal'>Tanggal</th>
 		        <th class='column-tanggal'>Tanggal Selesai</th>
 		        <th class='column-jam'>Jumlah</th>
@@ -70,6 +72,8 @@
 				@else
 		        	<td class='column-no_permohonan_konsumsi'>{{ $permohonanKonsumsi->nomor->no_pemesanan_ruangan ?? ''}}</td>
 				@endif
+		        <td class='column-tanggal'>{{ $permohonanKonsumsi->created_at->format("Y-m-d") }}</td>
+		        <td class='column-tanggal'>{{ $permohonanKonsumsi->created_at->format("H:i:s") }}</td>
 		        <td class='column-tanggal'>{{ $permohonanKonsumsi->tanggal }}</td>
 		        <td class='column-tanggal'>{{ $permohonanKonsumsi->tanggal_selesai }}</td>
 		        <td class='column-jam'>{{ $permohonanKonsumsi->jumlah }}</td>

@@ -6,20 +6,20 @@
     <form class="booking-item-dates-change mb40" action="{{url('fetchruangan')}}" method="GET">
         <div class="row">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group form-group-lg form-group-icon-left">
                         <i class="fa fa-calendar input-icon input-icon-highlight"></i>
                         <label>Tanggal Pemesanan</label>
-                        <input class="form-control" type="date" name="tanggal" value="{{Request::get('tanggal')}}" required autocomplete="off" />
+                        <input class="form-control" name="range_date" value="{{Request::get('range_date')}}" required autocomplete="off" />
                     </div>
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="form-group form-group-lg form-group-icon-left">
                         <i class="fa fa-calendar input-icon input-icon-highlight"></i>
                         <label>Tanggal Selesai</label>
                         <input class="form-control" type="date" name="tanggal_selesai" value="{{Request::get('tanggal_selesai')}}" required autocomplete="off" />
                     </div>
-                </div>
+                </div> --}}
             </div>
         <div class="row">
             <div class="col-md-6">
@@ -80,8 +80,8 @@
                                     <br>
                                     <input type="hidden" value="{{$ruang->id}}" name="id_ruang">
                                     <input type="hidden" value="{{$ruang->nama_ruang}}" name="nama_ruang">
-                                    <input type="hidden" value="{{Request::get('tanggal')}}" name="tanggal">
-                                    <input type="hidden" value="{{Request::get('tanggal_selesai')}}" name="tanggal_selesai">
+                                    <input type="hidden" value="{{Request::get('range_date')}}" name="range_date">
+                                    {{-- <input type="hidden" value="{{Request::get('tanggal_selesai')}}" name="tanggal_selesai"> --}}
                                     <input type="hidden" value="{{$waktu_awal}}" name="waktu_awal">
                                     <input type="hidden" value="{{$waktu_akhir}}" name="waktu_akhir">
                                     <input type="hidden" value="{{$jumlah_peserta}}" name="jumlah_peserta">

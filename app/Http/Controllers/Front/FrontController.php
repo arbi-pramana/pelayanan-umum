@@ -42,6 +42,7 @@ class FrontController extends Controller
 
     public function submitRuangan(Request $req)
     {
+    
         $PemesananRuangan = [] ;
         $ruangs = Ruang::where('kapasitas','>=',$req->jumlah_peserta)->get();
                 
@@ -68,8 +69,7 @@ class FrontController extends Controller
         }
         
         $data['pemesanan_ruangan'] = $PemesananRuangan;
-        $data['date'] = $req->tanggal;
-        $data['tanggal_selesai'] = $req->tanggal_selesai;
+        $data['date'] = $req->range_date;
         $data['waktu_awal'] = $req->waktu_awal;
         $data['waktu_akhir'] = $req->waktu_akhir;
         $data['jumlah_peserta'] = $req->jumlah_peserta;
@@ -165,7 +165,8 @@ class FrontController extends Controller
 
     public function pageLogin(Request $req)
     {
-        return view('front.pages.login');
+        $data['users'] = Karyawan::all();
+        return view('front.pages.login',$data);
     }
 
     public function pageListPeminjamanRuang(Request $request)

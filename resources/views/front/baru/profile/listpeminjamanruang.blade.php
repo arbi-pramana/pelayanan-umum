@@ -122,22 +122,9 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         </td>
                         <td>{{ $pemesananRuangan->keterangan }}</td>
                         <td class="row" width="300">
-                            @if($pemesananRuangan->manajer == $user->id)
-                                @if($pemesananRuangan->status_manajer == 'Pending')
-                                    <a class="btn btn-sm btn-success" href="{{ route('approve-manager-ruang', [$pemesananRuangan->getKey()]) }}">Approve</a>
-                                    <a class="btn btn-sm btn-warning" href="{{ route('reject-manager-ruang', [$pemesananRuangan->getKey()]) }}">Reject</a>
-                                @elseif($pemesananRuangan->status_manajer == 'Approved')
-                                    <a class="btn btn-sm btn-warning" href="{{ route('reject-manager-ruang', [$pemesananRuangan->getKey()]) }}">Reject</a>
+                                @if($pemesananRuangan->status_pj == 'Pending')
+                                    <a class="btn btn-sm btn-delete btn-danger" href="{{ route('delete-list-ruang', [$pemesananRuangan->getKey()]) }}">Delete</a>
                                 @endif
-                            @elseif($pemesananRuangan->supervisor == $user->id)
-                                @if($pemesananRuangan->status_supervisor == 'Pending')
-                                    <a class="btn btn-sm btn-success" href="{{ route('approve-supervisor-ruang', [$pemesananRuangan->getKey()]) }}">Approve</a>
-                                    <a class="btn btn-sm btn-warning" href="{{ route('reject-supervisor-ruang', [$pemesananRuangan->getKey()]) }}">Reject</a>
-                                @elseif($pemesananRuangan->status_supervisor == 'Approved')
-                                    <a class="btn btn-sm btn-warning" href="{{ route('reject-supervisor-ruang', [$pemesananRuangan->getKey()]) }}">Reject</a>
-                                @endif
-                            @endif
-                            <a class="btn btn-sm btn-delete btn-danger" href="{{ route('delete-list-ruang', [$pemesananRuangan->getKey()]) }}">Delete</a>
                         </td>
                     </tr>
                     @endforeach
