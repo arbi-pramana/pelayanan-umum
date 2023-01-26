@@ -10,7 +10,8 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <?php
-                        $x=\DB::table('pemesanan_ruangan')->where('tanggal','like', '%'.date("Y-m-",strtotime($_GET['tanggal'])).'%')->count();
+                        $date = explode(" - ",$_GET['range_date']);
+                        $x=\DB::table('pemesanan_ruangan')->where('tanggal','like', '%'.date("Y-m-",strtotime($date[0])).'%')->count();
                         ?>
                         <label>No Pemesanan Ruangan</label>
                         <input class="form-control" name="no_pemesanan_ruangan" type="text" value="PR-{{date('Ymd')}}-{{$_GET['id_ruang'].($x+1)}}"
@@ -34,7 +35,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label>Tanggal Pemesanan</label>
-                        <input class="form-control" name="range_date" value="{{$_GET['tanggal']}}" readonly
+                        <input class="form-control" name="range_date"  readonly
                             required />
                     </div>
                     {{-- <div class="form-group col-md-3">
