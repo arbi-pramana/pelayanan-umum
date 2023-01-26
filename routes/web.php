@@ -51,7 +51,7 @@ Route::middleware("front.auth")->namespace('Front')->group(function() {
     Route::get('/deletelistKonsumsi/{id}', 'FrontController@deletelistKonsumsi')->name('delete-list-konsumsi');
     
     Route::get('/approveManagerRuang/{id}', 'FrontController@approveManagerRuang')->name('approve-manager-ruang');
-    Route::get('/rejectManagerRuang/{id}', 'FrontController@rejectManagerRuang')->name('reject-manager-ruang');
+    Route::post('/rejectManagerRuang', 'FrontController@rejectManagerRuang')->name('reject-ruang');
     Route::get('/approveSupervisorRuang/{id}', 'FrontController@approveSupervisorRuang')->name('approve-supervisor-ruang');
     Route::get('/rejectSupervisorRuang/{id}', 'FrontController@rejectSupervisorRuang')->name('reject-supervisor-ruang');
     Route::get('/deletelistRuang/{id}', 'FrontController@deletelistRuang')->name('delete-list-ruang');
@@ -116,7 +116,7 @@ Route::name('admin::permohonan-konsumsi.')->prefix('admin/permohonan-konsumsi')-
     Route::get('view/{id}', 'PermohonanKonsumsiController@pageDetail')->name('page-detail');
     Route::get('approve/{id}', 'PermohonanKonsumsiController@approve')->name('approve');
     Route::get('terlaksana/{id}', 'PermohonanKonsumsiController@terlaksana')->name('terlaksana');
-    Route::get('reject/{id}', 'PermohonanKonsumsiController@reject')->name('reject');
+    Route::get('reject', 'PermohonanKonsumsiController@reject')->name('reject');
     Route::get('approve-supervisor/{id}', 'PermohonanKonsumsiController@approveSupervisor')->name('approve-supervisor');
     Route::get('approve-manager/{id}', 'PermohonanKonsumsiController@approveManager')->name('approve-manager');
     Route::get('approve-manager-list/{id}', 'PermohonanKonsumsiController@approveManagerList')->name('approve-manager-list');
@@ -197,7 +197,7 @@ Route::name('admin::pemesanan-ruangan.')->prefix('admin/pemesanan-ruangan')->mid
     Route::get('deletelist/{id}', 'PemesananRuanganController@deletelist')->name('deletelist');
     Route::get('view/{id}', 'PemesananRuanganController@pageDetail')->name('page-detail');
     Route::get('approve/{id}', 'PemesananRuanganController@approve')->name('approve');
-    Route::get('reject/{id}', 'PemesananRuanganController@reject')->name('reject');
+    Route::get('reject', 'PemesananRuanganController@reject')->name('reject');
 });
 
 Route::name('admin::karyawan.')->prefix('admin/karyawan')->middleware('auth')->namespace('Admin')->group(function() {
@@ -239,7 +239,7 @@ Route::name('admin::permohonan-pemakaian-kendaraan.')->prefix('admin/permohonan-
     Route::get('delete/{id}', 'PermohonanPemakaianKendaraanController@delete')->name('delete');
     Route::get('view/{id}', 'PermohonanPemakaianKendaraanController@pageDetail')->name('page-detail');
     Route::get('approve/{id}', 'PermohonanPemakaianKendaraanController@approve')->name('approve');
-    Route::get('reject/{id}', 'PermohonanPemakaianKendaraanController@reject')->name('reject');
+    Route::get('reject', 'PermohonanPemakaianKendaraanController@reject')->name('reject');
 });
 
 Route::name('admin::permohonan-atk.')->prefix('admin/permohonan-atk')->middleware('auth')->namespace('Admin')->group(function() {

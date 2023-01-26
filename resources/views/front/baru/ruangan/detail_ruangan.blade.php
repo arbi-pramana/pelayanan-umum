@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <?php
-                        $date = explode(" - ",$_GET['range_date']);
+                        $date = explode(" - ",$_GET['rangedate']);
                         $x=\DB::table('pemesanan_ruangan')->where('tanggal','like', '%'.date("Y-m-",strtotime($date[0])).'%')->count();
                         ?>
                         <label>No Pemesanan Ruangan</label>
@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label>Tanggal Pemesanan</label>
-                        <input class="form-control" name="range_date"  readonly
+                        <input class="form-control" name="rangedate"  readonly value="{{$_GET['rangedate']}}"
                             required />
                     </div>
                     {{-- <div class="form-group col-md-3">

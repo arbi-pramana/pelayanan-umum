@@ -40,7 +40,8 @@ class PermohonanPemakaianKendaraan extends Model
         "penanggung_jawab",
         "status_pj",
         "latlng",   
-        "keterangan"
+        "keterangan",
+        "alasan_reject"
     ];
 
     /**

@@ -45,14 +45,14 @@ class FrontController extends Controller
     
         $PemesananRuangan = [] ;
         $ruangs = Ruang::where('kapasitas','>=',$req->jumlah_peserta)->get();
-                
         foreach($ruangs as $ruang){
             $pemesanan_ruangan = $this->pemesananRuangan
-                ->where(function($q) use ($req,$ruang){
+            ->where(function($q) use ($req,$ruang){
+                    $date = explode(' - ',$req->range_date);
                     // $q->whereBetween('waktu_awal',[strtotime($req->waktu_awal),strtotime($req->waktu_akhir)]);
                     $q->whereBetween('waktu_akhir',[strtotime($req->waktu_awal),strtotime($req->waktu_akhir)]);
                     // $q->whereBetween('tanggal',[$req->tanggal,$req->tanggal_selesai]);
-                    // $q->whereBetween('tanggal_selesai',[$req->tanggal,$req->tanggal_selesai]);
+                    // $q->whereBetween('tanggal_selesai',[$date[1],$date[0]]);
                     $q->where('status_pj','!=','Rejected');
                     $q->where("id_ruang",$ruang->id);
                     return $q;
@@ -209,6 +209,7 @@ class FrontController extends Controller
                     "permohonan_konsumsi.status_pj",
                     "permohonan_konsumsi.keterangan",
                     "permohonan_konsumsi.attachment",
+                    "permohonan_konsumsi.alasan_reject",
                     "permohonan_konsumsi.created_at",
                     "permohonan_konsumsi.updated_at"
             ])

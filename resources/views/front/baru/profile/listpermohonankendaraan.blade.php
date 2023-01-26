@@ -109,6 +109,9 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <th class="column-status_pj">
                             Status Permohon
                         </th>
+                        <th class="column-status_pj">
+                            Alasan Reject
+                        </th>
                         <th class="text-center column-action">
                             Action
                         </th>
@@ -149,6 +152,9 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         </td>
                         <td class="column-status_pj">
                             {{ $permohonanPemakaianKendaraan->status_pj }}
+                        </td>
+                        <td class="column-status_pj">
+                            {{ $permohonanPemakaianKendaraan->alasan_reject }}
                         </td>
                         <td class="text-center column-action" width="200">
                                 @if($permohonanPemakaianKendaraan->status_pj == 'Pending')

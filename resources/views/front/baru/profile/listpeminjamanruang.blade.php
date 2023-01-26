@@ -89,6 +89,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         {{-- <td>Status Spv</td>
                         <td>Status Manajer</td> --}}
                         <td>Status Permohonan</td>
+                        <td>Alasan Reject</td>
                         <th>Attachment</th>
                         <th>Keterangan</th>
                         <th>Action</th>
@@ -111,6 +112,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         {{-- <td>{{ $pemesananRuangan->status_supervisor }}</td>
                         <td>{{ $pemesananRuangan->status_manajer }}</td> --}}
                         <td>{{ $pemesananRuangan->status_pj }}</td>
+                        <td>{{ $pemesananRuangan->alasan_reject }}</td>
                         <td>
                             @if ($pemesananRuangan->attachment == null)
                                 <span> - </span>

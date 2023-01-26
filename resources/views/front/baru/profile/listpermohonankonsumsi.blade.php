@@ -87,6 +87,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         {{-- <th>Status Spv</th>
                         <th>Status Manajer</th> --}}
                         <th>Status Permohonan</th>
+                        <th>Alasan Reject</th>
                         <th>Keterangan</th>
                         <th>Attachment</th>
                         {{-- <th>Status</th> --}}
@@ -110,6 +111,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         <td>{{ $permohonanKonsumsi->jenis_konsumsi }}</td>
                         <td>{{ $permohonanKonsumsi->jumlah_peserta }}</td>
                         <td>{{ $permohonanKonsumsi->status_pj }}</td>
+                        <td>{{ $permohonanKonsumsi->alasan_reject }}</td>
                         <td>{{ $permohonanKonsumsi->keterangan }}</td>
                         <td>
                             <a href="{{asset('pemesanan_ruangan/attachment/'.$permohonanKonsumsi->attachment) }}" download> Click</a>

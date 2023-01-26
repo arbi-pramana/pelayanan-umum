@@ -68,6 +68,7 @@ class PemesananRuanganController extends Controller
             "status_supervisor",
             "status_manajer",
             "status_pj",
+            "alasan_reject",
             "created_at"
         ]);
 
@@ -223,11 +224,11 @@ class PemesananRuanganController extends Controller
         return redirect('admin/pemesanan-ruangan')->with('info','Berhasil Merubah Status');
     }
 
-    public function reject($id)
+    public function reject(Request $req)
     {
         \DB::table('pemesanan_ruangan')
-            ->where('id', '=', $id)
-            ->update(['status_pj' => 'Rejected']);
+            ->where('id', '=', $req->id_ruangan)
+            ->update(['status_pj' => 'Rejected','alasan_reject'=>$req->alasan]);
 
         return redirect('admin/pemesanan-ruangan')->with('info','Berhasil Merubah Status');
     }

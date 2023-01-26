@@ -42,7 +42,8 @@ class PermohonanKonsumsi extends Model
         "keterangan",
         "attachment",
         "jumlah",
-        "status_pelaksana"
+        "status_pelaksana",
+        "alasan_reject"
     ];
 
     /**
