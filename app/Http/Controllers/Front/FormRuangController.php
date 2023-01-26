@@ -26,7 +26,7 @@ class FormRuangController extends Controller
             $image_name = null;
         }
         
-        $date = explode(' - ',$req->range_date);
+        $date = explode(' - ',$req->rangedate);
         
         $pemesananRuangan = new PemesananRuangan;
         $pemesananRuangan->no_pemesanan_ruangan = $req->get('no_pemesanan_ruangan');

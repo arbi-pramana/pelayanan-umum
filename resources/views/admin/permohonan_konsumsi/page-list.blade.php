@@ -51,6 +51,7 @@
 		        <th class='column-status_pj'>Status</th>
 		        <th class='column-status_pj'>Status Pelaksana</th>
 		        <th class='column-keterangan'>Keterangan</th>
+		        <th class='column-keterangan'>Alasan Reject</th>
 		        <th class='column-keterangan'>Attachment</th>
 		        <th class="text-center column-action">Action</th>
 		      </tr>
@@ -89,6 +90,7 @@
 		        <td class='column-status_pj'>{{ $permohonanKonsumsi->status_pj }}</td>
 		        <td class='column-status_pj'>{{ $permohonanKonsumsi->status_pelaksana }}</td>
 		        <td class='column-keterangan'>{{ $permohonanKonsumsi->keterangan }}</td>
+		        <td class='column-keterangan'>{{ $permohonanKonsumsi->alasan_reject }}</td>
 				<td>
 					<a href="{{asset('pemesanan_ruangan/attachment/'.$permohonanKonsumsi->attachment) }}" download> Click</a>
 				</td>
@@ -97,7 +99,7 @@
 					@if (Auth::user()->role == 'adminruang')
 						@if($permohonanKonsumsi->status_pj == 'Pending')
 							<a class="btn btn-sm btn-delete btn-success" href="{{ route('admin::permohonan-konsumsi.approve', [$permohonanKonsumsi->getKey()]) }}">Approve</a>
-							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-konsumsi.reject', [$permohonanKonsumsi->getKey()]) }}">Reject</a>
+							<a class="btn btn-sm btn-delete btn-danger reject-button" href="#" data-toggle="modal" data-target="#exampleModal" data-id="{{$permohonanKonsumsi->id}}">Reject</a>
 						@endif 
 						@if($permohonanKonsumsi->status_pelaksana != 'Terlaksana' && $permohonanKonsumsi->status_pj == 'Approved' )
 							<a class="btn btn-sm btn-delete btn-warning" href="{{ route('admin::permohonan-konsumsi.terlaksana', [$permohonanKonsumsi->getKey()]) }}">Selesai</a>
@@ -105,7 +107,7 @@
 					@else
 						@if($permohonanKonsumsi->status_pj == 'Pending')
 							<a class="btn btn-sm btn-delete btn-success" href="{{ route('admin::permohonan-konsumsi.approve', [$permohonanKonsumsi->getKey()]) }}">Approve</a>
-							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-konsumsi.reject', [$permohonanKonsumsi->getKey()]) }}">Reject</a>
+							<a class="btn btn-sm btn-delete btn-danger reject-button" href="#"  data-toggle="modal" data-target="#exampleModal" data-id="{{$permohonanKonsumsi->id}}">Reject</a>
 						@endif 
 						@if($permohonanKonsumsi->status_pj == 'Rejected')
 						<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::permohonan-konsumsi.form-edit', [$permohonanKonsumsi->getKey()]) }}">Edit</a>
@@ -127,4 +129,37 @@
 		</div>
 	</div>
 </div>
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Beri Alasan Untuk Reject</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+			<div class="modal-body">
+			<form action="{{ route('admin::permohonan-konsumsi.reject')}}" method="get">
+				<div class="form-group">
+					<input type="hidden" id="id-konsumsi" name="id_konsumsi">
+					<label for="exampleFormControlTextarea1">Alasan Reject</label>
+					<textarea class="form-control" id="alasan" rows="3" name="alasan"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Save changes</button>
+				</div>
+			</form>
+			</div>
+		</div>
+		</div>
+	</div>
+@stop
+@section('js')
+	<script>
+		$('.reject-button').on('click', function () {
+			$('#id-konsumsi').val($(this).attr("data-id"));
+		})
+	</script>
+
 @stop

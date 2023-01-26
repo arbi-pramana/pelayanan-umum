@@ -59,6 +59,7 @@ class PermohonanPemakaianKendaraanController extends Controller
             "jam_kembali",
             "penanggung_jawab",
             "status_pj",
+            "alasan_reject",
             "created_at",
         ]);
 
@@ -218,11 +219,11 @@ class PermohonanPemakaianKendaraanController extends Controller
         return redirect('admin/permohonan-pemakaian-kendaraan')->with('info','Berhasil Merubah Status');
     }
 
-    public function reject($id)
+    public function reject(Request $req)
     {
         \DB::table('permohonan_pemakaian_kendaraan')
-            ->where('id', '=', $id)
-            ->update(['status_pj' => 'Rejected']);
+            ->where('id', '=', $req->id_kendaraan)
+            ->update(['status_pj' => 'Rejected','alasan_reject'=>$req->alasan]);
 
         return redirect('admin/permohonan-pemakaian-kendaraan')->with('info','Berhasil Merubah Status');
     }

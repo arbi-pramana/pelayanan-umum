@@ -43,7 +43,8 @@ class PemesananRuangan extends Model
         "attachment",
         "keterangan",
         "child_ruang",
-        "design_ruangan"
+        "design_ruangan",
+        "alasan_reject"
     ];
 
     /**

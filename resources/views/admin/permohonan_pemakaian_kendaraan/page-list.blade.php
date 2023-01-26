@@ -44,6 +44,7 @@
 		        <th class='column-jam_berangkat'>Jam Berangkat</th>
 		        <th class='column-jam_kembali'>Jam Kembali</th>
 		        <th class='column-penanggung_jawab'>Status</th>
+		        <th class='column-penanggung_jawab'>Alasan Reject</th>
 		        <th class="text-center column-action">Action</th>
 		      </tr>
 		    </thead>
@@ -67,18 +68,19 @@
 		        <td class='column-jam_berangkat'>{{ $permohonanPemakaianKendaraan->jam_berangkat }}</td>
 		        <td class='column-jam_kembali'>{{ $permohonanPemakaianKendaraan->jam_kembali }}</td>
 		        <td class='column-penanggung_jawab'>{{ $permohonanPemakaianKendaraan->status_pj }}</td>
+		        <td class='column-penanggung_jawab'>{{ $permohonanPemakaianKendaraan->alasan_reject }}</td>
 		        <td width="200" class="text-center column-action">
 					{{-- @if (now() <= $permohonanPemakaianKendaraan->tanggal_berangkat) --}}
 						@if (Auth::user()->role == 'adminkendaraan')
 							@if($permohonanPemakaianKendaraan->status_pj == 'Pending')
 								<a class="btn btn-sm btn-delete btn-success" href="{{ route('admin::permohonan-pemakaian-kendaraan.approve', [$permohonanPemakaianKendaraan->getKey()]) }}">Approve</a>
-								<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-pemakaian-kendaraan.reject', [$permohonanPemakaianKendaraan->getKey()]) }}">Reject</a>
+								<a class="btn btn-sm btn-delete btn-danger reject-button" href="#" data-toggle="modal" data-target="#exampleModal" data-id="{{$permohonanPemakaianKendaraan->id}}">Reject</a>
 							@endif
 
 						@else
 							@if($permohonanPemakaianKendaraan->status_pj == 'Pending')
 								<a class="btn btn-sm btn-delete btn-success" href="{{ route('admin::permohonan-pemakaian-kendaraan.approve', [$permohonanPemakaianKendaraan->getKey()]) }}">Approve</a>
-								<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-pemakaian-kendaraan.reject', [$permohonanPemakaianKendaraan->getKey()]) }}">Reject</a>
+								<a class="btn btn-sm btn-delete btn-danger reject-button" href="#" data-toggle="modal" data-target="#exampleModal" data-id="{{$permohonanPemakaianKendaraan->id}}">Reject</a>
 								<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::permohonan-pemakaian-kendaraan.form-edit', [$permohonanPemakaianKendaraan->getKey()]) }}">Edit</a>
 								<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-pemakaian-kendaraan.delete', [$permohonanPemakaianKendaraan->getKey()]) }}">Delete</a>
 							@endif
@@ -96,4 +98,37 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+		<h5 class="modal-title" id="exampleModalLabel">Beri Alasan Untuk Reject</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		</div>
+		<div class="modal-body">
+		<form action="{{ route('admin::permohonan-pemakaian-kendaraan.reject')}}" method="get">
+			<div class="form-group">
+				<input type="hidden" id="id-kendaraan" name="id_kendaraan">
+				<label for="exampleFormControlTextarea1">Alasan Reject</label>
+				<textarea class="form-control" id="alasan" rows="3" name="alasan"></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Save changes</button>
+			</div>
+		</form>
+		</div>
+	</div>
+	</div>
+</div>
+@stop
+@section('js')
+	<script>
+		$('.reject-button').on('click', function () {
+			$('#id-kendaraan').val($(this).attr("data-id"));
+		})
+	</script>
+
 @stop

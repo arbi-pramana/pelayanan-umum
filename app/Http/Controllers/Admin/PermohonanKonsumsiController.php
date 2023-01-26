@@ -73,6 +73,7 @@ class PermohonanKonsumsiController extends Controller
             "permohonan_konsumsi.status_pelaksana",
             "permohonan_konsumsi.keterangan",
             "permohonan_konsumsi.attachment",
+            "permohonan_konsumsi.alasan_reject",
             "permohonan_konsumsi.created_at",
             "permohonan_konsumsi.updated_at",
         ]);
@@ -178,13 +179,13 @@ class PermohonanKonsumsiController extends Controller
         return redirect('admin/permohonan-konsumsi')->with('info','Berhasil Merubah Status');
     }
 
-    public function reject($id)
+    public function reject(Request $req)
     {
         \DB::table('permohonan_konsumsi')
-            ->where('id', '=', $id)
-            ->update(['status_pj' => 'Rejected']);
+            ->where('id', '=', $req->id_konsumsi)
+            ->update(['status_pj' => 'Rejected','alasan_reject'=>$req->alasan]);
 
-        return redirect('admin/permohonan-konsumsi'->with('info','Berhasil Merubah Status'));
+        return redirect('admin/permohonan-konsumsi')->with('info','Berhasil Merubah Status');
     }
 
     public function approveSupervisor($id)
