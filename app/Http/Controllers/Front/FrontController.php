@@ -165,7 +165,7 @@ class FrontController extends Controller
 
     public function pageLogin(Request $req)
     {
-        $data['users'] = Karyawan::all();
+        $data['users'] = Karyawan::orderBy('nama','asc')->get();
         return view('front.pages.login',$data);
     }
 
