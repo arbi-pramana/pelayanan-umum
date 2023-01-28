@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label>Attachment</label>
-                        <input class="form-control" name="attachment" type="file"/>
+                        <input id="attachment" class="form-control" name="attachment" type="file"/>
                         @if($errors->has('attachment'))
                         <div class="error text-danger">{{ $errors->first('attachment') }}</div>
                         @else
@@ -173,4 +173,23 @@
         </div>
     </div>
 </div>
+
+@endsection
+@section('script')
+
+<script>
+    var MAX_FILE_SIZE = 2 * 1024 * 1024; // 5MB
+ 
+    $(document).ready(function() {
+        $('#attachment').change(function() {
+            fileSize = this.files[0].size;
+            if (fileSize > MAX_FILE_SIZE) {
+                this.setCustomValidity("Ukuran File Maximal hanya 2 MB!");
+                this.reportValidity();
+            } else {
+                this.setCustomValidity("");
+            }
+        });
+    });
+</script>
 @endsection

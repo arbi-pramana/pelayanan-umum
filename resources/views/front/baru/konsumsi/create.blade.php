@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label>Attachment <span style="color:red;">*</span></label>
-                        <input class="form-control" accept=".xls,.xlsx,.pdf" name="attachment" type="file" required/>
+                        <input id="attachment" class="form-control" accept=".xls,.xlsx,.pdf" name="attachment" type="file" required/>
                         {{-- @if($errors->has('attachment'))
                         <div class="error text-danger">{{ $errors->first('attachment') }}</div>
                         @else --}}
@@ -168,7 +168,7 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label>Attachment <span style="color:red;">*</span></label>
-                        <input class="form-control" accept=".xls,.xlsx,.pdf" name="attachment" type="file" required/>
+                        <input id="attachment" class="form-control" accept=".xls,.xlsx,.pdf" name="attachment" type="file" required/>
                         @if($errors->has('attachment'))
                         <div class="error text-danger" >{{ $errors->first('attachment') }}</div>
                         @else
@@ -223,4 +223,21 @@
         });
     }
 </script>
+<script>
+    var MAX_FILE_SIZE = 2 * 1024 * 1024; // 5MB
+ 
+    $(document).ready(function() {
+        $('#attachment').change(function() {
+            fileSize = this.files[0].size;
+            if (fileSize > MAX_FILE_SIZE) {
+                this.setCustomValidity("Ukuran File Maximal hanya 2 MB!");
+                this.reportValidity();
+            } else {
+                this.setCustomValidity("");
+            }
+        });
+    });
+</script>
+ 
+
 @endsection
