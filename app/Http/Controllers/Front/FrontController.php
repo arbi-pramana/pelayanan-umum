@@ -42,33 +42,33 @@ class FrontController extends Controller
 
     public function submitRuangan(Request $req)
     {
-    
-        $PemesananRuangan = [] ;
-        $ruangs = Ruang::where('kapasitas','>=',$req->jumlah_peserta)->get();
-        foreach($ruangs as $ruang){
-            $pemesanan_ruangan = $this->pemesananRuangan
-            ->where(function($q) use ($req,$ruang){
-                    $date = explode(' - ',$req->range_date);
-                    // $q->whereBetween('waktu_awal',[strtotime($req->waktu_awal),strtotime($req->waktu_akhir)]);
-                    $q->whereBetween('waktu_akhir',[strtotime($req->waktu_awal),strtotime($req->waktu_akhir)]);
-                    // $q->whereBetween('tanggal',[$req->tanggal,$req->tanggal_selesai]);
-                    // $q->whereBetween('tanggal_selesai',[$date[1],$date[0]]);
-                    $q->where('status_pj','!=','Rejected');
-                    $q->where("id_ruang",$ruang->id);
-                    return $q;
-                })
-                ->first();
-            if(!empty($pemesanan_ruangan)){
-                $ruangNotReady[] = $pemesanan_ruangan->id_ruang;
-            }
-        }
+        $date = explode(' - ',$req->range_date);
 
+        $waktu_awal = date("Hi",strtotime($req->waktu_awal));
+        $waktu_akhir= date("Hi",strtotime($req->waktu_akhir));
+
+        $ruangNotReady = $this->pemesananRuangan
+            ->whereBetween('tanggal_selesai',[$date[0],$date[1]])
+            ->get()
+            ->map(function($q) use ($waktu_awal,$waktu_akhir){
+                $q->time_awal = (int)date("Hi",$q->waktu_awal);
+                $q->time_akhir = (int)date("Hi",$q->waktu_akhir);
+                if($q->time_awal <= $waktu_akhir && $waktu_akhir <= $q->time_akhir){
+                    return $q;
+                } else if($q->time_awal <= $waktu_awal && $waktu_awal <= $q->time_akhir){
+                    return $q;
+                }
+            })
+            ->pluck('id_ruang')
+            ->toArray();
+
+        $ruangs = Ruang::get();    
         //update data ruangs 
         if(!empty($ruangNotReady)){
             $ruangs = $ruangs->whereNotIn('id',$ruangNotReady);
         }
-        
-        $data['pemesanan_ruangan'] = $PemesananRuangan;
+
+        $data['pemesanan_ruangan'] = $this->pemesananRuangan->get();
         $data['date'] = $req->range_date;
         $data['waktu_awal'] = $req->waktu_awal;
         $data['waktu_akhir'] = $req->waktu_akhir;
