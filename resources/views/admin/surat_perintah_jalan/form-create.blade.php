@@ -93,6 +93,7 @@
               }
             })
             $("#input-tujuan").val(data.tujuan);
+            $("#input-driver_id").val(data.nama_driver);
             $("#input-tanggal_berangkat").val(data.tanggal_berangkat);
             $("#input-tanggal_kembali").val(data.tanggal_kembali);
             $("#input-jam_berangkat").val(data.jam_berangkat);

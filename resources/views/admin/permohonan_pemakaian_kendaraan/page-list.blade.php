@@ -38,6 +38,7 @@
 		        <th class='column-tanggal'>Jam Pemesanan </th>
 		        <th class='column-pemohon'>Pemohon</th>
 		        <th class='column-tujuan'>Tujuan</th>
+		        <th class='column-tujuan'>NamaPengemudi</th>
 		        <th class='column-keperluan'>Keperluan</th>
 		        <th class='column-tanggal_berangkat'>Tanggal Berangkat</th>
 		        <th class='column-tanggal_kembali'>Tanggal Kembali</th>
@@ -62,6 +63,7 @@
 		        <td class='column-pemohon'>{{ $permohonanPemakaianKendaraan->created_at->format("H:i:s") }}</td>
 		        <td class='column-pemohon'>{{ $permohonanPemakaianKendaraan->pemohon }}</td>
 		        <td class='column-tujuan'>{{ $permohonanPemakaianKendaraan->tujuan }}</td>
+		        <td class='column-keperluan'>{{ $permohonanPemakaianKendaraan->driver->nama_driver ?? '' }}</td>
 		        <td class='column-keperluan'>{{ $permohonanPemakaianKendaraan->keperluan }}</td>
 		        <td class='column-tanggal_berangkat'>{{ $permohonanPemakaianKendaraan->tanggal_berangkat }}</td>
 		        <td class='column-tanggal_kembali'>{{ $permohonanPemakaianKendaraan->tanggal_kembali }}</td>
@@ -82,11 +84,11 @@
 								<a class="btn btn-sm btn-delete btn-success" href="{{ route('admin::permohonan-pemakaian-kendaraan.approve', [$permohonanPemakaianKendaraan->getKey()]) }}">Approve</a>
 								<a class="btn btn-sm btn-delete btn-danger reject-button" href="#" data-toggle="modal" data-target="#exampleModal" data-id="{{$permohonanPemakaianKendaraan->id}}">Reject</a>
 								<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::permohonan-pemakaian-kendaraan.form-edit', [$permohonanPemakaianKendaraan->getKey()]) }}">Edit</a>
-								<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-pemakaian-kendaraan.delete', [$permohonanPemakaianKendaraan->getKey()]) }}">Delete</a>
+								<a class="btn btn-sm btn-delete btn-danger delete-button" href="#" data-id="{{$permohonanPemakaianKendaraan->id}}">Delete</a>
 							@endif
 							@if($permohonanPemakaianKendaraan->status_pj == 'Approved' || $permohonanPemakaianKendaraan->status_pj == 'Rejected')
 								<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::permohonan-pemakaian-kendaraan.form-edit', [$permohonanPemakaianKendaraan->getKey()]) }}">Edit</a>
-								<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-pemakaian-kendaraan.delete', [$permohonanPemakaianKendaraan->getKey()]) }}">Delete</a>
+								<a class="btn btn-sm btn-delete btn-danger delete-button" href="#" data-id="{{$permohonanPemakaianKendaraan->id}}">Delete</a>
 							@endif
 						@endif
 					{{-- @endif --}}
@@ -130,5 +132,31 @@
 			$('#id-kendaraan').val($(this).attr("data-id"));
 		})
 	</script>
+	<script>
+		$('.delete-button').on('click', function(e){
+		   var form = this;
+		   var id = $(this).attr("data-id")
+		   e.preventDefault();
+		   swal({
+			   title: "Apakah ingin menghapus data ? ",
+			   icon: "warning",
+			   buttons: true,
+			   dangerMode: true,
+			   })
+			   .then((willDelete) => {
+			   if (willDelete) {
+				   $.get("{{url('admin/permohonan-pemakaian-kendaraan/delete')}}"+'/'+id, function(){
+					   swal(
+						   'Terhapus!',
+						   'Data berhasil terhapus !',
+						   'success'
+					   ).then(()=>{
+						   location.reload()
+					   })
+				   });
+			   }
+			   });
+	   }); 
+   </script>
 
 @stop

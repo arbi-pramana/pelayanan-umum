@@ -108,16 +108,16 @@
 						@if($permohonanKonsumsi->status_pj == 'Pending')
 							<a class="btn btn-sm btn-delete btn-success" href="{{ route('admin::permohonan-konsumsi.approve', [$permohonanKonsumsi->getKey()]) }}">Approve</a>
 							<a class="btn btn-sm btn-delete btn-danger reject-button" href="#"  data-toggle="modal" data-target="#exampleModal" data-id="{{$permohonanKonsumsi->id}}">Reject</a>
+							
 						@endif 
 						@if($permohonanKonsumsi->status_pj == 'Rejected')
 						<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::permohonan-konsumsi.form-edit', [$permohonanKonsumsi->getKey()]) }}">Edit</a>
-							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-konsumsi.delete', [$permohonanKonsumsi->getKey()]) }}">Delete</a>
+							<a class="btn btn-sm btn-delete btn-danger delete-button" href="#" data-id="{{$permohonanKonsumsi->id}}">Delete</a>
 						@endif 
-
 						@if($permohonanKonsumsi->status_pelaksana != 'Terlaksana' && $permohonanKonsumsi->status_pj == 'Approved' )
 							<a class="btn btn-sm btn-delete btn-warning" href="{{ route('admin::permohonan-konsumsi.terlaksana', [$permohonanKonsumsi->getKey()]) }}">Selesai</a>
 							<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::permohonan-konsumsi.form-edit', [$permohonanKonsumsi->getKey()]) }}">Edit</a>
-							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::permohonan-konsumsi.delete', [$permohonanKonsumsi->getKey()]) }}">Delete</a>
+							<a class="btn btn-sm btn-delete btn-danger delete-button" href="#" data-id="{{$permohonanKonsumsi->id}}">Delete</a>
 						@endif 
 					@endif
 				{{-- @endif --}}
@@ -161,5 +161,32 @@
 			$('#id-konsumsi').val($(this).attr("data-id"));
 		})
 	</script>
+	<script>
+		$('.delete-button').on('click', function(e){
+		   var form = this;
+		   var id = $(this).attr("data-id")
+		   e.preventDefault();
+		   swal({
+			   title: "Apakah ingin menghapus data ? ",
+			   icon: "warning",
+			   buttons: true,
+			   dangerMode: true,
+			   })
+			   .then((willDelete) => {
+			   if (willDelete) {
+				   $.get("{{url('admin/permohonan-konsumsi/delete')}}"+'/'+id, function(){
+					   swal(
+						   'Terhapus!',
+						   'Data berhasil terhapus !',
+						   'success'
+					   ).then(()=>{
+						   location.reload()
+					   })
+				   });
+			   }
+			   });
+	   }); 
+   </script>
+
 
 @stop

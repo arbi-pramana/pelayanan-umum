@@ -32,6 +32,7 @@ Route::middleware("front.auth")->namespace('Front')->group(function() {
 
     // Permohonan Kendaraan
     Route::get('/permohonankendaraan', 'FrontController@pagePermohonanKendaraan')->name('permohonankendaraan');
+    Route::get('/getdriver/{tanggal}/{awal}/{akhir}', 'FrontController@getDriver')->name('getDriver');
     Route::post('/permohonankendaraan', 'FormPermohonanKendaraanController@submit')->name('permohonankendaraan.submit');
     Route::get('/listpermohonankendaraan', 'FrontController@pageListPermohonanKendaraan')->name('list-permohonan-kendaraan');
     Route::get('/listsuratperintahjalan', 'FrontController@pageListSuratPerintahJalan')->name('list-surat-perintah-jalan');
@@ -198,6 +199,7 @@ Route::name('admin::pemesanan-ruangan.')->prefix('admin/pemesanan-ruangan')->mid
     Route::get('view/{id}', 'PemesananRuanganController@pageDetail')->name('page-detail');
     Route::get('approve/{id}', 'PemesananRuanganController@approve')->name('approve');
     Route::get('reject', 'PemesananRuanganController@reject')->name('reject');
+    Route::get('terlaksana/{id}', 'PemesananRuanganController@terlaksana')->name('terlaksana');
 });
 
 Route::name('admin::karyawan.')->prefix('admin/karyawan')->middleware('auth')->namespace('Admin')->group(function() {

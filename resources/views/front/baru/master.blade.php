@@ -8,7 +8,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600' rel='stylesheet' type='text/css'>
     <link href='//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="{{asset('vendor/frontend')}}/css/bootstrap.css">
     <link rel="stylesheet" href="{{asset('vendor/frontend')}}/css/font-awesome.css">
     <link rel="stylesheet" href="{{asset('vendor/frontend')}}/css/icomoon.css">
@@ -98,6 +98,7 @@
         <script src="{{asset('vendor/frontend')}}/js/gridrotator.js"></script>
         <script src="{{asset('vendor/frontend')}}/js/custom.js"></script>
         <script src="{{asset('vendor/frontend')}}/js/switcher.js"></script>
+        @include('sweetalert::alert')
         <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> --}}
         <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -109,6 +110,7 @@
         </script>
         <script>
             $('input[name="range_date"]').daterangepicker({
+                
                 locale: {
                             format: 'YYYY-MM-DD',
                             }

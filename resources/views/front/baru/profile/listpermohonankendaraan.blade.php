@@ -148,7 +148,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                             {{ $permohonanPemakaianKendaraan->jam_kembali }}
                         </td>
                         <td class="column-nama-driver">
-                            {{ $permohonanPemakaianKendaraan->spj->driver->nama_driver ?? '-' }}
+                            {{ $permohonanPemakaianKendaraan->driver->nama_driver ?? '-' }}
                         </td>
                         <td class="column-status_pj">
                             {{ $permohonanPemakaianKendaraan->status_pj }}
@@ -158,11 +158,12 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         </td>
                         <td class="text-center column-action" width="200">
                                 @if($permohonanPemakaianKendaraan->status_pj == 'Pending')
-                                <a href="{{ route('permohonankendaraan.edit', $permohonanPemakaianKendaraan->id) }}"
-                                    class="btn btn-info btn-sm">Edit</a>
-                                <a onclick="return confirm('Apa anda yakin ingin menghapus permohonan ini?')"
-                                    href="{{ route('permohonankendaraan.destroy', $permohonanPemakaianKendaraan->id) }}"
-                                    class="btn btn-danger btn-sm">Delete</a>
+                                {{-- <a href="{{ route('permohonankendaraan.edit', $permohonanPemakaianKendaraan->id) }}"
+                                    class="btn btn-info btn-sm">Edit</a> --}}
+                                <a
+                                    href="#"
+                                    data-id="{{$permohonanPemakaianKendaraan->id}}"
+                                    class="btn btn-danger btn-sm delete-button">Delete</a>
                                 @endif
                         </td>
                     </tr>
@@ -172,4 +173,34 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $('.delete-button').on('click', function(e){
+       var form = this;
+       var id = $(this).attr("data-id")
+       e.preventDefault();
+       swal({
+           title: "Apakah ingin menghapus data ? ",
+           icon: "warning",
+           buttons: true,
+           dangerMode: true,
+           })
+           .then((willDelete) => {
+           if (willDelete) {
+               $.get("{{url('deletelistKendaraan')}}"+'/'+id, function(){
+                   swal(
+                       'Terhapus!',
+                       'Data berhasil terhapus !',
+                       'success'
+                   ).then(()=>{
+                       location.reload()
+                   })
+               });
+           }
+           });
+   }); 
+</script>
+
 @endsection

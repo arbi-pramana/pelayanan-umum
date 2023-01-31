@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\SumberDana;
-use App\Models\Barang;
-use App\Models\PermohonanPemakaianKendaraan;
-use App\Models\SuratPerintahJalan;
-use App\Models\PermohonanKonsumsi;
-use App\Models\PemesananRuangan;
-use App\Models\PermohonanAtk;
-use App\Models\Ruang;
-use App\Models\Karyawan;
-use App\User;
 use Auth;
+use App\User;
 use Carbon\Carbon;
+use App\Models\Ruang;
+use App\Models\Barang;
+use App\Models\Driver;
+use App\Models\Karyawan;
+use App\Models\SumberDana;
+use App\Models\Notification;
+use Illuminate\Http\Request;
+use App\Models\PermohonanAtk;
+use App\Models\PemesananRuangan;
+use App\Models\PermohonanKonsumsi;
+use App\Models\SuratPerintahJalan;
+use App\Http\Controllers\Controller;
+use App\Models\PermohonanPemakaianKendaraan;
 
 class FrontController extends Controller
 {
@@ -42,33 +44,37 @@ class FrontController extends Controller
 
     public function submitRuangan(Request $req)
     {
-    
-        $PemesananRuangan = [] ;
-        $ruangs = Ruang::where('kapasitas','>=',$req->jumlah_peserta)->get();
-        foreach($ruangs as $ruang){
-            $pemesanan_ruangan = $this->pemesananRuangan
-            ->where(function($q) use ($req,$ruang){
-                    $date = explode(' - ',$req->range_date);
-                    // $q->whereBetween('waktu_awal',[strtotime($req->waktu_awal),strtotime($req->waktu_akhir)]);
-                    $q->whereBetween('waktu_akhir',[strtotime($req->waktu_awal),strtotime($req->waktu_akhir)]);
-                    // $q->whereBetween('tanggal',[$req->tanggal,$req->tanggal_selesai]);
-                    // $q->whereBetween('tanggal_selesai',[$date[1],$date[0]]);
-                    $q->where('status_pj','!=','Rejected');
-                    $q->where("id_ruang",$ruang->id);
-                    return $q;
-                })
-                ->first();
-            if(!empty($pemesanan_ruangan)){
-                $ruangNotReady[] = $pemesanan_ruangan->id_ruang;
-            }
-        }
+        $date = explode(' - ',$req->range_date);
 
+        $waktu_awal = date("Hi",strtotime($req->waktu_awal));
+        $waktu_akhir= date("Hi",strtotime($req->waktu_akhir));
+
+        $ruangNotReady = $this->pemesananRuangan
+            ->whereBetween('tanggal_selesai',[$date[0],$date[1]])
+            ->where('status_pj','!=','Rejected')
+            ->get()
+            ->map(function($q) use ($waktu_awal,$waktu_akhir){
+                $q->time_awal = (int)date("Hi",$q->waktu_awal);
+                $q->time_akhir = (int)date("Hi",$q->waktu_akhir);
+                if($q->time_awal <= $waktu_akhir && $waktu_akhir <= $q->time_akhir){
+                    return $q;
+                } else if($q->time_awal <= $waktu_awal && $waktu_awal <= $q->time_akhir){
+                    return $q;
+                }else if($q->time_akhir <= $waktu_awal && $waktu_akhir <= $q->time_akhir){
+                    return $q;
+                }
+            })
+            ->pluck('id_ruang')
+            ->toArray();
+
+        $ruangs = Ruang::where('kapasitas','>=',$req->jumlah_peserta)->get();    
         //update data ruangs 
         if(!empty($ruangNotReady)){
-            $ruangs = $ruangs->whereNotIn('id',$ruangNotReady);
+            $ruangs = $ruangs
+            ->whereNotIn('id',$ruangNotReady);
         }
-        
-        $data['pemesanan_ruangan'] = $PemesananRuangan;
+
+        $data['pemesanan_ruangan'] = $this->pemesananRuangan->get();
         $data['date'] = $req->range_date;
         $data['waktu_awal'] = $req->waktu_awal;
         $data['waktu_akhir'] = $req->waktu_akhir;
@@ -390,15 +396,6 @@ class FrontController extends Controller
     }
 
 
-    protected function findOrFailKonsumsi($id)
-    {
-        $permohonanKonsumsi = $this->permohonanKonsumsi->find($id);
-        if (!$permohonanKonsumsi) {
-            return abort(404, 'Permohonan Konsumsi not found');
-        }
-
-        return $permohonanKonsumsi;
-    }
     
     public function approveSupervisorKonsumsi($id)
     {
@@ -422,22 +419,33 @@ class FrontController extends Controller
 
     public function deletelistKonsumsi(Request $request, $id)
     {
-        $permohonanKonsumsi = $this->findOrFail($id);
+        $permohonanKonsumsi = $this->permohonanKonsumsi->where('id',$id)->first();
 
         // Delete data
+        $notification = Notification::where('permohonan_konsumsi_id',$id)->first();
+        if($notification){
+            $notification->delete();
+        }
         $deleted = $permohonanKonsumsi->delete();
         if (!$deleted) {
 
-            $notification = Notification::where('permohonan_konsumsi_id',$id)->first();
-            if($notification){
-                $notification->delete();
-            }
+          
             $message = 'Something went wrong when delete Permohonan Konsumsi';
-            return back()->with('danger', $message);
+            return redirect()->back()->with('danger', $message);
         }
 
         $message = 'Permohonan Konsumsi has been deleted!';
-        return redirect('/listpermohonanKonsumsi')->with('info', $message);
+        return redirect('/listpermohonankonsumsi')->with('info', $message);
+    }
+
+    protected function findOrFailKonsumsi($id)
+    {
+        $permohonanKonsumsi = $this->permohonanKonsumsi->find($id);
+        if (!$permohonanKonsumsi) {
+            return abort(404, 'Permohonan Konsumsi not found');
+        }
+
+        return $permohonanKonsumsi;
     }
 
     protected function findOrFailRuang($id)
@@ -487,13 +495,14 @@ class FrontController extends Controller
         $pemesananRuangan = $this->findOrFailRuang($id);
 
         // Delete data
+        $notification = Notification::where('pemesanan_ruangan_id',$id)->first();
+        if($notification){
+            $notification->delete();
+        }
         $deleted = $pemesananRuangan->delete();
         if (!$deleted) {
 
-            $notification = Notification::where('pemesanan_ruangan_id',$id)->first();
-            if($notification){
-                $notification->delete();
-            }
+           
             $message = 'Something went wrong when delete Pemesanan Ruangan';
             return back()->with('danger', $message);
         }
@@ -562,14 +571,13 @@ class FrontController extends Controller
     {
         $permohonankendaraan = $this->findOrFailKendaraan($id);
 
+        $notification = Notification::where('permohonan_pemakaian_kendaraan_id',$id)->first();
+        if($notification){
+            $notification->delete();
+        }
         // Delete data
         $deleted = $permohonankendaraan->delete();
         if (!$deleted) {
-
-            $notification = Notification::where('permohonan_pemakaian_kendaraan_id',$id)->first();
-            if($notification){
-                $notification->delete();
-            }
 
             $message = 'Something went wrong when delete Permohonan Kendaraan';
             return back()->with('danger', $message);
@@ -620,6 +628,41 @@ class FrontController extends Controller
 
         $message = 'Surat Perintah has been deleted!';
         return redirect('/listsuratperintahjalan')->with('info', $message);
+    }
+
+    public function getDriver($date,$waktu_awal,$waktu_akhir){
+
+        $date = explode(' - ',$date);
+
+        $driverNotReady = $this->permohonanPemakaianKendaraan
+            ->whereBetween('tanggal_kembali',[$date[0],$date[1]])
+            ->where('driver_id','!=','1')
+            ->where('status_pj','!=','Rejected')
+            ->get()
+            ->map(function($q) use ($waktu_awal,$waktu_akhir){
+                // $q->time_awal = (int)date("Hi",$q->waktu_awal);
+                // $q->time_akhir = (int)date("Hi",$q->waktu_akhir);
+                if($q->jam_berangkat <= $waktu_akhir && $waktu_akhir <= $q->jam_kembali){
+                    return $q;
+                } else if($q->jam_berangkat <= $waktu_awal && $waktu_awal <= $q->jam_kembali){
+                    return $q;
+                }else if($q->jam_kembali <= $waktu_awal && $waktu_akhir <= $q->jam_kembali){
+                    return $q;
+                }
+            })
+            ->pluck('driver_id')
+            ->toArray();
+
+        $drivers = Driver::get();    
+        //update data ruangs 
+        if(!empty($driverNotReady)){
+            $drivers = $drivers
+            ->whereNotIn('id',$driverNotReady);
+        }
+
+        $data['drivers'] = $drivers;
+
+        return $data;
     }
 
     protected function guard()

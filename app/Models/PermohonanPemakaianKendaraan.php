@@ -33,6 +33,7 @@ class PermohonanPemakaianKendaraan extends Model
         "tujuan",
         "keperluan",
         "hari",
+        "driver_id",
         "tanggal_berangkat",
         "tanggal_kembali",
         "jam_berangkat",
@@ -62,6 +63,11 @@ class PermohonanPemakaianKendaraan extends Model
     public function spj(){
 
         return $this->hasOne('App\Models\SuratPerintahJalan', 'id_permohonan_pemakaian_kendaraan','id');
+
+    }
+    public function driver(){
+
+        return $this->hasOne('App\Models\Driver', 'id','driver_id');
 
     }
 }
