@@ -9,6 +9,9 @@
   <link rel="icon" href="{{asset('vendor/home')}}/images/new-logo.ico">
 
   @section('styles')
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
@@ -106,12 +109,14 @@
       @yield('content')
     </div>
   </section>
-
   <!-- Jquery Core Js -->
   @section('scripts')
+  
+ 
   <script src="{{ asset('vendor/admin-bsb/plugins/jquery/jquery.min.js') }}"></script>
   <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script>
+  
   $(document).ready( function () {
     $('#my-table').DataTable();
 } );
@@ -131,12 +136,13 @@
 
   <!-- Custom Js -->
   <script src="{{ asset('vendor/admin-bsb/js/admin.js') }}"></script>
-
+  
   @scripts
 
   <!-- Demo Js -->
   <script src="{{ asset('vendor/admin-bsb/js/demo.js') }}"></script>
   @show
   @yield('js')
+  @include('sweetalert::alert')
 </body>
 </html>

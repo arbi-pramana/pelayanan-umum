@@ -74,6 +74,7 @@ class FormRuangController extends Controller
             }
             return view('front.baru.konsumsi.create')->with(compact('array_sumber_dana', 'pemohon', 'info'));
         } else {
+            alert()->success('Berhasil', 'Data berhasil dibuat');
             return redirect()->route('list-peminjaman-ruang');
         }
     }

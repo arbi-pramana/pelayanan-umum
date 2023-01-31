@@ -48,6 +48,7 @@
 		        {{-- <th class='column-status-supervisor'>Status Spv</th>
 		        <th class='column-status-manajer'>Status Manajer</th> --}}
 		        <th class='column-status-penanggung_jawab'>Status Penanggung Jawab</th>
+		        <th class='column-status-penanggung_jawab'>Status Pelaksana</th>
 		        <th class='column-status-penanggung_jawab'>Alasan Reject</th>
 		        <th class='column-file_attachment'>File Attachment</th>
 		        <th class='column-keterangan'>Keterangan</th>
@@ -56,7 +57,9 @@
 		    </thead>
 		    <tbody>
 		      @foreach($pagination as $i => $pemesananRuangan)
-				@if ($pemesananRuangan->status_pj == 'Approved')
+				@if ($pemesananRuangan->status_pj == 'Approved' && $pemesananRuangan->status_pelaksana =='Terlaksana')
+				<tr style="background-color: #FAF4B7;color:black;">
+				@elseif ($pemesananRuangan->status_pj == 'Approved')
 				<tr style="background-color: #9ED2C6;color:black;">
 				@elseif($pemesananRuangan->status_pj == 'Rejected')
 				<tr style="background-color: #FF8AAE;color:black;">
@@ -79,6 +82,7 @@
 		        {{-- <td class='column-status_supervisor'>{{ $pemesananRuangan->status_supervisor }}</td>
 		        <td class='column-status_manajer'>{{ $pemesananRuangan->status_manajer }}</td> --}}
 		        <td class='column-status_penanggung_jawab'>{{ $pemesananRuangan->status_pj }}</td>
+		        <td class='column-status_penanggung_jawab'>{{ $pemesananRuangan->status_pelaksana }}</td>
 		        <td class='column-status_penanggung_jawab'>{{ $pemesananRuangan->alasan_reject }}</td>
 		        <td class='column-file_attachment'>
 					@if ($pemesananRuangan->attachment == null)
@@ -100,11 +104,17 @@
 							<a class="btn btn-sm btn-delete btn-success" href="{{ route('admin::pemesanan-ruangan.approve', [$pemesananRuangan->getKey()]) }}">Approve</a>
 							<a class="btn btn-sm btn-delete btn-danger reject-button" href="#" data-toggle="modal" data-target="#exampleModal" data-id="{{$pemesananRuangan->id}}">Reject</a>
 							<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::pemesanan-ruangan.form-edit', [$pemesananRuangan->getKey()]) }}">Edit</a>
-							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::pemesanan-ruangan.delete', [$pemesananRuangan->getKey()]) }}">Delete</a>
+							<a class="btn btn-sm btn-delete btn-danger delete-button" href="#" data-id="{{$pemesananRuangan->id}}">Delete</a>
 							@endif
-							@if($pemesananRuangan->status_pj == 'Approved' || $pemesananRuangan->status_pj == 'Rejected')
+							@if($pemesananRuangan->status_pj == 'Approved' && $pemesananRuangan->status_pelaksana ==
+							'Belum Terlaksana' )
+							<a class="btn btn-sm btn-delete btn-warning" href="{{ route('admin::pemesanan-ruangan.terlaksana', [$pemesananRuangan->getKey()]) }}">Selesai</a>
 							<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::pemesanan-ruangan.form-edit', [$pemesananRuangan->getKey()]) }}">Edit</a>
-							<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::pemesanan-ruangan.delete', [$pemesananRuangan->getKey()]) }}">Delete</a>
+							<a class="btn btn-sm btn-delete btn-danger delete-button" href="#" data-id="{{$pemesananRuangan->id}}">Delete</a>
+							@endif
+							@if ( $pemesananRuangan->status_pj == 'Rejected')
+							<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::pemesanan-ruangan.form-edit', [$pemesananRuangan->getKey()]) }}">Edit</a>
+							<a class="btn btn-sm btn-delete btn-danger delete-button" href="#" data-id="{{$pemesananRuangan->id}}">Delete</a>
 							@endif
 						@endif	
 					{{-- @endif --}}
@@ -150,6 +160,32 @@
 		$('.reject-button').on('click', function () {
 			$('#id-ruangan').val($(this).attr("data-id"));
 		})
+	</script>
+	<script>
+		 $('.delete-button').on('click', function(e){
+            var form = this;
+			var id = $(this).attr("data-id")
+            e.preventDefault();
+			swal({
+				title: "Apakah ingin menghapus data ? ",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+				})
+				.then((willDelete) => {
+				if (willDelete) {
+					$.get("{{url('admin/pemesanan-ruangan/delete')}}"+'/'+id, function(){
+						swal(
+							'Terhapus!',
+							'Data berhasil terhapus !',
+							'success'
+						).then(()=>{
+							location.reload()
+						})
+					});
+				}
+				});
+        }); 
 	</script>
 
 @stop

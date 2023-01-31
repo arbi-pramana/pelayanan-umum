@@ -7,6 +7,7 @@ use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\PermohonanKonsumsi;
 use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class FormKonsumsiController extends Controller
 {
@@ -42,6 +43,7 @@ class FormKonsumsiController extends Controller
         $notifications->status = false;
         $notifications->save();
         
+        alert()->success('Berhasil', 'Data berhasil dibuat');
         return redirect()->route('list-permohonan-konsumsi');
     }
 }

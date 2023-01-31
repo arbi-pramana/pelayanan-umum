@@ -47,21 +47,21 @@ class PermohonanPemakaianKendaraanController extends Controller
     {
 
         $query = $this->permohonanPemakaianKendaraan->query();
-        $query->select([
-            "id",
-            "pemohon",
-            "tujuan",
-            "keperluan",
-            "hari",
-            "tanggal_berangkat",
-            "tanggal_kembali",
-            "jam_berangkat",
-            "jam_kembali",
-            "penanggung_jawab",
-            "status_pj",
-            "alasan_reject",
-            "created_at",
-        ]);
+        // $query->select([
+        //     "id",
+        //     "pemohon",
+        //     "tujuan",
+        //     "keperluan",
+        //     "hari",
+        //     "tanggal_berangkat",
+        //     "tanggal_kembali",
+        //     "jam_berangkat",
+        //     "jam_kembali",
+        //     "penanggung_jawab",
+        //     "status_pj",
+        //     "alasan_reject",
+        //     "created_at",
+        // ]);
 
         $data['title'] = 'List Permohonan Pemakaian Kendaraan';
         $data['pagination'] = $query->latest()->get();

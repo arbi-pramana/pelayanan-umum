@@ -72,6 +72,11 @@ class SuratPerintahJalan extends Model
         return $this->hasOne('App\Models\Driver', 'id','driver_id');
 
     }
+    public function permohonankendaraan(){
+
+        return $this->hasOne('App\Models\PermohonanPemakaianKendaraan', 'id','id_permohonan_pemakaian_kendaraan');
+
+    }
     public function kendaraan(){
 
         return $this->hasOne('App\Models\Kendaraan', 'id','kendaraan_id');

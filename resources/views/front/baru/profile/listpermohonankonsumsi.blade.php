@@ -119,10 +119,9 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                         {{-- <td>{{ $permohonanKonsumsi->status_approval }}</td> --}}
                         <td>
                                 @if($permohonanKonsumsi->status_pj == 'Pending')
-                                <a class="btn btn-sm btn-delete btn-danger" href="{{ route('delete-list-konsumsi', [$permohonanKonsumsi->getKey()]) }}">Delete</a>
+                                <a class="btn btn-sm btn-delete btn-danger delete-button" href="#" data-id="{{$permohonanKonsumsi->id}}">Delete</a>
                                 @endif
-                           
-              
+
                         </td>
                     </tr>
                     @endforeach
@@ -131,4 +130,34 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $('.delete-button').on('click', function(e){
+       var form = this;
+       var id = $(this).attr("data-id")
+       e.preventDefault();
+       swal({
+           title: "Apakah ingin menghapus data ? ",
+           icon: "warning",
+           buttons: true,
+           dangerMode: true,
+           })
+           .then((willDelete) => {
+           if (willDelete) {
+               $.get("{{url('deletelistKonsumsi')}}"+'/'+id, function(){
+                   swal(
+                       'Terhapus!',
+                       'Data berhasil terhapus !',
+                       'success'
+                   ).then(()=>{
+                       location.reload()
+                   })
+               });
+           }
+           });
+   }); 
+</script>
+
 @endsection

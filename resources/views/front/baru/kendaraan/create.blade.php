@@ -67,18 +67,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="tanggal_berangkat">
-                                        Tanggal Berangkat <span style="color:red;">*</span>
+                                        Tanggal<span style="color:red;">*</span>
                                     </label>
                                     <div class="form-field">
-                                        <input class="form-control input-date/" id="tanggal_berangkat" name="tanggal_berangkat" placeholder="Tanggal Berangkat" type="date" required>
+                                        <input class="form-control input-date" id="tanggal_berangkat" name="range_date" required>
                                         </input>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="tanggal_kembali">
                                         Tanggal Kembali <span style="color:red;">*</span>
@@ -88,7 +88,7 @@
                                         </input>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="tanggal_berangkat">
@@ -96,7 +96,7 @@
                                     </label>
                                     <div class="form-field">
                                         <i class="icon icon-calendar2"></i>
-                                        <input class="form-control time" id="jam_berangkat" name="jam_berangkat" placeholder="Jam Berangkat" type="time" required>
+                                        <input class="form-control time-awal" id="jam_berangkat" name="jam_berangkat" placeholder="Jam Berangkat" type="time" required>
                                         </input>
                                     </div>
                                 </div>
@@ -108,8 +108,21 @@
                                     </label>
                                     <div class="form-field">
                                         <i class="icon icon-calendar2"></i>
-                                        <input class="form-control time" id="jam_kembali" name="jam_kembali" placeholder="Jam Kembali" type="time" required>
+                                        <input class="form-control time-akhir" id="jam_kembali" name="jam_kembali" placeholder="Jam Kembali" type="time" required>
                                         </input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="tanggal_berangkat">
+                                        Driver<span style="color:red;">*</span>
+                                    </label>
+                                    <div class="form-field">
+                                        <select name="driver_kendaraan" id="driver_kendaraan" class="form-control driver_kendaraan" required>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -196,5 +209,56 @@
             }
         });
     }
+</script>
+<script>
+     $('.input-date').on('change', function(){
+        $("#driver_kendaraan").empty();
+        var tanggal = $(this).val();
+        var awal = $('.time-awal').val();
+        var akhir = $('.time-akhir').val();
+
+            $.ajax({
+                    type: "GET",
+                    url: "{{ url('/getdriver') . '/' }}" + tanggal +'/'+awal+'/' + akhir,
+                    success: function(res) {
+                        res.drivers.forEach(element => {
+                            $('#driver_kendaraan').append("<option value="+element.id+">"+element.nama_driver+"</option>")
+                        });
+                    }
+                });
+            })
+     $('.time-awal').on('change', function(){
+        $("#driver_kendaraan").empty();
+        var tanggal = $('.input-date').val();
+        var awal = $(this).val();
+        var akhir = $('.time-akhir').val();
+
+            $.ajax({
+                    type: "GET",
+                    url: "{{ url('/getdriver') . '/' }}" + tanggal +'/'+awal+'/' + akhir,
+                    success: function(res) {
+                        res.drivers.forEach(element => {
+                            $('#driver_kendaraan').append("<option value="+element.id+">"+element.nama_driver+"</option>")
+                        });
+                    }
+                });
+            })
+     $('.time-akhir').on('change', function(){
+        $("#driver_kendaraan").empty();
+        var tanggal = $('.input-date').val();
+        var awal = $('.time-awal').val();
+        var akhir = $(this).val();
+
+            $.ajax({
+                    type: "GET",
+                    url: "{{ url('/getdriver') . '/' }}" + tanggal +'/'+awal+'/' + akhir,
+                    success: function(res) {
+                        res.drivers.forEach(element => {
+                            $('#driver_kendaraan').append("<option value="+element.id+">"+element.nama_driver+"</option>")
+                        });
+                    }
+                });
+            })
+
 </script>
 @endsection
