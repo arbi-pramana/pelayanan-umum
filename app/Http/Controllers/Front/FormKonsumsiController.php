@@ -43,7 +43,7 @@ class FormKonsumsiController extends Controller
         $notifications->status = false;
         $notifications->save();
         
-        alert()->success('Berhasil', 'Data berhasil dibuat');
+        // alert()->success('Berhasil', 'Data berhasil dibuat');
         return redirect()->route('list-permohonan-konsumsi');
     }
 }
