@@ -15,7 +15,7 @@ class FormPermohonanKendaraanController extends Controller
         $permohonan = new PermohonanPemakaianKendaraan;
         $this->save($req, $permohonan);
         
-        alert()->success('Berhasil', 'Data berhasil dibuat');
+        // alert()->success('Berhasil', 'Data berhasil dibuat');
         return redirect()
             ->route('list-permohonan-kendaraan')
             ->with('info', "Data permohonan pemakaian kendaraan telah disimpan.");
