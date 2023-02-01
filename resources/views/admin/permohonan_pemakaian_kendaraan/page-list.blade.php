@@ -38,7 +38,6 @@
 		        <th class='column-tanggal'>Jam Pemesanan </th>
 		        <th class='column-pemohon'>Pemohon</th>
 		        <th class='column-tujuan'>Tujuan</th>
-		        <th class='column-tujuan'>NamaPengemudi</th>
 		        <th class='column-keperluan'>Keperluan</th>
 		        <th class='column-tanggal_berangkat'>Tanggal Berangkat</th>
 		        <th class='column-tanggal_kembali'>Tanggal Kembali</th>
@@ -63,7 +62,6 @@
 		        <td class='column-pemohon'>{{ $permohonanPemakaianKendaraan->created_at->format("H:i:s") }}</td>
 		        <td class='column-pemohon'>{{ $permohonanPemakaianKendaraan->pemohon }}</td>
 		        <td class='column-tujuan'>{{ $permohonanPemakaianKendaraan->tujuan }}</td>
-		        <td class='column-keperluan'>{{ $permohonanPemakaianKendaraan->driver->nama_driver ?? '' }}</td>
 		        <td class='column-keperluan'>{{ $permohonanPemakaianKendaraan->keperluan }}</td>
 		        <td class='column-tanggal_berangkat'>{{ $permohonanPemakaianKendaraan->tanggal_berangkat }}</td>
 		        <td class='column-tanggal_kembali'>{{ $permohonanPemakaianKendaraan->tanggal_kembali }}</td>

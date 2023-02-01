@@ -118,10 +118,13 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="tanggal_berangkat">
-                                        Driver<span style="color:red;">*</span>
+                                        Informasi Driver Yang Tersedia Saat Ini :
                                     </label>
                                     <div class="form-field">
-                                        <select name="driver_kendaraan" id="driver_kendaraan" class="form-control driver_kendaraan" required>
+                                        <select name="" id="driver_kendaraan" class="form-control driver_kendaraan" >
+                                            @foreach ($driver as $item)
+                                                <option value="">{{$item->nama_driver}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -210,7 +213,7 @@
         });
     }
 </script>
-<script>
+{{-- <script>
      $('.input-date').on('change', function(){
         $("#driver_kendaraan").empty();
         var tanggal = $(this).val();
@@ -260,5 +263,5 @@
                 });
             })
 
-</script>
+</script> --}}
 @endsection

@@ -148,7 +148,7 @@ $user = App\Models\Karyawan::where('id', auth()->guard('front')->id())->first();
                             {{ $permohonanPemakaianKendaraan->jam_kembali }}
                         </td>
                         <td class="column-nama-driver">
-                            {{ $permohonanPemakaianKendaraan->driver->nama_driver ?? '-' }}
+                            {{ $permohonanPemakaianKendaraan->spj->driver->nama_driver ?? '-' }}
                         </td>
                         <td class="column-status_pj">
                             {{ $permohonanPemakaianKendaraan->status_pj }}
