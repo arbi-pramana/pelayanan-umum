@@ -98,7 +98,7 @@
         <script src="{{asset('vendor/frontend')}}/js/gridrotator.js"></script>
         <script src="{{asset('vendor/frontend')}}/js/custom.js"></script>
         <script src="{{asset('vendor/frontend')}}/js/switcher.js"></script>
-        <script src="{{asset('vendor/sweetalert')}}sweetalert.all.js"></script>
+        <script src="{{asset('vendor/sweetalert/')}}sweetalert.all.js"></script>
       
         <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> --}}
