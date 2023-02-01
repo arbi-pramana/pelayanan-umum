@@ -143,6 +143,6 @@
   <script src="{{ asset('vendor/admin-bsb/js/demo.js') }}"></script>
   @show
   @yield('js')
-  <script src="{{asset('vendor/sweetalert/')}}sweetalert.all.js"></script>
+  <script src="{{asset('vendor/sweetalert')}}sweetalert.all.js"></script>
 </body>
 </html>

@@ -150,6 +150,7 @@ class SuratPerintahJalanController extends Controller
         try {
             $spj = new SuratPerintahJalan;
             $spj->id_permohonan_pemakaian_kendaraan = $request->id_permohonan_pemakaian_kendaraan;
+            $spj->driver_id = $request->driver_id;
             $spj->kendaraan_id = $request->kendaraan_id;
             $spj->biaya_toll = $request->biaya_toll;
             $spj->tujuan = $request->tujuan;
@@ -163,8 +164,7 @@ class SuratPerintahJalanController extends Controller
             $spj->total_biaya_2 = $request->total_biaya_2;
             $spj->save();
             
-            $perkendaraan = PermohonanPemakaianKendaraan::where('id',$request->id_permohonan_pemakaian_kendaraan)->first();
-            $driver = Driver::where('id',$perkendaraan->driver_id)->first();
+            $driver = Driver::where('id',$request->driver_id)->first();
             if($driver->email != null){
 
                 $driver->status_driver = 'Not Ready';
@@ -249,7 +249,7 @@ class SuratPerintahJalanController extends Controller
             $message = 'Something went wrong when delete Surat Perintah Jalan';
             return back()->with('danger', $message);
         }
-        $driver = Driver::where('id',$suratPerintahJalan->permohonankendaraan->driver->id)->first();
+        $driver = Driver::where('id',$suratPerintahJalan->driver->id)->first();
         $driver->status_driver = 'Ready';
         $driver->save();
         
@@ -313,10 +313,13 @@ class SuratPerintahJalanController extends Controller
                 ]
             ],
             'driver_id' => [
-                'input' => "text",
+                'input' => "select",
                 'label' => "Nama Driver",
                 'maxlength' => "20",
-                'readonly' =>"true",
+                'options' => $this->getDriver(),
+                'rules' => [
+                    "max:20"
+                ]
             ],
             'kendaraan_id' => [
                 'input' => "select",
@@ -548,23 +551,23 @@ class SuratPerintahJalanController extends Controller
             ->get()
             ->toArray();
     }
-    protected function getdriver()
+    protected function getDriver()
     {
-        // $segments = request()->segments();
-        // if($segments[2] == 'edit'){
+        $segments = request()->segments();
+        if($segments[2] == 'edit'){
             return Driver::query()
             // phpcs:ignore
             ->select(['id as value', \DB::raw('concat(nama_driver," - ", email ) as label')])
             ->get()
             ->toArray();
-        // }else{
-        //     return Driver::query()
+        }else{
+            return Driver::query()
         //     // phpcs:ignore
-        //     ->select(['id as value', \DB::raw('concat(nama_driver," - ", email ) as label')])
-        //     ->where('status_driver','Ready')
-        //     ->get()
-        //     ->toArray();
-        // }
+            ->select(['id as value', \DB::raw('concat(nama_driver," - ", email ) as label')])
+            ->where('status_driver','Ready')
+            ->get()
+            ->toArray();
+        }
        
     }
     protected function getKendaraan()
@@ -596,9 +599,7 @@ class SuratPerintahJalanController extends Controller
 
     public function getDataPermohonan($id){
 
-        $permohonan = PermohonanPemakaianKendaraan::join('driver','driver.id','permohonan_pemakaian_kendaraan.driver_id')
-        ->where('permohonan_pemakaian_kendaraan.id',$id)
-        ->first();
+        $permohonan = PermohonanPemakaianKendaraan::where('id',$id)->first();
 
         return $permohonan;
     }

@@ -66,7 +66,7 @@
 				  <tr>
 			  @endif
 		        <td class="text-center column-number">{{ $loop->iteration }}</td>
-		        <td class='column-nama_pengemudi'>{{ $suratPerintahJalan->permohonankendaraan->driver->nama_driver ?? '' }}</td>
+		        <td class='column-nama_pengemudi'>{{ $suratPerintahJalan->driver->nama_driver ?? '' }}</td>
 		        <td class='column-nama_pengemudi'>{{ $suratPerintahJalan->kendaraan->nama_kendaraan ?? 'Tanpa Kendaraan' }}</td>
 		        <td class='column-nama_pengemudi'>{{ $suratPerintahJalan->kendaraan->no_pol ?? 'Tanpa Kendaraan' }}</td>
 		        <td class='column-tujuan'>{{ $suratPerintahJalan->tujuan }}</td>
@@ -99,7 +99,7 @@
 						@if ($suratPerintahJalan->status_perjalanan != 'Sudah Sampai')
 						<a class="btn btn-sm btn-edit btn-success" href="{{ route('admin::surat-perintah-jalan.sampai', [$suratPerintahJalan->getKey()]) }}">Sampai</a>
 						<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::surat-perintah-jalan.form-edit', [$suratPerintahJalan->getKey()]) }}">Edit</a>
-						<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::surat-perintah-jalan.delete', [$suratPerintahJalan->getKey()]) }}">Delete</a>
+						<a class="btn btn-sm btn-delete btn-danger delete-button" href="#" data-id="{{$suratPerintahJalan->id}}">Delete</a>
 						<a class="btn btn-success" href="{{ route('admin::surat-perintah-jalan.send-email',['id'=>$suratPerintahJalan->id]) }}">Send Email</a>
 						@endif
 						<a class="btn btn-warning" href="{{ route('admin::surat-perintah-jalan.page-pdf',['id'=>$suratPerintahJalan->id]) }}" target="_blank">Export PDF</a>
@@ -108,7 +108,7 @@
 						@if ($suratPerintahJalan->status_perjalanan != 'Sudah Sampai')
 						<a class="btn btn-sm btn-edit btn-success" href="{{ route('admin::surat-perintah-jalan.sampai', [$suratPerintahJalan->getKey()]) }}">Sampai</a>
 						<a class="btn btn-sm btn-edit btn-primary" href="{{ route('admin::surat-perintah-jalan.form-edit', [$suratPerintahJalan->getKey()]) }}">Edit</a>
-						<a class="btn btn-sm btn-delete btn-danger" href="{{ route('admin::surat-perintah-jalan.delete', [$suratPerintahJalan->getKey()]) }}">Delete</a>
+						<a class="btn btn-sm btn-delete btn-danger" href="#" data-id="{{$suratPerintahJalan->id}}">Delete</a>
 						<a class="btn btn-success" href="{{ route('admin::surat-perintah-jalan.send-email',['id'=>$suratPerintahJalan->id]) }}">Send Email</a>
 						@endif
 						<a class="btn btn-warning" href="{{ route('admin::surat-perintah-jalan.page-pdf',['id'=>$suratPerintahJalan->id]) }}" target="_blank">Export PDF</a>
@@ -122,3 +122,32 @@
 	</div>
 </div>
 @stop
+@section('js')
+<script>
+	$('.delete-button').on('click', function(e){
+	   var form = this;
+	   var id = $(this).attr("data-id")
+	   e.preventDefault();
+	   swal({
+		   title: "Apakah ingin menghapus data ? ",
+		   icon: "warning",
+		   buttons: true,
+		   dangerMode: true,
+		   })
+		   .then((willDelete) => {
+		   if (willDelete) {
+			   $.get("{{url('admin/surat-perintah-jalan/delete')}}"+'/'+id, function(){
+				   swal(
+					   'Terhapus!',
+					   'Data berhasil terhapus !',
+					   'success'
+				   ).then(()=>{
+					   location.reload()
+				   })
+			   });
+		   }
+		   });
+   }); 
+</script>
+@stop
+

@@ -118,7 +118,7 @@
         <div class="desc-body">
             <div class="nama_pengemudi">
                 <label for="">Nama Pengemudi &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; : </label>
-                <span>{{$surat->permohonankendaraan->driver->nama_driver}}</span>
+                <span>{{$surat->permohonankendaraan->spj->driver->nama_driver}}</span>
             </div>
             <div class="tujuan-body">
                 <div class="tujuan">

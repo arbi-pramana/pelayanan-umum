@@ -59,7 +59,6 @@ class FormPermohonanKendaraanController extends Controller
 
         $permohonan->pemohon =$req->get('pemohon');
         $permohonan->pemohon_id =$req->get('pemohon_id');
-        $permohonan->driver_id =$req->get('driver_kendaraan');
         $permohonan->latlng =$req->get('latlng');
         $permohonan->tujuan =$req->get('tujuan');
         $permohonan->keperluan =$req->get('keperluan');

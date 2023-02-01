@@ -72,6 +72,7 @@
         $.ajax({
           url: "{{ url('api/getdatapermohonan') }}"+'/' + $("#input-id_permohonan_pemakaian_kendaraan").val(),
           success: function(data){
+            console.log(data)
             var request = {
               origin: "Pjb Up Muara Karang Pt., Pluit, North Jakarta City, Jakarta, Indonesia",
               destination:data.tujuan,
