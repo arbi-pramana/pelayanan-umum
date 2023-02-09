@@ -10,41 +10,39 @@
   <div class="row">
     <div class="col-md-3">
       @include('admin::partials.infobox', [
-        'icon' => 'home',
+        'icon' => 'fastfood',
         'count' => 50,
-        'label' => 'Count Data',
+        'label' => 'Permohonan Konsumsi',
         'hover_effect' => 'zoom',
         'icon_classes' => 'bg-blue',
       ])
     </div>
     <div class="col-md-3">
       @include('admin::partials.infobox', [
-        'icon' => 'home',
+        'icon' => 'directions_car',
         'count' => 50,
-        'label' => 'Count Data',
-        'color' => 'blue',
-        'hover_effect' => 'expand',
-      ])
-    </div>
-    <div class="col-md-3">
-      @include('admin::partials.infobox', [
-        'icon' => 'home',
-        'count' => 50,
-        'label' => 'Count Data',
-        'color' => 'blue',
-        'hover_effect' => 'expand',
-        'right_icon' => true,
-        'solid_color' => true,
-      ])
-    </div>
-    <div class="col-md-3">
-      @include('admin::partials.infobox', [
-        'icon' => 'home',
-        'count' => 50,
-        'label' => 'Count Data',
+        'label' => 'Permohonan Kendaraan',
         'hover_effect' => 'zoom',
-        'right_icon' => true,
-        'icon_color' => 'blue'
+        'icon_classes' => 'bg-blue',
+      ])
+    </div>
+    <div class="col-md-3">
+      @include('admin::partials.infobox', [
+        'icon' => 'meeting_room',
+        'count' => 50,
+        'label' => 'Pemesanan Ruangan',
+        'hover_effect' => 'zoom',
+        'icon_classes' => 'bg-blue',
+        
+      ])
+    </div>
+    <div class="col-md-3">
+      @include('admin::partials.infobox', [
+        'icon' => 'directions_walk',
+        'count' => 50,
+        'label' => 'Surat Perintah Jalan',
+        'hover_effect' => 'zoom',
+        'icon_classes' => 'bg-blue',
       ])
     </div>
   </div>

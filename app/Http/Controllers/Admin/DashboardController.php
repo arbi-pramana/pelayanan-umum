@@ -15,6 +15,11 @@ class DashboardController extends Controller
      */
     public function pageDashboard()
     {
+        $data['konsumsi'] ='';
+        $data['kendaraan'] ='';
+        $data['ruangan'] ='';
+        $data['spj'] ='';
+
         return view('admin::dashboard.dashboard');
     }
 }

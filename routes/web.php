@@ -84,10 +84,10 @@ Route::name('admin::auth.')->prefix('admin/auth')->namespace('Admin')->group(fun
     Route::get('logout', 'AuthController@logout')->name('logout');
 });
 
-// Route::get('admin', 'Admin\DashboardController@pageDashboard')->name('admin::dashboard')->middleware('auth');
-Route::get('/admin', function () {
-    return redirect('admin/permohonan-konsumsi');
-})->name('admin::dashboard')->middleware('auth');
+Route::get('admin', 'Admin\DashboardController@pageDashboard')->name('admin::dashboard')->middleware('auth');
+// Route::get('/admin', function () {
+//     return redirect('admin/permohonan-konsumsi');
+// })->name('admin::dashboard')->middleware('auth');
 
 Route::name('admin::test.')->prefix('admin/test')->middleware('auth')->namespace('Admin')->group(function() {
     Route::get('/', 'TestController@pageList')->name('page-list');
