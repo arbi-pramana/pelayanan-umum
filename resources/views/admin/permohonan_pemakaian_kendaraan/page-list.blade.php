@@ -43,6 +43,7 @@
 		        <th class='column-tanggal_kembali'>Tanggal Kembali</th>
 		        <th class='column-jam_berangkat'>Jam Berangkat</th>
 		        <th class='column-jam_kembali'>Jam Kembali</th>
+		        <th class='column-jam_kembali'>Keterangan</th>
 		        <th class='column-penanggung_jawab'>Status</th>
 		        <th class='column-penanggung_jawab'>Alasan Reject</th>
 		        <th class="text-center column-action">Action</th>
@@ -67,6 +68,7 @@
 		        <td class='column-tanggal_kembali'>{{ $permohonanPemakaianKendaraan->tanggal_kembali }}</td>
 		        <td class='column-jam_berangkat'>{{ $permohonanPemakaianKendaraan->jam_berangkat }}</td>
 		        <td class='column-jam_kembali'>{{ $permohonanPemakaianKendaraan->jam_kembali }}</td>
+		        <td class='column-jam_kembali'>{{ $permohonanPemakaianKendaraan->keterangan }}</td>
 		        <td class='column-penanggung_jawab'>{{ $permohonanPemakaianKendaraan->status_pj }}</td>
 		        <td class='column-penanggung_jawab'>{{ $permohonanPemakaianKendaraan->alasan_reject }}</td>
 		        <td width="200" class="text-center column-action">

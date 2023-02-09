@@ -74,6 +74,7 @@
                         <label>Jenis Konsumsi <span style="color:red;">*</span></label>
                             <select name="jenis_konsumsi" class="form-control" required>
                                 <option>Snack Pagi + Makan Siang + Snack Sore + Makan Malam</option>
+                                <option>Snack pagi + Makan siang + Snack Sore</option>
                                 <option>Snack Pagi + Makan Siang</option>
                                 <option>Snack Sore + Makan Malam</option>
                                 <option>Snack Pagi</option>
@@ -180,6 +181,7 @@
                         <select name="jenis_konsumsi" class="form-control" required>
                             <option selected disabled>Pilih Jenis Konsumsi</option>
                             <option>Snack Pagi + Makan Siang + Snack Sore + Makan Malam</option>
+                            <option>Snack pagi + Makan siang + Snack Sore</option>
                             <option>Snack Pagi + Makan Siang</option>
                             <option>Snack Sore + Makan Malam</option>
                             <option>Snack Pagi</option>
