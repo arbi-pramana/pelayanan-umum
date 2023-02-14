@@ -120,6 +120,15 @@
   $(document).ready( function () {
     $('#my-table').DataTable();
 } );
+  $(document).ready( function () {
+    $('#my-table2').DataTable();
+} );
+  $(document).ready( function () {
+    $('#my-table3').DataTable();
+} );
+  $(document).ready( function () {
+    $('#my-table4').DataTable();
+} );
 
 </script>
   <!-- Bootstrap Core Js -->

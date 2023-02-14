@@ -2,11 +2,11 @@
 
 return [
     'menu' => [
-        // [
-        //     'label' => "Dashboard",
-        //     'route' => "admin::dashboard",
-        //     'icon' => "dashboard"
-        // ],
+        [
+            'label' => "Dashboard",
+            'route' => "admin::dashboard",
+            'icon' => "dashboard"
+        ],
         // [
         //     'label' => "Permohonan Konsumsi",
         //     'route' => "admin::permohonan-konsumsi.page-list",
