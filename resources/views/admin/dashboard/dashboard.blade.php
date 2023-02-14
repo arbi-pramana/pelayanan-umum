@@ -47,7 +47,7 @@
     </a>
   </div>
   <div class="block-header">
-    <h2>Rangkuman Berjalan Aplikasi Pelayanan Umum</h2>
+    <h2>Rangkuman Data Berjalan Aplikasi Pelayanan Umum</h2>
   </div>
   @component('admin::partials.card', [
     'title' => 'Permohonan Konsumsi',
@@ -272,7 +272,7 @@
     </div>
 
     <div class="block-header">
-      <h2>Rangkuman Berjalan Aplikasi Pelayanan Umum</h2>
+      <h2>Rangkuman Data Berjalan Aplikasi Pelayanan Umum</h2>
     </div>
     @component('admin::partials.card', [
       'title' => 'Permohonan Konsumsi',
@@ -400,7 +400,7 @@
       </a>
     </div>
     <div class="block-header">
-      <h2>Rangkuman Berjalan Aplikasi Pelayanan Umum</h2>
+      <h2>Rangkuman Data Berjalan Aplikasi Pelayanan Umum</h2>
     </div>
       @component('admin::partials.card', [
       'title' => 'Permohonan Kendaraan',
