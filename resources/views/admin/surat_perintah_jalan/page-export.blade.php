@@ -232,12 +232,13 @@
                         <div class="ttd-1">
                             <p style="margin-bottom: 65px;margin-left:20px;">Mengetahui / Menyetujui</p>
         
-                            <span >(..................................................)</span>
+                            <span >(..................................................)
+                               </span>
                         </div>
                         <div class="ttd-2">
                             <p style="margin-bottom: 65px;margin-left: 40px;">Pemohon</p>
         
-                            <span >(..................................................)</span>
+                            <span >{{$surat->permohonankendaraan->pemohon ?? ' (..................................................)'}}</span>
                         </div>
                     </div>
                 </div>
