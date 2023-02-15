@@ -186,7 +186,7 @@
                     <div class="nama-pemohon flexdisplay">
                         <div>
                             <label for="">Nama Pemohon &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;: </label>
-                            <span>{{$surat->pemohon}}</span>
+                            <span>{{$surat->permohonankendaraan->pemohon ?? ''}}</span>
                         </div>
                         <div>
                             <label for="">Jabatan : </label>
@@ -203,7 +203,7 @@
                     </div>
                     <div class="keperluan">
                         <label for="">Keperluan &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;: </label>
-                        <span>{{$surat->keperluan}}</span>
+                        <span>{{$surat->permohonankendaraan->keperluan ?? ''}}</span>
                     </div>
                     <div class="berangkat-body">
                         <div class="berangkat">
