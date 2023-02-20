@@ -58,7 +58,7 @@ class FrontController extends Controller
             ->where('tanggal_selesai', '>=', $tanggal_awal)
             ->where('tanggal', '<=', $tanggal_akhir)
             ->where('status_pj', '!=', 'Rejected')
-            // ->where('status_pelaksana','Terlaksana')
+            ->where('status_pelaksana','Belum Terlaksana')
             ->get()
             ->map(function($q) use ($waktu_awal, $waktu_akhir) {
                 // Convert waktu_awal and waktu_akhir to integer format
