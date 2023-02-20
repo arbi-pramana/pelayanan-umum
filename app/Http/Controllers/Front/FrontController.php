@@ -44,45 +44,52 @@ class FrontController extends Controller
 
     public function submitRuangan(Request $req)
     {
-        $date = explode(' - ',$req->range_date);
+        $date = explode(' - ', $req->range_date);
 
-        $waktu_awal = date("Hi",strtotime($req->waktu_awal));
-        $waktu_akhir= date("Hi",strtotime($req->waktu_akhir));
-
+        // Convert waktu_awal and waktu_akhir to integer format
+        $waktu_awal = intval(str_replace(':', '', $req->waktu_awal));
+        $waktu_akhir = intval(str_replace(':', '', $req->waktu_akhir));
+    
+        // Convert dates to database format
+        $tanggal_awal = date("Y-m-d", strtotime($date[0]));
+        $tanggal_akhir = date("Y-m-d", strtotime($date[1]));
+    
         $ruangNotReady = $this->pemesananRuangan
-            ->whereBetween('tanggal_selesai',[$date[0],$date[1]])
-            ->where('status_pj','!=','Rejected')
+            ->where('tanggal_selesai', '>=', $tanggal_awal)
+            ->where('tanggal', '<=', $tanggal_akhir)
+            ->where('status_pj', '!=', 'Rejected')
             ->get()
-            ->map(function($q) use ($waktu_awal,$waktu_akhir){
-                $q->time_awal = (int)date("Hi",$q->waktu_awal);
-                $q->time_akhir = (int)date("Hi",$q->waktu_akhir);
-                if($q->time_awal <= $waktu_akhir && $waktu_akhir <= $q->time_akhir){
+            ->map(function($q) use ($waktu_awal, $waktu_akhir) {
+                // Convert waktu_awal and waktu_akhir to integer format
+                $time_awal = intval(date("Hi", $q->waktu_awal));
+                $time_akhir = intval(date("Hi", $q->waktu_akhir));
+                if($time_awal <= $waktu_akhir && $waktu_akhir <= $time_akhir){
                     return $q;
-                } else if($q->time_awal <= $waktu_awal && $waktu_awal <= $q->time_akhir){
+                } else if($time_awal <= $waktu_awal && $waktu_awal <= $time_akhir){
                     return $q;
-                }else if($q->time_akhir <= $waktu_awal && $waktu_akhir <= $q->time_akhir){
+                } else if($time_akhir <= $waktu_awal && $waktu_akhir <= $time_akhir){
                     return $q;
                 }
             })
             ->pluck('id_ruang')
             ->toArray();
-
-        $ruangs = Ruang::where('kapasitas','>=',$req->jumlah_peserta)->get();    
-        //update data ruangs 
+    
+        $ruangs = Ruang::where('kapasitas', '>=', $req->jumlah_peserta)->get();    
+    
+        // Exclude booked rooms from the available rooms
         if(!empty($ruangNotReady)){
-            $ruangs = $ruangs
-            ->whereNotIn('id',$ruangNotReady);
+            $ruangs = $ruangs->whereNotIn('id', $ruangNotReady);
         }
-
+    
         $data['pemesanan_ruangan'] = $this->pemesananRuangan->get();
         $data['date'] = $req->range_date;
         $data['waktu_awal'] = $req->waktu_awal;
         $data['waktu_akhir'] = $req->waktu_akhir;
         $data['jumlah_peserta'] = $req->jumlah_peserta;
         $data['ruangs'] = $ruangs;
-
+    
         return view('front.baru.ruangan.daftar_ruangan', $data);
-    }
+}
 
 
     public function pageDashboard(Request $req)

@@ -19,42 +19,36 @@ class DashboardController extends Controller
      */
     public function pageDashboard()
     {
-        $today = Date('Y-m-d');
-        // $ruangan = PemesananRuangan::join('ruang', 'pemesanan_ruangan.id_ruang', 'ruang.id')
-        // ->where('status_pj', 'Approved')
-        // ->where('tanggal', '<=', $today)
-        // ->where(function($query) use($today) {
-        //     $query->where('tanggal_selesai', '>=', $today)
-        //         ->orWhereNull('tanggal_selesai');
-        // })
-        // ->select('pemesanan_ruangan.nama_acara', 'pemesanan_ruangan.jumlah_peserta',
-        // 'pemesanan_ruangan.tanggal', 'pemesanan_ruangan.tanggal_selesai', 'pemesanan_ruangan.waktu_awal', 'pemesanan_ruangan.waktu_akhir', 'ruang.nama_ruang', 'ruang.foto_ruang')
-        // ->get();
-        $data['konsumsi'] =PermohonanKonsumsi::where('status_pj', 'Approved')
-        ->where('tanggal', '<=', $today)
-        ->where(function($query) use($today) {
-            $query->where('tanggal_selesai', '>=', $today)
-                ->orWhereNull('tanggal_selesai');
-        })->get();
-        $data['kendaraan'] =PermohonanPemakaianKendaraan::where('status_pj', 'Approved')
-        ->where('tanggal_berangkat', '<=', $today)
-        ->where(function($query) use($today) {
-            $query->where('tanggal_kembali', '>=', $today)
-                ->orWhereNull('tanggal_kembali');
-        })->get();
-        $data['ruangan'] =PemesananRuangan::where('status_pj', 'Approved')
-        ->where('tanggal', '<=', $today)
-        ->where(function($query) use($today) {
-            $query->where('tanggal_selesai', '>=', $today)
-                ->orWhereNull('tanggal_selesai');
-        })->get();
-        $data['spj'] =SuratPerintahJalan::where('status_pj', 'Approved')
-        ->where('tanggal_berangkat', '<=', $today)
-        ->where(function($query) use($today) {
-            $query->where('tanggal_kembali', '>=', $today)
-                ->orWhereNull('tanggal_kembali');
-        })->get();
+        $events = [];
+        $ruangan = PemesananRuangan::where('status_pj','Approved')
+                    ->where('status_pelaksana','Belum Terlaksana')
+                    ->join('ruang','ruang.id','pemesanan_ruangan.id_ruang')
+                    ->get();
 
-        return view('admin::dashboard.dashboard',$data);
+        foreach($ruangan as $item){
+            $events[] = [
+                            'title' => $item->nama_ruang.' - '.$item->nama_acara,
+                            'start' => $item->tanggal.'T'.date('H:i',$item->waktu_awal),
+                            'end' => $item->tanggal_selesai.'T'.date('H:i',$item->waktu_akhir),
+                            'color' =>sprintf("#%06x",rand(0,16777215)),
+                            'allDay'=>false
+                        ];
+        }
+        // dd($events);
+        $kendaraan = SuratPerintahJalan::where('status_perjalanan','Belum Sampai')
+        ->join('permohonan_pemakaian_kendaraan','permohonan_pemakaian_kendaraan.id','surat_perintah_jalan.id_permohonan_pemakaian_kendaraan')
+        ->get();
+
+        // dd($kendaraan);
+        foreach($kendaraan as $item){
+            $events[] = [
+                            'title' => $item->tujuan.' '.$item->keperluan,
+                            'start' => $item->tanggal_berangkat.'T'.$item->jam_berangkat.'',
+                            'end' => $item->tanggal_kembali.'T'.$item->jam_kembali,
+                            'color' =>sprintf("#%06x",rand(0,16777215))
+                        ];
+        }
+        // dd($events);
+        return view('admin::dashboard.dashboard',compact('events'));
     }
 }
