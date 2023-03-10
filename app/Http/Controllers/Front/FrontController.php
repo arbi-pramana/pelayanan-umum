@@ -151,9 +151,9 @@ class FrontController extends Controller
     {
         $array_pj_kendaraan = Karyawan::where('role', 'manajer')->get()->toArray();
         $pemohon = $this->guard()->user();
-        $driver = Driver::where('status_driver','Ready')->get();
+        // $driver = Driver::where('status_driver','Ready')->get();
 
-        return view('front.baru.kendaraan.create')->with(compact('array_pj_kendaraan', 'pemohon','driver'));
+        return view('front.baru.kendaraan.create')->with(compact('array_pj_kendaraan', 'pemohon'));
     }
 
     public function pageEditPermohonanKendaraan(Request $req, $id)
