@@ -1,14 +1,58 @@
 @extends('front.baru.master')
 @section('content')
 <style>
+    @media only screen and (min-width: 1000px) {
+        .tab-pane{
+            margin-top:-450px !important;
+        }
+        .headline{
+            margin-top:100px;
+            font-weight: 100;
+        }
+    }
+    @media only screen and (max-width: 992px) {
+        .tab-pane{
+            margin-top:10px !important;
+        }
+        .headline{
+            margin-top:100px;
+            font-weight: 100;
+            line-height: 1.5;
+        }
+        .baris{
+            padding-top:200px;
+            padding-bottom: 250px;
+            display: grid !important;
+            grid-area: 1;
+        }
+        .item-ruangan{
+            /* display :flex; */
+            margin-left: 50px;
+            justify-content: center;
+        }
+        .item-kendaraan{
+            /* display :flex; */
+            margin-left: 50px;
+            justify-content: center;
+        }
+        .item-konsumsi{
+            /* display :flex; */
+            margin-left: 50px;
+            justify-content: center;
+        }
+        #main-footer{
+            margin-top:0px !important;
+        }
+    }
     .img-dashboard{
         width: 100px;
         height: 100px;
         margin-left: 50px;
     }
     .headline{
-        margin-top:100px;
+        margin-top:50px;
         font-weight: 100;
+
     }
     .baris{
         display: flex;
@@ -69,6 +113,8 @@
         margin-left: 50px;
         justify-content: center;
     }
+
+
 </style>
 <div class="top-area show-onload" >
     <div class="bg-holder full">
@@ -79,9 +125,9 @@
                         <span style="color:white;font-size:40px;">Selamat Datang Di <b>Aplikasi Pelayanan Umum UPMKR</b>, <br><br> Silahkan Pilih Pelayanan Dibawah Ini  : </span>
                     </div>
                     <div class="search-tabs search-tabs-bg search-tabs-bottom mb25" >
-                        <div class="tabbable">
+                        <div class="">
                             <div class="">
-                                <div class="tab-pane fade in active" id="tab-1" style="margin-top:-450px;">
+                                <div class="tab-pane fade in active" id="tab-1">
                                   <div class=" baris">
                                       <a href="{{route('pemesananruangan')}}" class="col-md-4 dashboard-item ruangan-box">
                                         <div class="item-ruangan">
@@ -132,6 +178,5 @@
             style="background-image:url({{asset('vendor/frontend')}}/img/196_365_2048x1365.jpg);"></div>
         <div class="bg-mask hidden-lg"></div>
     </div>
-    <div class="gap"></div>
 </div>
 @endsection
