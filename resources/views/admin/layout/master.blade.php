@@ -18,7 +18,7 @@
 
   <!-- Font awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-dt/1.13.1/css/jquery.dataTables.min.css">
   
 
   <!-- Bootstrap Core Css -->
@@ -114,7 +114,7 @@
   
  
   <script src="{{ asset('vendor/admin-bsb/plugins/jquery/jquery.min.js') }}"></script>
-  <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net/1.13.1/jquery.dataTables.min.js"></script>
 <script>
   
   $(document).ready( function () {
